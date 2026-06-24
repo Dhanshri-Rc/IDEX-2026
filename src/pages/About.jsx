@@ -1,53 +1,85 @@
+import React from "react";
 import {
-  Target,
+  Brain,
   Eye,
-  BrainCircuit,
-  Workflow,
-  Cpu,
+  Target,
+  Network,
   Handshake,
   Globe2,
-  LineChart,
-  Settings2,
+  BarChart3,
+  Cpu,
+  Settings,
   Cloud,
-  HeartPulse,
-  Users2,
-  Award,
-  Briefcase,
-  GraduationCap,
-  Landmark,
-  Rocket,
-  Calendar,
-  FileCheck2,
-  BadgeCheck,
-  Network,
-  FileText,
+  Cross,
+  Users,
+  CalendarDays,
   Trophy,
+  Send,
+  Linkedin,
+  Twitter,
+  Facebook,
+  Youtube,
+  BookOpen,
+  FileText,
+  Award,
+  Mail,
+  Phone,
+  MapPin,
+  ArrowRight,
 } from "lucide-react";
-import { Link } from "react-router-dom";
-import Button from "../components/Button";
-import SectionTitle from "../components/SectionTitle";
-import FadeUp from "../components/FadeUp";
-import PageHero from "../components/PageHero";
-import innerHeroLight from "../assets/hero/inner-hero-light.png";
 
-const FOCUS_AREAS = [
-  { icon: BrainCircuit, title: "Innovation", desc: "Encouraging novel ideas and creative solutions", color: "text-blue-600" },
-  { icon: Workflow, title: "Decision Engineering", desc: "Modeling and optimizing decision processes", color: "text-teal-600" },
-  { icon: Cpu, title: "Artificial Intelligence", desc: "Intelligent algorithms and adaptive systems", color: "text-purple-600" },
-  { icon: Handshake, title: "Collaboration", desc: "Connecting academia, industry and institutions", color: "text-orange-500" },
-  { icon: Globe2, title: "Sustainability", desc: "Technology-enabled sustainable and ethical solutions", color: "text-green-600" },
+import heroBg from "../assets/AboutBg.png";
+import ctaBg from "../assets/AboutCta.png";
+import whyBg from "../assets/AboutPract.png";
+
+const tracks = [
+  {
+    icon: Brain,
+    title: "Artificial Intelligence & Machine Learning",
+    color: "#0B63FF",
+    items: ["Deep Learning", "Generative AI", "Explainable AI", "Neural Computing"],
+  },
+  {
+    icon: BarChart3,
+    title: "Data Science & Decision Analytics",
+    color: "#13BFD6",
+    items: ["Predictive Analytics", "Data Mining", "Big Data Engineering", "Business Intelligence"],
+  },
+  {
+    icon: Settings,
+    title: "Optimization & Decision Engineering",
+    color: "#7146FF",
+    items: ["Operations Research", "Decision Support Systems", "Multi-criteria Decision Making", "Simulation & Modeling"],
+  },
+  {
+    icon: Cloud,
+    title: "Emerging Computing Technologies",
+    color: "#FF9900",
+    items: ["Cloud & Edge Computing", "Internet of Things (IoT)", "Blockchain", "Cybersecurity"],
+  },
+  {
+    icon: Cross,
+    title: "Intelligent Systems Applications",
+    color: "#28B64B",
+    items: ["Healthcare AI", "Finance & FinTech", "Smart Cities", "Industry 4.0/5.0"],
+  },
+  {
+    icon: Users,
+    title: "Socio-Technical & Human-Centric AI",
+    color: "#236CFF",
+    items: ["Human-AI Interaction", "Ethics & Responsible AI", "Policy & Governance", "Education & Training"],
+  },
 ];
 
-const CONFERENCE_TRACKS = [
-  { num: "01", icon: BrainCircuit, title: "Artificial Intelligence & Machine Learning", items: ["Deep Learning", "Generative AI", "Explainable AI", "Neural Computing"] },
-  { num: "02", icon: LineChart, title: "Data Science & Decision Analytics", items: ["Predictive Analytics", "Data Mining", "Big Data Engineering", "Business Intelligence"] },
-  { num: "03", icon: Settings2, title: "Optimization & Decision Engineering", items: ["Operations Research", "Decision Support Systems", "Multi-criteria Decision Making", "Simulation & Modeling"] },
-  { num: "04", icon: Cloud, title: "Emerging Computing Technologies", items: ["Cloud & Edge Computing", "Internet of Things (IoT)", "Blockchain", "Cybersecurity"] },
-  { num: "05", icon: HeartPulse, title: "Intelligent Systems Applications", items: ["Healthcare AI", "Finance & FinTech", "Smart Cities", "Industry 4.0/5.0"] },
-  { num: "06", icon: Users2, title: "Socio-Technical & Human-Centric AI", items: ["Human-AI Interaction", "Ethics & Responsible AI", "Policy & Governance", "Education & Training"] },
+const focusAreas = [
+  { icon: Brain, title: "Innovation", desc: "Encouraging novel ideas and creative solutions", color: "#0B63FF" },
+  { icon: Network, title: "Decision Engineering", desc: "Modeling and optimizing decision processes", color: "#12AFC2" },
+  { icon: Cpu, title: "Artificial Intelligence", desc: "Intelligent algorithms and adaptive systems", color: "#6F42FF" },
+  { icon: Handshake, title: "Collaboration", desc: "Connecting academia, industry and institutions", color: "#FF9900" },
+  { icon: Globe2, title: "Sustainability", desc: "Technology-enabled sustainable and ethical solutions", color: "#27B43E" },
 ];
 
-const WHY_PARTICIPATE = [
+const whyItems = [
   "Present your research to a global audience",
   "Learn from world renowned experts",
   "Network with global research community",
@@ -56,225 +88,322 @@ const WHY_PARTICIPATE = [
   "Drive innovation for societal impact",
 ];
 
-const STATS = [
-  { icon: Users2, value: "500+", label: "Participants" },
-  { icon: FileText, value: "150+", label: "Research Papers" },
-  { icon: Globe2, value: "30+", label: "Countries" },
-  { icon: Award, value: "50+", label: "Keynote Speakers" },
-  { icon: Handshake, value: "20+", label: "Partner Institutions" },
+const dates = [
+  ["Paper Submission Deadline", "30 June, 2026"],
+  ["Notification of Acceptance", "31 August, 2026"],
+  ["Camera-Ready Submission", "30 September, 2026"],
+  ["Early Bird Registration", "15 October, 2026"],
+  ["Conference Dates", "10 – 12 December, 2026"],
 ];
 
-const ATTENDEES = [
-  { icon: Briefcase, label: "Researchers & Academicians" },
-  { icon: Landmark, label: "Industry Professionals" },
-  { icon: GraduationCap, label: "Students & Scholars" },
-  { icon: Award, label: "Policy Makers & Government" },
-  { icon: Rocket, label: "Startups & Innovators" },
-];
-
-const DATES = [
-  { label: "Paper Submission Deadline", date: "30 June, 2026" },
-  { label: "Notification of Acceptance", date: "31 August, 2026" },
-  { label: "Camera-Ready Submission", date: "30 September, 2026" },
-  { label: "Early Bird Registration", date: "15 October, 2026" },
-  { label: "Conference Dates", date: "10 – 12 December, 2026" },
-];
-
-const PUBLICATION = [
-  { icon: FileCheck2, title: "Peer Reviewed", desc: "All accepted papers are peer reviewed" },
-  { icon: FileText, title: "Conference Proceedings", desc: "Published with ISBN and DOI" },
-  { icon: Network, title: "Indexed & Abstracted", desc: "Scopus, Google Scholar and other databases" },
-  { icon: BadgeCheck, title: "Selected Papers", desc: "Opportunity for extended journal publication" },
-];
-
-export default function About() {
+export default function AboutIdeax2026() {
   return (
-    <div>
-      <PageHero
-        variant="light"
-        breadcrumb="About"
-        title="About the"
-        titleAccent="IDEAX 2026"
-        image={innerHeroLight}
-        description="IDEAX 2026 is a premier international platform that brings together researchers, academicians, industry leaders and innovators to explore cutting-edge advancements in computing, intelligent systems and decision-making methodologies."
-      />
-
-      {/* MISSION / VISION / FOCUS */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid md:grid-cols-3 gap-6">
-          <FadeUp className="md:col-span-1 flex flex-col gap-6">
-            <div className="card-lift bg-surface-light rounded-xl2 p-6 text-center">
-              <Target className="mx-auto text-brand-blue mb-3" size={26} />
-              <h3 className="font-semibold text-navy-900 mb-2">Our Mission</h3>
-              <p className="text-sm text-slate-500 leading-relaxed">
-                To advance innovation and intelligent decision-making by fostering
-                interdisciplinary research, collaboration and knowledge exchange for global
-                impact.
-              </p>
-            </div>
-            <div className="card-lift bg-surface-light rounded-xl2 p-6 text-center">
-              <Eye className="mx-auto text-brand-blue mb-3" size={26} />
-              <h3 className="font-semibold text-navy-900 mb-2">Our Vision</h3>
-              <p className="text-sm text-slate-500 leading-relaxed">
-                To become a leading global conference series that inspires innovation and shapes
-                the future of intelligent decision systems.
-              </p>
-            </div>
-          </FadeUp>
-
-          <div className="md:col-span-2">
-            <SectionTitle eyebrow="Core Focus Areas" align="left" />
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {FOCUS_AREAS.map((f, i) => (
-                <FadeUp key={f.title} delay={i * 0.06}>
-                  <div className="card-lift bg-white border border-slate-100 rounded-xl2 p-5 text-center h-full">
-                    <f.icon className={`mx-auto mb-3 ${f.color}`} size={26} />
-                    <h4 className="font-semibold text-sm text-navy-900 mb-1">{f.title}</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">{f.desc}</p>
-                  </div>
-                </FadeUp>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CONFERENCE TRACKS */}
-      <section className="bg-surface-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <SectionTitle
-            eyebrow="Conference Tracks"
-            description="IDEAX 2026 invites high-quality research papers across a wide range of topics, including but not limited to:"
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {CONFERENCE_TRACKS.map((t, i) => (
-              <FadeUp key={t.num} delay={i * 0.06}>
-                <div className="card-lift relative bg-white rounded-xl2 shadow-card p-6 h-full">
-                  <t.icon className="text-brand-blue mb-3" size={26} />
-                  <h4 className="font-semibold text-navy-900 mb-2 leading-snug">{t.title}</h4>
-                  <ul className="text-sm text-slate-500 space-y-1">
-                    {t.items.map((it) => (
-                      <li key={it}>• {it}</li>
-                    ))}
-                  </ul>
-                  <span className="absolute bottom-4 right-4 w-8 h-8 rounded-full border-2 border-brand-blue text-brand-blue text-xs font-bold flex items-center justify-center">
-                    {t.num}
-                  </span>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* WHY PARTICIPATE + STATS */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid md:grid-cols-2 gap-6">
-          <FadeUp className="bg-surface-light rounded-xl2 p-7">
-            <h3 className="text-brand-blue text-xs font-bold tracking-widest uppercase mb-4">
-              Why Participate?
-            </h3>
-            <ul className="space-y-3">
-              {WHY_PARTICIPATE.map((w) => (
-                <li key={w} className="flex items-center gap-3 text-sm text-slate-700">
-                  <span className="w-6 h-6 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center text-xs">
-                    ✓
-                  </span>
-                  {w}
-                </li>
-              ))}
-            </ul>
-          </FadeUp>
-
-          <FadeUp delay={0.1} className="bg-navy-900 rounded-xl2 p-7 relative overflow-hidden">
-            <div className="absolute inset-0 bg-navy-radial pointer-events-none" />
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 relative z-10">
-              {STATS.map((s) => (
-                <div key={s.label} className="text-center">
-                  <s.icon className="mx-auto mb-2 text-brand-sky" size={22} />
-                  <div className="text-xl font-bold text-white">{s.value}</div>
-                  <div className="text-xs text-white/60">{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* WHO SHOULD ATTEND + IMPORTANT DATES */}
-      <section className="bg-surface-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid md:grid-cols-3 gap-8">
-          <div className="md:col-span-2">
-            <SectionTitle eyebrow="Who Should Attend?" align="left" />
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
-              {ATTENDEES.map((a, i) => (
-                <FadeUp key={a.label} delay={i * 0.06}>
-                  <div className="flex flex-col items-center text-center gap-3">
-                    <span className="w-16 h-16 rounded-full bg-white shadow-card flex items-center justify-center">
-                      <a.icon size={24} className="text-brand-blue" />
-                    </span>
-                    <p className="text-xs text-slate-600 font-medium leading-tight">{a.label}</p>
-                  </div>
-                </FadeUp>
-              ))}
-            </div>
-          </div>
-
-          <FadeUp delay={0.1} className="bg-white rounded-xl2 shadow-card p-6">
-            <h3 className="text-brand-blue text-xs font-bold tracking-widest uppercase mb-4">
-              Important Dates
-            </h3>
-            <ul className="space-y-3">
-              {DATES.map((d) => (
-                <li key={d.label} className="flex items-start gap-2.5 text-sm">
-                  <Calendar size={15} className="text-brand-blue mt-0.5 shrink-0" />
-                  <span className="text-slate-600 flex-1">{d.label}</span>
-                  <span className="font-medium text-navy-900 whitespace-nowrap text-xs">
-                    {d.date}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* PUBLICATION & INDEXING */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <SectionTitle eyebrow="Publication & Indexing" />
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {PUBLICATION.map((p, i) => (
-              <FadeUp key={p.title} delay={i * 0.06}>
-                <div className="card-lift text-center p-5 rounded-xl2 border border-slate-100 h-full">
-                  <p.icon className="mx-auto mb-3 text-brand-blue" size={26} />
-                  <h4 className="font-semibold text-sm text-navy-900 mb-1">{p.title}</h4>
-                  <p className="text-xs text-slate-500 leading-relaxed">{p.desc}</p>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="bg-navy-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4 text-white">
-            <Trophy className="text-gold-500 shrink-0" size={34} />
+    <div className="min-h-screen bg-white text-[#07113F] font-sans overflow-hidden">
+      {/* Navbar */}
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-[0_4px_18px_rgba(0,35,120,0.08)]">
+        <div className="max-w-[1420px] mx-auto px-4 lg:px-8 h-[74px] flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Brain className="w-11 h-11 text-[#0B63FF]" />
             <div>
-              <h4 className="font-bold text-lg">Be Part of IDEAX 2026</h4>
-              <p className="text-white/70 text-sm max-w-md">
-                Join us in shaping the future of intelligent systems and data-driven decisions
-                that create a better and smarter world.
+              <h1 className="text-3xl font-black tracking-wide">
+                IDEAX <span className="text-[#F5A400]">2026</span>
+              </h1>
+              <p className="text-[10px] font-bold tracking-[2px] text-[#07113F]">
+                INNOVATE • DECIDE • TRANSFORM
               </p>
             </div>
           </div>
-          <Button as={Link} to="/registration" variant="gold" className="shrink-0">
-            Register Now
-          </Button>
+
+          <nav className="hidden lg:flex items-center gap-8 text-[13px] font-extrabold uppercase">
+            {["Home", "About", "Tracks", "Speakers", "Schedule", "Committee", "Registration", "Contact"].map(
+              (item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className={`relative hover:text-[#0B63FF] transition ${
+                    item === "About" ? "text-[#0B63FF]" : ""
+                  }`}
+                >
+                  {item}
+                  {item === "About" && (
+                    <span className="absolute -bottom-4 left-0 w-full h-[3px] bg-[#0B63FF] rounded-full" />
+                  )}
+                </a>
+              )
+            )}
+          </nav>
+
+          <button className="hidden sm:block bg-gradient-to-r from-[#075BFF] to-[#6D4CFF] text-white px-7 py-3 rounded-xl font-bold text-sm shadow-lg hover:scale-105 transition">
+            REGISTER NOW
+          </button>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section
+        className="relative min-h-[530px] bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      >
+        <div className="absolute inset-0 bg-white/20 lg:bg-transparent" />
+        <div className="relative max-w-[1420px] mx-auto px-5 lg:px-14 pt-12 lg:pt-20">
+          <div className="max-w-[520px]">
+            <h2 className="text-[42px] sm:text-[58px] lg:text-[70px] leading-[1.05] font-black text-[#06134A]">
+              About the <br /> IDEAX 2026
+            </h2>
+
+            <h3 className="mt-5 text-xl lg:text-2xl font-black leading-snug">
+              International Conference on{" "}
+              <span className="text-[#0B63FF]">Innovation, Decision Engineering</span> and{" "}
+              <span className="text-[#0B63FF]">Artificial Intelligence</span>
+            </h3>
+
+            <div className="mt-7 w-[90px] h-[5px] bg-gradient-to-r from-[#0B63FF] to-[#FFAA00] rounded-full" />
+
+            <p className="mt-8 text-[15px] lg:text-[16px] leading-8 font-semibold text-[#07113F]/90">
+              IDEAX 2026 is a premier international platform that brings together researchers,
+              academicians, industry leaders and innovators to explore cutting-edge advancements in
+              computing, intelligent systems and decision-making methodologies.
+            </p>
+          </div>
         </div>
       </section>
+
+      <main className="max-w-[1420px] mx-auto px-4 lg:px-10">
+        {/* Mission Vision Focus */}
+        <section className="grid grid-cols-1 lg:grid-cols-[250px_250px_1fr] gap-4 -mt-2">
+          {[
+            {
+              title: "OUR MISSION",
+              icon: Target,
+              desc: "To advance innovation and intelligent decision-making by fostering interdisciplinary research, collaboration and knowledge exchange for global impact.",
+            },
+            {
+              title: "OUR VISION",
+              icon: Eye,
+              desc: "To become a leading global conference series that inspires innovation and shapes the future of intelligent decision systems.",
+            },
+          ].map((card) => (
+            <div
+              key={card.title}
+              className="bg-white rounded-2xl p-8 text-center shadow-[0_8px_25px_rgba(0,40,120,0.12)] hover:-translate-y-2 transition duration-500"
+            >
+              <h4 className="font-black text-[#07113F]">{card.title}</h4>
+              <card.icon className="mx-auto my-8 w-16 h-16 text-[#0B63FF]" />
+              <p className="text-sm leading-7 font-semibold text-[#07113F]/80">{card.desc}</p>
+            </div>
+          ))}
+
+          <div className="bg-white rounded-2xl p-6 shadow-[0_8px_25px_rgba(0,40,120,0.14)]">
+            <h4 className="text-center font-black text-[#0637C8] mb-7">CORE FOCUS AREAS</h4>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-5">
+              {focusAreas.map((f) => (
+                <div key={f.title} className="text-center group">
+                  <div
+                    className="mx-auto w-24 h-24 flex items-center justify-center border-2 rounded-[28px] rotate-45 group-hover:scale-110 transition"
+                    style={{ borderColor: f.color }}
+                  >
+                    <f.icon className="-rotate-45 w-12 h-12" style={{ color: f.color }} />
+                  </div>
+                  <h5 className="mt-6 font-black text-sm" style={{ color: f.color }}>
+                    {f.title}
+                  </h5>
+                  <p className="mt-2 text-xs leading-5 font-semibold">{f.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Tracks */}
+        <section className="py-12">
+          <h3 className="text-center text-2xl font-black text-[#0637C8]">CONFERENCE TRACKS</h3>
+          <p className="text-center mt-4 font-semibold text-sm">
+            IDEAX 2026 invites high-quality research papers across a wide range of topics, including but not limited to:
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-5 mt-9">
+            {tracks.map((t, i) => (
+              <div
+                key={t.title}
+                className="relative bg-white rounded-2xl p-6 min-h-[330px] shadow-[0_8px_24px_rgba(0,40,120,0.12)] hover:-translate-y-2 hover:shadow-[0_18px_35px_rgba(0,40,120,0.18)] transition duration-500"
+              >
+                <t.icon className="w-14 h-14 mb-5" style={{ color: t.color }} />
+                <h4 className="font-black text-[15px] leading-5">{t.title}</h4>
+                <ul className="mt-5 space-y-3 text-xs font-semibold text-[#07113F]/80">
+                  {t.items.map((it) => (
+                    <li key={it}>• {it}</li>
+                  ))}
+                </ul>
+                <div
+                  className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-11 h-11 bg-white rounded-full flex items-center justify-center border-2 font-black"
+                  style={{ borderColor: t.color, color: t.color }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Why + Stats */}
+        <section className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-6 py-8">
+          <div className="bg-white rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,40,120,0.12)]">
+            <h3 className="font-black mb-6">WHY PARTICIPATE?</h3>
+            <div className="space-y-4">
+              {whyItems.map((item, i) => (
+                <div key={item} className="flex items-center gap-4 font-bold text-sm">
+                  <span className="w-8 h-8 rounded-full flex items-center justify-center text-white bg-gradient-to-br from-[#0B63FF] to-[#22C55E]">
+                    {i + 1}
+                  </span>
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div
+            className="rounded-2xl p-8 lg:p-12 bg-cover bg-center text-white shadow-xl"
+            style={{ backgroundImage: `url(${whyBg})` }}
+          >
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-8 h-full items-center text-center">
+              {[
+                ["500+", "Participants", Users],
+                ["150+", "Research Papers", FileText],
+                ["30+", "Countries", Globe2],
+                ["50+", "Keynote Speakers", Award],
+                ["20+", "Partner Institutions", Network],
+              ].map(([num, label, Icon]) => (
+                <div key={label}>
+                  <Icon className="w-12 h-12 mx-auto mb-4 text-[#00B8FF]" />
+                  <h4 className="text-3xl font-black">{num}</h4>
+                  <p className="text-sm mt-2">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Attend + Dates */}
+        <section className="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-8 py-8">
+          <div>
+            <h3 className="text-center text-xl font-black text-[#0637C8] mb-8">WHO SHOULD ATTEND?</h3>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {["Researchers & Academicians", "Industry Professionals", "Students & Scholars", "Policy Makers & Government", "Startups & Innovators"].map(
+                (x, i) => (
+                  <div key={x} className="text-center bg-white rounded-2xl p-5 shadow-md hover:-translate-y-2 transition">
+                    <div className="w-24 h-24 mx-auto rounded-full bg-[#EAF3FF] flex items-center justify-center">
+                      {i === 0 ? <BookOpen /> : i === 1 ? <Users /> : i === 2 ? <Award /> : i === 3 ? <Globe2 /> : <Trophy />}
+                    </div>
+                    <p className="mt-4 text-sm font-black">{x}</p>
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-7 shadow-[0_8px_24px_rgba(0,40,120,0.12)]">
+            <h3 className="text-center font-black text-[#0637C8] mb-6">IMPORTANT DATES</h3>
+            <div className="space-y-5">
+              {dates.map(([name, date]) => (
+                <div key={name} className="flex items-center justify-between gap-4 font-bold text-sm">
+                  <div className="flex items-center gap-3">
+                    <CalendarDays className="w-6 h-6 text-[#0B63FF]" />
+                    <span>{name}</span>
+                  </div>
+                  <span className="text-[#0637C8]">{date}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Publication */}
+        <section className="py-8">
+          <h3 className="text-center text-xl font-black text-[#0637C8] mb-7">PUBLICATION & INDEXING</h3>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 bg-white rounded-2xl p-7 shadow-[0_8px_24px_rgba(0,40,120,0.12)]">
+            {[
+              ["Peer Reviewed", "All accepted papers are peer reviewed", FileText],
+              ["Conference Proceedings", "Published with ISBN and DOI", BookOpen],
+              ["Indexed & Abstracted", "Scopus, Google Scholar and other databases", Globe2],
+              ["Selected Papers", "Opportunity for extended journal publication", Award],
+            ].map(([title, desc, Icon]) => (
+              <div key={title} className="flex items-center gap-4">
+                <Icon className="w-12 h-12 text-[#0B63FF]" />
+                <div>
+                  <h4 className="font-black">{title}</h4>
+                  <p className="text-sm font-semibold mt-1">{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section
+          className="my-8 rounded-2xl overflow-hidden bg-cover bg-center text-white p-8 lg:p-12 shadow-xl"
+          style={{ backgroundImage: `url(${ctaBg})` }}
+        >
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="flex items-center gap-8">
+              <Trophy className="w-24 h-24 text-[#FFB000]" />
+              <div>
+                <h2 className="text-3xl lg:text-4xl font-black">Be Part of IDEAX 2026</h2>
+                <p className="mt-3 max-w-[650px] text-white/90">
+                  Join us in shaping the future of intelligent systems and data-driven decisions that create a better and smarter world.
+                </p>
+              </div>
+            </div>
+
+            <button className="bg-[#FFB000] text-[#07113F] px-10 py-5 rounded-xl font-black flex items-center gap-4 hover:scale-105 transition">
+              REGISTER NOW <ArrowRight />
+            </button>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-[#020B26] text-white pt-12 pb-6">
+        <div className="max-w-[1420px] mx-auto px-5 lg:px-10 grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div>
+            <h2 className="text-3xl font-black">IDEAX <span className="text-[#F5A400]">2026</span></h2>
+            <p className="mt-4 text-white/70 leading-7">
+              International Conference on Innovation, Decision Engineering and Artificial Intelligence.
+            </p>
+            <div className="flex gap-4 mt-6">
+              {[Linkedin, Twitter, Facebook, Youtube].map((Icon, i) => (
+                <Icon key={i} className="w-5 h-5 hover:text-[#0B63FF] transition" />
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-black mb-5">QUICK LINKS</h4>
+            {["Home", "About", "Tracks", "Speakers", "Schedule", "Committee", "Registration", "Contact"].map((x) => (
+              <p key={x} className="text-white/70 text-sm hover:text-white cursor-pointer">{x}</p>
+            ))}
+          </div>
+
+          <div>
+            <h4 className="font-black mb-5">CONTACT US</h4>
+            <p className="flex gap-3 text-white/70 mb-4"><MapPin /> Singapore</p>
+            <p className="flex gap-3 text-white/70 mb-4"><Mail /> info@ideax-conference.org</p>
+            <p className="flex gap-3 text-white/70"><Phone /> +65 9123 4567</p>
+          </div>
+
+          <div>
+            <h4 className="font-black mb-5">STAY UPDATED</h4>
+            <p className="text-white/70 mb-5">Subscribe to get the latest updates and announcements.</p>
+            <div className="flex border border-white/30 rounded-lg overflow-hidden">
+              <input className="bg-transparent px-4 py-3 flex-1 outline-none text-sm" placeholder="Enter your email" />
+              <button className="bg-[#0B63FF] px-4">
+                <Send className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <p className="text-center text-white/60 mt-10 text-sm">© 2026 IDEAX 2026. All Rights Reserved.</p>
+      </footer>
     </div>
   );
 }
