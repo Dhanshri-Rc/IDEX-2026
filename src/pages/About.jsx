@@ -125,8 +125,8 @@ export default function AboutIdeax2026() {
 
       {/* Hero */}
       <section
-        className="relative min-h-[670px] bg-cover bg-center bg-no-repeat -mt-2"
-        style={{ backgroundImage: `url(${heroBg})` }}
+        className="relative min-h-[670px] bg-[#020b22] bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBg}),` }}
       >
         <div className="absolute inset-0 bg-white/20 lg:bg-transparent" />
         <div className="relative max-w-[1420px] mx-auto px-5 lg:px-16 pt-12 lg:pt-20">
