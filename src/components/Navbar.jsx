@@ -52,8 +52,8 @@ export default function Navbar() {
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                `relative text-[14px] font-bold uppercase text-[#07113F] transition-all duration-300 hover:text-[#2563EB]
-                after:absolute after:-bottom-1 rounded-full after:left-0 after:h-[3px] after:w-full after:origin-center after:scale-x-0 after:bg-[#2563EB] after:transition-transform after:duration-300 hover:after:scale-x-100
+                `relative text-[14px] font-semibold  text-[#07113F] transition-all duration-300 hover:text-[#2563EB]
+                after:absolute after:-bottom-1 after:rounded-full after:left-0 after:h-[2px] after:w-full after:origin-center after:scale-x-0 after:bg-[#2563EB] after:transition-transform after:duration-300 hover:after:scale-x-100
                 ${isActive ? " after:scale-x-100" : ""}`
               }
             >
