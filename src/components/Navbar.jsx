@@ -46,15 +46,15 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden items-center gap-9 lg:flex">
+        <div className="hidden items-center gap-7 lg:flex">
           {LINKS.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                `relative text-[14px] font-extrabold uppercase text-[#07113F] transition-all duration-300 hover:text-[#2563EB]
-                after:absolute after:-bottom-3 after:left-0 after:h-[3px] after:w-full after:origin-center after:scale-x-0 after:bg-[#2563EB] after:transition-transform after:duration-300 hover:after:scale-x-100
-                ${isActive ? "text-[#2563EB] after:scale-x-100" : ""}`
+                `relative text-[14px] font-bold uppercase text-[#07113F] transition-all duration-300 hover:text-[#2563EB]
+                after:absolute after:-bottom-1 rounded-full after:left-0 after:h-[3px] after:w-full after:origin-center after:scale-x-0 after:bg-[#2563EB] after:transition-transform after:duration-300 hover:after:scale-x-100
+                ${isActive ? " after:scale-x-100" : ""}`
               }
             >
               {link.label}
