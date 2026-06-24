@@ -3,7 +3,7 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../assets/icons/Logo";
-import Button from "./Button";
+import hlogo from "../assets/hero/logo.png"
 
 const LINKS = [
   { label: "Home", to: "/" },
@@ -16,7 +16,7 @@ const LINKS = [
   { label: "Contact", to: "/contact" },
 ];
 
-export default function Navbar({ variant = "light" }) {
+export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -29,49 +29,32 @@ export default function Navbar({ variant = "light" }) {
 
   useEffect(() => {
     setOpen(false);
-  }, [location]);
-
-  const isDark = variant === "dark";
+  }, [location.pathname]);
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
-        isDark
-          ? "bg-navy-900"
-          : scrolled
-          ? "bg-white/95 backdrop-blur shadow-sm"
-          : "bg-white"
+      className={`sticky top-0 z-50 w-full bg-white transition-all duration-300 ${
+        scrolled ? "shadow-[0_8px_25px_rgba(15,23,42,0.08)]" : ""
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5">
-          <Logo size={38} />
-          <span className="font-display font-bold text-lg sm:text-xl leading-none">
-            <span className={isDark ? "text-white" : "text-navy-900"}>IDEAX</span>{" "}
-            <span className="text-gold-500">2026</span>
-            <span
-              className={`block text-[9px] font-semibold tracking-[0.18em] mt-0.5 ${
-                isDark ? "text-white/60" : "text-slate-500"
-              }`}
-            >
-              INNOVATE · DECIDE · TRANSFORM
-            </span>
-          </span>
+      <nav className="relative mx-auto flex h-[70px] max-w-[1420px] items-center justify-between px-5 sm:px-8 lg:px-16">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-3">
+          {/* <Logo size={55} /> */}
+<img src={hlogo} alt="logo" className="w-[190px]" />
+        
         </Link>
 
-        <div className="hidden lg:flex items-center gap-7">
+        {/* Desktop Links */}
+        <div className="hidden items-center gap-9 lg:flex">
           {LINKS.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                `nav-link text-sm font-medium transition-colors ${
-                  isActive
-                    ? `active ${isDark ? "text-white" : "text-brand-blue"}`
-                    : isDark
-                    ? "text-white/80 hover:text-white"
-                    : "text-navy-900/80 hover:text-navy-900"
-                }`
+                `relative text-[14px] font-extrabold uppercase text-[#07113F] transition-all duration-300 hover:text-[#2563EB]
+                after:absolute after:-bottom-3 after:left-0 after:h-[3px] after:w-full after:origin-center after:scale-x-0 after:bg-[#2563EB] after:transition-transform after:duration-300 hover:after:scale-x-100
+                ${isActive ? "text-[#2563EB] after:scale-x-100" : ""}`
               }
             >
               {link.label}
@@ -79,71 +62,54 @@ export default function Navbar({ variant = "light" }) {
           ))}
         </div>
 
-        <div className="hidden lg:block">
-          <Button as={Link} to="/registration" variant="blue" className="px-5 py-2.5">
-            Register Now
-          </Button>
-        </div>
-
+        {/* Mobile Button */}
         <button
-          className={`lg:hidden p-2 rounded-md ${isDark ? "text-white" : "text-navy-900"}`}
+          type="button"
           onClick={() => setOpen((p) => !p)}
+          className="flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 text-[#07113F] transition-all duration-300 hover:bg-[#F4F7FF] lg:hidden"
           aria-label="Toggle menu"
         >
-          {open ? <X size={26} /> : <Menu size={26} />}
+          {open ? <X size={24} /> : <Menu size={24} />}
         </button>
-      </nav>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`lg:hidden overflow-hidden border-t ${
-              isDark ? "bg-navy-900 border-white/10" : "bg-white border-slate-100"
-            }`}
-          >
-            <div className="flex flex-col px-5 py-4 gap-1">
-              {LINKS.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => setOpen(false)}
-                  className={({ isActive }) =>
-                    `py-2.5 px-2 rounded-md text-sm font-medium ${
-                      isActive
-                        ? "bg-brand-blue/10 text-brand-blue"
-                        : isDark
-                        ? "text-white/80"
-                        : "text-navy-900/80"
-                    }`
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-              <Link
-                to="/registration"
-                onClick={() => setOpen(false)}
-                className="mt-2 bg-brand-blue text-white text-center py-2.5 rounded-md text-sm font-semibold"
-              >
-                Register Now
-              </Link>
-              <Link
-                to="/login"
-                onClick={() => setOpen(false)}
-                className={`text-center py-2.5 rounded-md text-sm font-semibold border ${
-                  isDark ? "border-white/30 text-white" : "border-slate-200 text-navy-900"
-                }`}
-              >
-                Participant Login
-              </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        {/* Mobile Menu - not full width */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, y: -12, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -12, scale: 0.96 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="absolute right-5 top-[78px] z-50 w-[285px] overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-[0_20px_55px_rgba(15,23,42,0.18)] sm:right-8 lg:hidden"
+            >
+              <div className="flex flex-col gap-1">
+                {LINKS.map((link, index) => (
+                  <motion.div
+                    key={link.to}
+                    initial={{ opacity: 0, x: 16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.25, delay: index * 0.03 }}
+                  >
+                    <NavLink
+                      to={link.to}
+                      onClick={() => setOpen(false)}
+                      className={({ isActive }) =>
+                        `block rounded-lg px-4 py-3 text-[13px] font-extrabold uppercase transition-all duration-300 ${
+                          isActive
+                            ? "bg-[#2563EB] text-white"
+                            : "text-[#07113F] hover:bg-[#F4F7FF] hover:text-[#2563EB]"
+                        }`
+                      }
+                    >
+                      {link.label}
+                    </NavLink>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
     </header>
   );
 }

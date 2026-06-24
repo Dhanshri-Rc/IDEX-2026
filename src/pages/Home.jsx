@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import homeHero from "../assets/hero/HomeBG.png";
+import { useState } from "react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -15,27 +16,59 @@ const fadeUp = {
 };
 
 const STATS = [
-  { icon: Users, value: "500+", label: "Participants", color: "text-blue-600" },
-  { icon: FileText, value: "150+", label: "Research Papers", color: "text-purple-600" },
-  { icon: Globe2, value: "30+", label: "Countries", color: "text-cyan-600" },
-  { icon: Mic2, value: "50+", label: "Keynote Speakers", color: "text-orange-500" },
+  { icon: Users, value: "500+", label: "Participants", color: "text-[#2563EB]" },
+  { icon: FileText, value: "150+", label: "Research Papers", color: "text-[#7C3AED]" },
+  { icon: Globe2, value: "30+", label: "Countries", color: "text-[#12B8B3]" },
+  { icon: Mic2, value: "50+", label: "Keynote Speakers", color: "text-[#FB923C]" },
 ];
 
 const TRACKS = [
-  { icon: BrainCircuit, color: "text-blue-600", title: "Artificial Intelligence & Machine Learning", desc: "Advances in AI, ML, deep learning and intelligent systems." },
-  { icon: LineChart, color: "text-purple-600", title: "Decision Engineering & Analytics", desc: "Decision support systems, optimization, predictive analytics and simulation." },
-  { icon: Cloud, color: "text-cyan-600", title: "Data Science & Big Data", desc: "Big data technologies, data mining, analytics and visualization." },
-  { icon: Cpu, color: "text-orange-500", title: "Smart Systems & Emerging Tech", desc: "IoT, blockchain, cloud, edge computing and cyber-physical systems." },
-  { icon: HeartPulse, color: "text-pink-500", title: "Intelligent Applications & Industry 4.0", desc: "AI in healthcare, finance, smart cities, robotics and automation." },
-  { icon: Leaf, color: "text-green-500", title: "Sustainability & Societal Impact", desc: "Sustainable innovation, green computing and ethical AI." },
+  {
+    icon: BrainCircuit,
+    color: "text-[#2563EB]",
+    title: "Artificial Intelligence & Machine Learning",
+    desc: "Advances in AI, ML, deep learning and intelligent systems.",
+  },
+  {
+    icon: LineChart,
+    color: "text-[#7C3AED]",
+    title: "Decision Engineering & Analytics",
+    desc: "Decision support systems, optimization, predictive analytics and simulation.",
+  },
+  {
+    icon: Cloud,
+    color: "text-[#12B8B3]",
+    title: "Data Science & Big Data",
+    desc: "Big data technologies, data mining, analytics and visualization.",
+  },
+  {
+    icon: Cpu,
+    color: "text-[#FB923C]",
+    title: "Smart Systems & Emerging Tech",
+    desc: "IoT, blockchain, cloud, edge computing and cyber-physical systems.",
+  },
+  {
+    icon: HeartPulse,
+    color: "text-[#EC4899]",
+    title: "Intelligent Applications & Industry 4.0",
+    desc: "AI in healthcare, finance, smart cities, robotics and automation.",
+  },
+  {
+    icon: Leaf,
+    color: "text-[#84CC16]",
+    title: "Sustainability & Societal Impact",
+    desc: "Sustainable innovation, green computing and ethical AI.",
+  },
 ];
 
 const SPEAKERS = [
-  ["Prof. Yann LeCun", "New York University", "🇺🇸"],
-  ["Prof. Fei-Fei Li", "Stanford University", "🇺🇸"],
-  ["Prof. Amit P. Sheth", "University of South Carolina", "🇺🇸"],
-  ["Prof. Virginia Dignum", "Umeå University", "🇸🇪"],
-  ["Prof. Hiroaki Kitano", "Sony Computer Science Labs", "🇯🇵"],
+  { name: "Prof. Yann LeCun", uni: "New York University", country: "USA", flag: "🇺🇸", img: "/speakers/yann-lecun.jpg" },
+  { name: "Prof. Fei-Fei Li", uni: "Stanford University", country: "USA", flag: "🇺🇸", img: "/speakers/fei-fei-li.jpg" },
+  { name: "Prof. Amit P. Sheth", uni: "University of South Carolina", country: "USA", flag: "🇺🇸", img: "/speakers/amit-sheth.jpg" },
+  { name: "Prof. Virginia Dignum", uni: "Umeå University", country: "Sweden", flag: "🇸🇪", img: "/speakers/virginia-dignum.jpg" },
+  { name: "Prof. Hiroaki Kitano", uni: "Sony Computer Science Labs", country: "Japan", flag: "🇯🇵", img: "/speakers/hiroaki-kitano.jpg" },
+  { name: "Prof. Stuart Russell", uni: "UC Berkeley", country: "USA", flag: "🇺🇸", img: "/speakers/stuart-russell.jpg" },
+  { name: "Prof. Yoshua Bengio", uni: "Mila Institute", country: "Canada", flag: "🇨🇦", img: "/speakers/yoshua-bengio.jpg" },
 ];
 
 const DATES = [
@@ -46,7 +79,27 @@ const DATES = [
   ["Conference Dates", "10 – 12 December, 2026"],
 ];
 
+
+
+
 export default function Home() {
+
+
+const [speakerIndex, setSpeakerIndex] = useState(0);
+
+const visibleSpeakers = [
+  ...SPEAKERS.slice(speakerIndex),
+  ...SPEAKERS.slice(0, speakerIndex),
+].slice(0, 5);
+
+const nextSpeaker = () => {
+  setSpeakerIndex((prev) => (prev + 1) % SPEAKERS.length);
+};
+
+const prevSpeaker = () => {
+  setSpeakerIndex((prev) => (prev - 1 + SPEAKERS.length) % SPEAKERS.length);
+};
+
   return (
     <main className="w-full overflow-hidden bg-white text-[#07113F]">
 
@@ -59,13 +112,15 @@ export default function Home() {
           <motion.div initial="hidden" animate="show" variants={fadeUp}>
             <p className="text-[15px] font-medium text-[#FFC21A]">Welcome to</p>
 
-            <h1 className="mt-1 text-[46px] font-semibold leading-none text-white sm:text-[62px] lg:text-[56px]">
+            <h1 className="mt-1 text-[40px] font-semibold leading-none text-white sm:text-[50px] lg:text-[56px]">
               IDEAX <span className="text-[#FFC21A]">2026</span>
             </h1>
 
-            <h2 className="mt-4 max-w-[590px] text-[21px] font-semibold leading-tight text-white sm:text-[28px]">
+            <h2 className="mt-4 max-w-[540px] text-[21px] font-medium leading-tight text-white sm:text-[27px]">
               International Conference on Innovation, Decision Engineering and Artificial Intelligence
             </h2>
+
+            <div className="mt-4 w-16 h-[3px] rounded-lg bg-[#FFC21A]"></div>
 
             <p className="mt-5 text-[14px] font-medium text-white/85">
               Innovating Intelligence. Engineering Decisions. Creating Impact.
@@ -89,7 +144,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 25 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .7 }} className="hidden lg:flex flex-col gap-5 justify-self-end">
+          {/* <motion.div initial={{ opacity: 0, x: 25 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .7 }} className="hidden lg:flex flex-col gap-5 justify-self-end">
             {[
               [Lightbulb, "INNOVATION"],
               [BrainCircuit, "INTELLIGENCE"],
@@ -97,153 +152,415 @@ export default function Home() {
               [Target, "IMPACT"],
             ].map(([Icon, label]) => (
               <div key={label} className="flex items-center gap-3 text-white">
-                {/* <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur transition hover:scale-110 hover:bg-white/20">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur transition hover:scale-110 hover:bg-white/20">
                   <Icon size={18} />
-                </span> */}
+                </span>
                 <span className="text-[12px] font-bold tracking-wide">{label}</span>
               </div>
             ))}
-          </motion.div>
+          </motion.div> */}
         </div>
       </section>
 
       {/* ABOUT */}
-      <section className="-mt-1 rounded-t-[22px] bg-[#F6FAFF]">
-        <div className="mx-auto grid max-w-[1420px] grid-cols-1 gap-8 px-5 py-10 sm:px-8 lg:grid-cols-[1fr_660px] lg:px-16">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-            <p className="text-[11px] font-bold uppercase text-blue-600">About IDEAX 2026</p>
-            <h2 className="mt-2 max-w-[560px] text-[26px] font-bold leading-tight sm:text-[34px]">
-              Shaping the Future with <span className="text-blue-600">Innovation</span> and Intelligence
-            </h2>
-            <p className="mt-4 max-w-[650px] text-[14px] leading-relaxed text-slate-600">
-              IDEAX 2026 brings together global researchers, industry leaders, practitioners and innovators to exchange ideas, present cutting-edge research and explore the transformative power of innovation, decision engineering and artificial intelligence.
-            </p>
-            <Button as={Link} to="/about" variant="blueOutline" className="mt-6">Learn More</Button>
-          </motion.div>
+   <section className="relative -mt-4 overflow-hidden rounded-t-[22px] bg-[#F6FAFF]">
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(37,99,235,0.08),transparent_32%),radial-gradient(circle_at_85%_30%,rgba(14,165,233,0.10),transparent_35%)]" />
 
-          <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
-            {STATS.map(({ icon: Icon, value, label, color }) => (
-              <motion.div key={label} whileHover={{ y: -8, scale: 1.02 }} className="rounded-xl bg-white p-6 text-center shadow-[0_12px_35px_rgba(15,23,42,.08)] transition">
-                <Icon className={`mx-auto mb-3 ${color}`} size={31} />
-                <h3 className="text-[25px] font-bold">{value}</h3>
-                <p className="text-[12px] font-medium text-slate-600">{label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+  <div className="relative mx-auto grid max-w-[1420px] grid-cols-1 items-center gap-8 px-5 py-10 sm:px-8 md:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(540px,660px)] lg:px-16">
+    
+    {/* Left Content */}
+    <motion.div
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.65, ease: "easeOut" }}
+      className="text-left"
+    >
+      <p className="text-[12px] font-bold uppercase tracking-wide text-[#2563EB]">
+        About IDEAX 2026
+      </p>
+
+      <h2 className="mt-3 max-w-[560px] text-[22px] font-[600] leading-[1.12] text-[#07113F] sm:text-[28px] lg:text-[30px]">
+        Shaping the Future with{" "}
+        <span className="text-[#2563EB]">Innovation</span> and Intelligence
+      </h2>
+
+      <p className="mt-5 max-w-[650px] text-[14px] font-medium leading-[1.75] text-[#1F2A44]/85">
+        IDEAX 2026 brings together global researchers, industry leaders,
+        practitioners and innovators to exchange ideas, present cutting-edge
+        research and explore the transformative power of innovation, decision
+        engineering and artificial intelligence.
+      </p>
+
+      <Link
+        to="/about"
+        className="mt-6 inline-flex h-[34px] items-center gap-3 rounded-[6px] border border-[#2563EB] px-5 text-[12px] font-bold text-[#2563EB] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#2563EB] hover:text-white hover:shadow-[0_10px_25px_rgba(37,99,235,0.22)]"
+      >
+        Learn More <span className="text-[16px] leading-none">→</span>
+      </Link>
+    </motion.div>
+
+    {/* Stats Cards */}
+    <div className="grid grid-cols-2 gap-3 sm:gap-2 xl:grid-cols-4">
+      {STATS.map(({ icon: Icon, value, label, color }, index) => (
+        <motion.div
+          key={label}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
+          whileHover={{ y: -8, scale: 1.025 }}
+          className="group flex min-h-[155px] flex-col items-center justify-center rounded-[10px] border border-[#E5ECF7] bg-white p-4 text-center shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 hover:border-[#C7D8FF] hover:shadow-[0_18px_45px_rgba(37,99,235,0.16)]"
+        >
+          <Icon
+            size={37}
+            strokeWidth={2.1}
+            className={`mb-4 ${color} transition-transform duration-300 group-hover:scale-110`}
+          />
+
+          <h3 className="text-[22px] font-semibold leading-none text-[#07113F] sm:text-[26px]">
+            {value}
+          </h3>
+
+          <p className="mt-3 text-[14px] font-medium text-[#1F2A44]">
+            {label}
+          </p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* TRACKS */}
-      <section className="bg-white px-5 py-8 sm:px-8 lg:px-16">
-        <div className="mx-auto max-w-[1420px] text-center">
-          <p className="text-[11px] font-bold uppercase text-blue-600">Conference Tracks</p>
-          <h2 className="text-[27px] font-bold">Explore Key Themes</h2>
+    <section className="relative overflow-hidden bg-white px-5 py-3 sm:px-8 lg:px-16">
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(37,99,235,0.06),transparent_35%)]" />
 
-          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-            {TRACKS.map(({ icon: Icon, color, title, desc }) => (
-              <motion.div key={title} whileHover={{ y: -8 }} className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-[0_18px_45px_rgba(15,23,42,.12)]">
-                <Icon size={36} className={`mx-auto mb-3 ${color} transition group-hover:scale-110`} />
-                <h3 className="text-[13px] font-bold leading-tight">{title}</h3>
-                <p className="mt-2 text-[11px] leading-relaxed text-slate-600">{desc}</p>
-              </motion.div>
-            ))}
-          </div>
+  <div className="relative mx-auto max-w-[1420px] text-center">
+    <motion.p
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45 }}
+      className="text-[12px] font-bold uppercase leading-none text-[#2563EB]"
+    >
+      Conference Tracks
+    </motion.p>
 
-          <Button as={Link} to="/tracks" variant="blueOutline" className="mt-6">View All Tracks</Button>
-        </div>
-      </section>
+    <motion.h2
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.05 }}
+      className="mt-2 text-[24px] font-[600] leading-tight text-[#07113F] sm:text-[29px]"
+    >
+      Explore Key Themes
+    </motion.h2>
+
+    <div className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
+      {TRACKS.map(({ icon: Icon, color, title, desc }, index) => (
+        <motion.div
+          key={title}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: index * 0.06, ease: "easeOut" }}
+          whileHover={{ y: -8, scale: 1.025 }}
+          className="group flex min-h-[165px] flex-col items-center justify-start rounded-[10px] border border-[#E3E9F4] bg-white px-3 py-5 text-center shadow-[0_8px_24px_rgba(15,23,42,0.04)] transition-all duration-300 hover:border-[#C7D8FF] hover:shadow-[0_18px_45px_rgba(37,99,235,0.14)]"
+        >
+          <Icon
+            size={39}
+            strokeWidth={2}
+            className={`mb-4 ${color} transition-transform duration-300 group-hover:scale-110`}
+          />
+
+          <h3 className="max-w-[160px] text-[13px] font-[600] leading-[1.18] text-[#07113F]">
+            {title}
+          </h3>
+
+          <p className="mt-3 max-w-[160px] text-[12px] font-medium leading-[1.45] text-[#1F2A44]/75">
+            {desc}
+          </p>
+        </motion.div>
+      ))}
+    </div>
+
+    <Link
+      to="/tracks"
+      className="mx-auto mt-5 inline-flex h-[34px] items-center gap-4 rounded-[6px] border border-[#2563EB] px-8 text-[12px] font-bold text-[#2563EB] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#2563EB] hover:text-white hover:shadow-[0_10px_25px_rgba(37,99,235,0.22)]"
+    >
+      View All Tracks <span className="text-[16px] leading-none">→</span>
+    </Link>
+  </div>
+</section>
 
       {/* SPEAKERS */}
-      <section className="relative bg-gradient-to-br from-[#05153D] via-[#0A1649] to-[#26003F] px-5 py-8 sm:px-8 lg:px-16">
-        <div className="mx-auto max-w-[1420px]">
-          <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <p className="text-[11px] font-bold uppercase text-[#FFC21A]">Keynote Speakers</p>
-              <h2 className="text-[25px] font-bold text-white">Global Minds. Intelligent Ideas. Lasting Impact.</h2>
+    <section className="relative overflow-hidden rounded-t-[8px] bg-[#050B35] px-5 py-7 sm:px-8 lg:px-16">
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_95%_85%,rgba(168,85,247,0.35),transparent_28%),radial-gradient(circle_at_20%_0%,rgba(37,99,235,0.22),transparent_34%)]" />
+
+  <div className="relative mx-auto max-w-[1420px]">
+    <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <p className="text-[12px] font-bold uppercase leading-none text-[#FFC21A]">
+          Keynote Speakers
+        </p>
+
+        <h2 className="mt-2 text-[22px] font-[600] leading-tight text-white sm:text-[25px]">
+          Global Minds. Intelligent Ideas. Lasting Impact.
+        </h2>
+      </div>
+
+      <Link
+        to="/speakers"
+        className="inline-flex h-[32px] items-center gap-3 rounded-[5px] border border-[#FFC21A]/70 px-5 text-[11px] font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#FFC21A] hover:text-[#07113F]"
+      >
+        View All Speakers <span className="text-[15px]">→</span>
+      </Link>
+    </div>
+
+    <div className="relative px-0 md:px-8">
+      <button
+        type="button"
+        onClick={prevSpeaker}
+        className="absolute left-0 top-1/2 z-20 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur transition-all duration-300 hover:scale-110 hover:bg-white/20 md:flex"
+      >
+        <ChevronLeft size={17} />
+      </button>
+
+      <motion.div
+        key={speakerIndex}
+        initial={{ opacity: 0, x: 28 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+      >
+        {visibleSpeakers.map((sp, index) => (
+          <motion.div
+            key={`${sp.name}-${speakerIndex}`}
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: index * 0.05 }}
+            whileHover={{ y: -8, scale: 1.025 }}
+            className="group rounded-[8px] border border-white/10 bg-white/[0.09] px-4 py-5 text-center backdrop-blur transition-all duration-300 hover:border-[#11A8FF]/70 hover:bg-white/[0.13] hover:shadow-[0_18px_45px_rgba(17,168,255,0.15)]"
+          >
+            <div className="mx-auto mb-3 h-[86px] w-[86px] overflow-hidden rounded-full border-2 border-[#11A8FF] bg-slate-200 transition-transform duration-300 group-hover:scale-105">
+              <img
+                src={sp.img}
+                alt={sp.name}
+                className="h-full w-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                  e.currentTarget.parentElement.innerHTML = `<div class='flex h-full w-full items-center justify-center text-[28px] font-bold text-slate-700'>${sp.name.split(" ")[1]?.[0] || "S"}</div>`;
+                }}
+              />
             </div>
-            <Button as={Link} to="/speakers" variant="navyOutline">View All Speakers</Button>
-          </div>
 
-          <div className="relative">
-            <button className="absolute -left-4 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white md:flex">
-              <ChevronLeft size={17} />
-            </button>
+            <h3 className="text-[13px] font-semibold leading-tight text-white">
+              {sp.name}
+            </h3>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-              {SPEAKERS.map(([name, uni, flag]) => (
-                <motion.div key={name} whileHover={{ y: -8, scale: 1.02 }} className="rounded-xl border border-white/10 bg-white/10 p-5 text-center backdrop-blur transition">
-                  <div className="mx-auto mb-3 flex h-[86px] w-[86px] items-center justify-center rounded-full border-2 border-[#11A8FF] bg-slate-200 text-[28px] font-bold text-slate-700">
-                    {name.split(" ")[1]?.[0]}
-                  </div>
-                  <h3 className="text-[13px] font-bold text-white">{name}</h3>
-                  <p className="mt-1 text-[11px] text-white/70">{uni}</p>
-                  <p className="mt-1 text-[14px]">{flag}</p>
-                </motion.div>
-              ))}
-            </div>
+            <p className="mt-1 text-[11px] font-medium text-white/75">
+              {sp.uni}
+            </p>
 
-            <button className="absolute -right-4 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white md:flex">
-              <ChevronRight size={17} />
-            </button>
-          </div>
-        </div>
-      </section>
+            <p className="mt-2 text-[12px] font-semibold text-white/85">
+               {sp.country}
+            </p>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      <button
+        type="button"
+        onClick={nextSpeaker}
+        className="absolute right-0 top-1/2 z-20 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur transition-all duration-300 hover:scale-110 hover:bg-white/20 md:flex"
+      >
+        <ChevronRight size={17} />
+      </button>
+
+      <div className="mt-5 flex justify-center gap-2 md:hidden">
+        <button
+          type="button"
+          onClick={prevSpeaker}
+          className="flex h-8 w-8 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white"
+        >
+          <ChevronLeft size={17} />
+        </button>
+
+        <button
+          type="button"
+          onClick={nextSpeaker}
+          className="flex h-8 w-8 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white"
+        >
+          <ChevronRight size={17} />
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* INFO */}
-      <section className="bg-white px-5 py-8 sm:px-8 lg:px-16">
-        <div className="mx-auto grid max-w-[1420px] grid-cols-1 gap-8 md:grid-cols-3">
-          <Info title="Important Dates">
-            {DATES.map(([label, date]) => (
-              <li key={label} className="flex items-center gap-2 text-[12px]">
-                <Calendar size={15} className="text-blue-600" />
-                <span className="flex-1 text-slate-700">{label}</span>
-                <b>{date}</b>
-              </li>
-            ))}
-          </Info>
+  <section className="relative overflow-hidden bg-white px-5 py-8 sm:px-8 lg:px-16">
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(37,99,235,0.05),transparent_30%),radial-gradient(circle_at_85%_20%,rgba(14,165,233,0.05),transparent_30%)]" />
 
-          <Info title="Why Attend IDEAX 2026?">
-            {["Present your research to a global audience", "Learn from world-renowned experts", "Publish in reputed indexed proceedings", "Network with researchers and industry leaders", "Explore collaborations and innovations"].map((x) => (
-              <li key={x} className="flex gap-2 text-[12px] text-slate-700">
-                <CheckCircle2 size={15} className="text-green-500" /> {x}
-              </li>
-            ))}
-          </Info>
+  <div className="relative mx-auto grid max-w-[1420px] grid-cols-1 gap-8 md:grid-cols-[1.15fr_1fr_1.15fr]">
+    
+    {/* Important Dates */}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.55 }}
+      className="md:border-r md:border-[#E5EAF3] md:pr-8"
+    >
+      <h3 className="mb-5 text-[12px] font-semibold uppercase tracking-wide text-[#2563EB]">
+        Important Dates
+      </h3>
 
-          <div>
-            <h3 className="mb-4 text-[11px] font-bold uppercase text-blue-600">Publication & Indexing</h3>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                [FileCheck2, "Indexed in Scopus"],
-                [BadgeCheck, "IEEE Xplore"],
-                [ShieldCheck, "DOI Assignment"],
-                [FileText, "Open Access Proceedings"],
-              ].map(([Icon, label]) => (
-                <motion.div whileHover={{ y: -5 }} key={label} className="rounded-xl bg-[#F6FAFF] p-5 text-center transition hover:shadow-lg">
-                  <Icon size={25} className="mx-auto mb-2 text-blue-600" />
-                  <p className="text-[11px] font-medium text-slate-600">{label}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <ul className="space-y-4">
+        {DATES.map(([label, date], index) => (
+          <motion.li
+            key={label}
+            initial={{ opacity: 0, x: -18 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: index * 0.05 }}
+            className="flex items-center gap-3 text-[13px]"
+          >
+            <span className="flex h-[17px] w-[17px] shrink-0 items-center justify-center rounded-full border border-[#2563EB] text-[#2563EB]">
+              <Calendar size={11} strokeWidth={2.4} />
+            </span>
+
+            <span className="flex-1 font-semibold text-[#07113F]">
+              {label}
+            </span>
+
+            <span className="whitespace-nowrap font-semibold text-[#1F2A44]">
+              {date}
+            </span>
+          </motion.li>
+        ))}
+      </ul>
+    </motion.div>
+
+    {/* Why Attend */}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.55, delay: 0.1 }}
+      className="md:border-r md:border-[#E5EAF3] md:pr-8"
+    >
+      <h3 className="mb-5 text-[12px] font-semibold uppercase tracking-wide text-[#2563EB]">
+        Why Attend IDEAX 2026?
+      </h3>
+
+      <ul className="space-y-4">
+        {[
+          "Present your research to a global audience",
+          "Learn from world-renowned experts",
+          "Publish in reputed indexed proceedings",
+          "Network with researchers and industry leaders",
+          "Explore collaborations and innovations",
+        ].map((item, index) => (
+          <motion.li
+            key={item}
+            initial={{ opacity: 0, x: -18 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: index * 0.05 }}
+            className="flex items-start gap-3 text-[13px] font-medium leading-snug text-[#1F2A44]"
+          >
+            <span className="mt-[1px] flex h-[16px] w-[16px] shrink-0 items-center justify-center rounded-full bg-[#2563EB] text-white">
+              <CheckCircle2 size={12} strokeWidth={3} />
+            </span>
+            {item}
+          </motion.li>
+        ))}
+      </ul>
+    </motion.div>
+
+    {/* Publication */}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.55, delay: 0.2 }}
+    >
+      <h3 className="mb-5 text-[12px] font-semibold uppercase tracking-wide text-[#2563EB]">
+        Publication &amp; Indexing
+      </h3>
+
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 md:grid-cols-2 xl:grid-cols-4">
+        {[
+          [FileCheck2, "Indexed in Scopus"],
+          [BadgeCheck, "IEEE Xplore"],
+          [ShieldCheck, "DOI Assignment"],
+          [FileText, "Open Access Proceedings"],
+        ].map(([Icon, label], index) => (
+          <motion.div
+            key={label}
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: index * 0.06 }}
+            whileHover={{ y: -7, scale: 1.025 }}
+            className="group flex min-h-[118px] flex-col items-center justify-center rounded-[10px] bg-white p-4 text-center shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition-all duration-300 hover:shadow-[0_18px_45px_rgba(37,99,235,0.15)]"
+          >
+            <Icon
+              size={34}
+              strokeWidth={2.2}
+              className="mb-3 text-[#2563EB] transition-transform duration-300 group-hover:scale-110"
+            />
+
+            <p className="text-[12px] font-semibold leading-tight text-[#07113F]">
+              {label}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  </div>
+</section>
 
       {/* CTA */}
-      <section className="px-5 pb-6 sm:px-8 lg:px-16">
-        <div className="mx-auto flex max-w-[1420px] flex-col items-center justify-between gap-5 rounded-xl bg-gradient-to-r from-[#031CFF] via-[#0808A8] to-[#111827] px-7 py-6 text-white sm:flex-row">
-          <div className="flex items-center gap-4">
-            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500">
-              <Send size={20} />
-            </span>
-            <div>
-              <h3 className="text-[17px] font-bold text-[#FFC21A]">Be a Part of IDEAX 2026</h3>
-              <p className="text-[12px] text-white/85">Join us to innovate, engineer decisions and create a better tomorrow.</p>
-            </div>
-          </div>
-          <Button as={Link} to="/registration" variant="gold">Register Now</Button>
-        </div>
-      </section>
+     <section className="bg-white px-5 pb-6 sm:px-8 lg:px-16">
+  <motion.div
+    initial={{ opacity: 0, y: 22 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.55, ease: "easeOut" }}
+    className="relative mx-auto flex max-w-[1420px] flex-col items-center justify-between gap-5 overflow-hidden rounded-[10px] px-7 py-6 text-white sm:flex-row sm:px-16"
+  >
+    {/* exact dark blue bg gradient */}
+    <div className="absolute inset-0 bg-[linear-gradient(100deg,#071263_0%,#020B54_38%,#050A78_68%,#0A012D_100%)]" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_45%,rgba(59,130,246,0.45),transparent_18%),radial-gradient(circle_at_92%_20%,rgba(37,99,235,0.35),transparent_28%),radial-gradient(circle_at_72%_85%,rgba(168,85,247,0.25),transparent_25%)]" />
+
+    <div className="relative z-10 flex w-full items-center gap-4 sm:w-auto">
+      <motion.span
+        whileHover={{ scale: 1.12, rotate: -8 }}
+        className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#1D4ED8,#6366F1)] shadow-[0_8px_22px_rgba(59,130,246,0.35)]"
+      >
+        <Send size={22} className="text-white" fill="currentColor" />
+      </motion.span>
+
+      <div>
+        <h3 className="text-[14px] font-semibold leading-tight text-[#FFC21A] sm:text-[18px]">
+          Be a Part of IDEAX 2026
+        </h3>
+        <p className="mt-1 text-[10px] font-medium leading-snug text-white/90 sm:text-[12px]">
+          Join us to innovate, engineer decisions and create a better tomorrow.
+        </p>
+      </div>
+    </div>
+
+    <Link
+      to="/registration"
+      className="relative z-10 inline-flex h-[38px] w-full items-center justify-center gap-3 rounded-[5px] bg-[#FFC21A] px-6 text-[13px] font-bold text-[#07113F] shadow-[0_8px_20px_rgba(255,194,26,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#FFD34D] hover:shadow-[0_12px_28px_rgba(255,194,26,0.4)] sm:w-auto"
+    >
+      Register Now <span className="text-[15px] leading-none">→</span>
+    </Link>
+  </motion.div>
+</section>
     </main>
   );
 }
