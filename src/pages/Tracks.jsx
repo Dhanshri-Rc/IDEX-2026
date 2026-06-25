@@ -139,18 +139,18 @@ export default function TracksPage() {
             className="max-w-[520px]"
           >
             <div className="flex items-center gap-3 text-white/80 text-[13px]">
-              <Link to="/" className="text-[#12A8FF]">
+              <Link to="/" className="hover:text-[#12A8FF]">
                 Home
               </Link>
               <span>›</span>
-              <span>Tracks</span>
+              <span className="text-[#12A8FF]">Tracks</span>
             </div>
 
             <h1 className="mt-8 font-[600] leading-none">
               <span className="block text-white text-[36px] sm:text-[38px] lg:text-[42px]">
                 Conference
               </span>
-              <span className="block text-[#12A8FF] text-[38px] sm:text-[40px] lg:text-[48px]">
+              <span className="block text-[36px] sm:text-[48px] lg:text-[52px] font-bold bg-gradient-to-r from-[#0B63FF] via-[#13B5FF] to-[#00D4FF] bg-clip-text text-transparent">
                 Tracks
               </span>
             </h1>

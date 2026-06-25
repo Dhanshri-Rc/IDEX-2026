@@ -114,9 +114,9 @@ export default function AboutIdeax2026() {
 
         <div className="relative max-w-[1420px] mx-auto px-4 sm:px-6 lg:px-16 pt-10 sm:pt-14 lg:pt-20">
           <motion.div initial="hidden" animate="show" variants={fadeUp} className="max-w-[520px]">
-            <h2 className="font-semibold text-[#06134A] leading-none">
-              <span className="block text-[30px] sm:text-[42px] lg:text-[44px]">About the</span>
-              <span className="block mt-2 text-[38px] sm:text-[52px] lg:text-[56px] tracking-[-1px] sm:tracking-[-2px]">
+            <h2 className="font-semibold text-[#06134A] leading-[1.1]">
+              <span className="block text-[26px] sm:text-[38px] lg:text-[42px]">About the</span>
+              <span className="block text-[36px] sm:text-[48px] lg:text-[52px] font-bold bg-gradient-to-r from-[#0B63FF] via-[#13B5FF] to-[#00D4FF] bg-clip-text text-transparent">
                 IDEAX 2026
               </span>
             </h2>

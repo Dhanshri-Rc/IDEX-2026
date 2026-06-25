@@ -124,7 +124,7 @@ export default function SchedulePage() {
               <span className="block text-[#07113F] text-[36px] sm:text-[38px] lg:text-[42px]">
                 Conference
               </span>
-              <span className="block text-[#0B63FF] text-[38px] sm:text-[40px] lg:text-[48px]">
+              <span className="block text-[36px] sm:text-[48px] lg:text-[52px] font-bold bg-gradient-to-r from-[#0B63FF] via-[#13B5FF] to-[#00D4FF] bg-clip-text text-transparent">
                 Schedule
               </span>
             </h1>
