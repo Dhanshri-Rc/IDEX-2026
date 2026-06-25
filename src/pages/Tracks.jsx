@@ -147,15 +147,18 @@ export default function TracksPage() {
             </div>
 
             <h1 className="mt-8 font-[600] leading-none">
-              <span className="block text-white text-[30px] sm:text-[42px] lg:text-[44px]">
+              <span className="block text-white text-[36px] sm:text-[38px] lg:text-[42px]">
                 Conference
               </span>
-              <span className="block text-[#12A8FF] text-[42px] sm:text-[54px] lg:text-[56px]">
+              <span className="block text-[#12A8FF] text-[38px] sm:text-[40px] lg:text-[48px]">
                 Tracks
               </span>
             </h1>
 
-            <div className="mt-6 w-[90px] h-[5px] rounded-full bg-gradient-to-r from-[#00B6FF] to-[#F5A300]" />
+             <div className="mt-4 flex h-[4px] w-[70px] overflow-hidden rounded-full">
+        <span className="w-[55%] bg-[#13B5FF]" />
+        <span className="w-[45%] bg-[#FFC21A]" />
+      </div>
 
             <p className="mt-7 max-w-[430px] text-white text-[14px] sm:text-[15px] leading-8">
               IDEAX 2026 invites high-quality research papers across a wide
