@@ -102,7 +102,6 @@ const virtualFeatures = [
 const offlineFeatures = [
   "Offline Presentation",
   "Conference Kit (Physical)",
-  "Participation Certificate",
   "Peer Review & Publication",
   "Access to All Sessions",
   "Lunch & Refreshments",
@@ -190,14 +189,14 @@ export default function RegistrationPage() {
                 Home
               </Link>
               <span>›</span>
-              <span>Registration</span>
+              <span className="text-[#0B63FF]">Registration</span>
             </div>
 
             <h1 className="mt-7 font-semibold leading-[1.2]">
               <span className="block text-[#07113F] text-[36px] sm:text-[38px] lg:text-[42px]">
                 Register for
               </span>
-              <span className="block text-[42px] sm:text-[52px] lg:text-[56px] font-bold bg-gradient-to-r from-[#0B63FF] via-[#13B5FF] to-[#00D4FF] bg-clip-text text-transparent">
+              <span className="block text-[36px] sm:text-[48px] lg:text-[52px] font-bold bg-gradient-to-r from-[#0B63FF] via-[#13B5FF] to-[#00D4FF] bg-clip-text text-transparent">
   IDEAX 2026
 </span>
             </h1>
@@ -435,7 +434,7 @@ export default function RegistrationPage() {
                 </div>
               </div>
 
-              <button className="inline-flex items-center gap-3 rounded-[8px] bg-[#FFC21A] px-8 py-4 text-[14px] font-semibold text-[#07113F] shadow-[0_12px_28px_rgba(255,194,26,0.35)] transition-all duration-300 hover:scale-105 hover:bg-[#FFB400]">
+              <button className="inline-flex items-center gap-3 rounded-[8px] bg-[#FFC21A] px-4 py-3 text-[14px] font-semibold text-[#07113F] shadow-[0_12px_28px_rgba(255,194,26,0.35)] transition-all duration-300 hover:scale-105 hover:bg-[#FFB400]">
                 REGISTER NOW <ArrowRight className="h-5 w-5" />
               </button>
             </div>
