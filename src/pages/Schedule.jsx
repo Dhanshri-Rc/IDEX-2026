@@ -162,13 +162,13 @@ export default function SchedulePage() {
                 className={`flex items-center gap-4 ${i !== 3 ? "lg:border-r lg:border-[#D8E2F1]" : ""}`}
               >
                 <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center"
+                  className="w-12 h-12 rounded-full flex items-center justify-center"
                   style={{ backgroundColor: `${color}15` }}
                 >
                   <Icon className="w-7 h-7" style={{ color }} />
                 </div>
                 <div>
-                  <h4 className="text-[15px] font-[600] text-[#0637C8]">{title}</h4>
+                  <h4 className="text-[14px] font-semibold text-[#0637C8]">{title}</h4>
                   <p className="text-[12px] font-medium">{desc}</p>
                 </div>
               </motion.div>
