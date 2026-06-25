@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { Linkedin, Twitter, Facebook, Youtube } from "./SocialIcons";
-import Logo from "../assets/icons/Logo";
+import Logo from "../assets/hero/logo.png";
 
 const QUICK_LINKS = [
   
@@ -38,7 +38,8 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <Logo size={38} />
+          <img src={Logo} alt="footer logo" className="w-[210px]"  />
+            {/* <Logo size={38} />
             <div>
               <h3 className="text-[28px] font-[600] leading-none tracking-wide">
                 IDEAX <span className="text-[#FFC21A]">2026</span>
@@ -46,7 +47,7 @@ export default function Footer() {
               <p className="mt-1 text-[7.5px] font-[600] uppercase tracking-[0.16em] text-[#f0efeb]">
                 Innovate • Decide • Transform
               </p>
-            </div>
+            </div> */}
           </div>
 
           <p className="max-w-[260px] text-[13px] font-medium leading-[1.7] text-white/80">

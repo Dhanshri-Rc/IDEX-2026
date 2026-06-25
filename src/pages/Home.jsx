@@ -3,7 +3,8 @@ import {
   Calendar, MapPin, Laptop, Lightbulb, BarChart3, Target,
   Users, FileText, Globe2, Mic2, BrainCircuit, LineChart,
   Cloud, HeartPulse, Leaf, Cpu, ChevronLeft, ChevronRight,
-  CheckCircle2, FileCheck2, BadgeCheck, ShieldCheck, Send
+  CheckCircle2, FileCheck2, BadgeCheck, ShieldCheck, Send,
+  ArrowRight
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
@@ -547,18 +548,37 @@ const prevSpeaker = () => {
         <h3 className="text-[14px] font-semibold leading-tight text-[#FFC21A] sm:text-[18px]">
           Be a Part of IDEAX 2026
         </h3>
-        <p className="mt-1 text-[10px] font-medium leading-snug text-white/90 sm:text-[12px]">
+        <p className="mt-1 text-[11px] font-medium leading-snug text-white/90 sm:text-[12px]">
           Join us to innovate, engineer decisions and create a better tomorrow.
         </p>
       </div>
     </div>
 
-    <Link
-      to="/registration"
-      className="relative z-10 inline-flex h-[38px] w-full items-center justify-center gap-3 rounded-[5px] bg-[#FFC21A] px-6 text-[13px] font-bold text-[#07113F] shadow-[0_8px_20px_rgba(255,194,26,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#FFD34D] hover:shadow-[0_12px_28px_rgba(255,194,26,0.4)] sm:w-auto"
-    >
-      Register Now <span className="text-[15px] leading-none">→</span>
-    </Link>
+  <Link
+  to="/registration"
+  className="
+    relative z-10 inline-flex items-center justify-center gap-2
+    h-[38px]
+    px-10
+    md:h-[34px]
+    md:px-4
+    text-[12px]
+    md:text-[12px]
+    lg:h-[38px]
+    lg:px-10
+    lg:text-[13px]
+    rounded-[5px]
+    bg-[#FFC21A]
+    font-semibold text-[#07113F]
+    shadow-[0_8px_20px_rgba(255,194,26,0.28)]
+    transition-all duration-300
+    hover:-translate-y-0.5
+    hover:bg-[#FFD34D]
+  "
+>
+  Register
+  <ArrowRight size={16} className="md:w-4 md:h-4 lg:w-[18px] lg:h-[18px]" />
+</Link>
   </motion.div>
 </section>
     </main>

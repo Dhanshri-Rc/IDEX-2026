@@ -3,7 +3,7 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../assets/icons/Logo";
-import hlogo from "../assets/hero/logo.png"
+import hlogo from "../assets/hero/flogo.png"
 
 const LINKS = [
   { label: "Home", to: "/" },
@@ -37,7 +37,7 @@ export default function Navbar() {
         scrolled ? "shadow-[0_8px_25px_rgba(15,23,42,0.08)]" : ""
       }`}
     >
-      <nav className="relative mx-auto flex h-[70px] max-w-[1420px] items-center justify-between px-5 sm:px-8 lg:px-16">
+      <nav className="relative mx-auto flex h-[65px] border-b border-black max-w-[1420px] items-center justify-between px-5 sm:px-8 lg:px-16">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
           {/* <Logo size={55} /> */}
