@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import homeHero from "../assets/hero/HomeBG.png";
 import { useState } from "react";
+import profile from "../assets/hero/emly.jpg"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -63,13 +64,13 @@ const TRACKS = [
 ];
 
 const SPEAKERS = [
-  { name: "Prof. Yann LeCun", uni: "New York University", country: "USA", flag: "🇺🇸", img: "/speakers/yann-lecun.jpg" },
-  { name: "Prof. Fei-Fei Li", uni: "Stanford University", country: "USA", flag: "🇺🇸", img: "/speakers/fei-fei-li.jpg" },
-  { name: "Prof. Amit P. Sheth", uni: "University of South Carolina", country: "USA", flag: "🇺🇸", img: "/speakers/amit-sheth.jpg" },
-  { name: "Prof. Virginia Dignum", uni: "Umeå University", country: "Sweden", flag: "🇸🇪", img: "/speakers/virginia-dignum.jpg" },
-  { name: "Prof. Hiroaki Kitano", uni: "Sony Computer Science Labs", country: "Japan", flag: "🇯🇵", img: "/speakers/hiroaki-kitano.jpg" },
-  { name: "Prof. Stuart Russell", uni: "UC Berkeley", country: "USA", flag: "🇺🇸", img: "/speakers/stuart-russell.jpg" },
-  { name: "Prof. Yoshua Bengio", uni: "Mila Institute", country: "Canada", flag: "🇨🇦", img: "/speakers/yoshua-bengio.jpg" },
+  { name: "Prof. Yann LeCun", uni: "New York University", country: "USA", flag: "🇺🇸", img:profile },
+  { name: "Prof. Fei-Fei Li", uni: "Stanford University", country: "USA", flag: "🇺🇸", img:profile },
+  { name: "Prof. Amit P. Sheth", uni: "University of South Carolina", country: "USA", flag: "🇺🇸", img:profile },
+  { name: "Prof. Virginia Dignum", uni: "Umeå University", country: "Sweden", flag: "🇸🇪", img:profile },
+  { name: "Prof. Hiroaki Kitano", uni: "Sony Computer Science Labs", country: "Japan", flag: "🇯🇵", img:profile },
+  { name: "Prof. Stuart Russell", uni: "UC Berkeley", country: "USA", flag: "🇺🇸", img:profile },
+  { name: "Prof. Yoshua Bengio", uni: "Mila Institute", country: "Canada", flag: "🇨🇦", img:profile },
 ];
 
 const DATES = [

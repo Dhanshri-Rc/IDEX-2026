@@ -231,7 +231,7 @@ const [organizingIndex, setOrganizingIndex] = useState(0);
 
     <Link
       to="/registration"
-      className="relative z-10 inline-flex h-[44px] w-full items-center justify-center gap-3 rounded-[6px] bg-white px-8 text-[12px] font-bold uppercase text-[#2563EB] transition-all duration-300 hover:-translate-y-1 hover:bg-[#FFC21A] hover:text-[#07113F] sm:w-auto sm:px-10"
+      className="relative z-10 inline-flex h-[40px] w-full items-center justify-center gap-3 rounded-[6px] bg-white px-8 text-[12px] font-bold uppercase text-[#2563EB] transition-all duration-300 hover:-translate-y-1 hover:bg-[#FFC21A] hover:text-[#07113F] sm:w-auto sm:px-6"
     >
       Join as Volunteer
       <ArrowRight size={18}/>
