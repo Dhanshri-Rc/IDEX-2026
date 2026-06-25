@@ -1,161 +1,311 @@
-import { useState } from "react";
-import { Users2, ShieldCheck, UserCog, Network, ChevronRight, UserPlus } from "lucide-react";
-import Button from "../components/Button";
-import SectionTitle from "../components/SectionTitle";
-import FadeUp from "../components/FadeUp";
-import PageHero from "../components/PageHero";
-import Avatar from "../components/Avatar";
-import committeeHero from "../assets/hero/committee-hero.png";
+import { Users2, UserCog, ChevronRight, UserPlus } from "lucide-react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import committeeHero from "../assets/hero/CommiteBg.png";
+import cta from "../assets/hero/commiteCta.png";
+import profile from "../assets/hero/emly.jpg"
 
 const STEERING = [
-  { name: "Prof. David Tan", role: "Chair", org: "National University of Singapore, Singapore" },
-  { name: "Prof. Elena Kovacs", role: "Co-Chair", org: "Technical University of Munich, Germany" },
-  { name: "Prof. Amit Sharma", role: "Co-Chair", org: "Indian Institute of Technology, India" },
-  { name: "Prof. Marco Rossi", role: "Co-Chair", org: "Politecnico di Milano, Italy" },
-  { name: "Prof. Mei Lin", role: "Co-Chair", org: "Tsinghua University, China" },
+  { name: "Prof. David\nTan", role: "Chair", org: "National University of\nSingapore, Singapore" },
+  { name: "Prof. Elena\nKovacs", role: "Co-Chair", org: "Technical University\nof Munich, Germany" },
+  { name: "Prof. Amit\nSharma", role: "Co-Chair", org: "Indian Institute of\nTechnology, India" },
+  { name: "Prof. Marco\nRossi", role: "Co-Chair", org: "Politecnico di Milano,\nItaly" },
+  { name: "Prof. Mei\nLin", role: "Co-Chair", org: "Tsinghua University,\nChina" },
 ];
 
 const TECHNICAL = [
-  { name: "Prof. John Doe", org: "University of California, USA" },
-  { name: "Prof. Satoshi Nakamura", org: "The University of Tokyo, Japan" },
-  { name: "Prof. Priya Nair", org: "IIT Bombay, India" },
+  { name: "Prof. John\nDoe", org: "University of\nCalifornia, USA" },
+  { name: "Prof. Satoshi\nNakamura", org: "The University of\nTokyo, Japan" },
+  { name: "Prof. Priya\nNair", org: "IIT Bombay,\nIndia" },
 ];
 
 const ORGANIZING = [
-  { name: "Dr. Wei Huang", org: "Conference Director" },
-  { name: "Dr. Anita Verma", org: "Program Coordinator" },
-  { name: "Mr. Ryan Lee", org: "Operations Manager" },
+  { name: "Dr. Wei\nHuang", org: "Conference\nDirector" },
+  { name: "Dr. Anita\nVerma", org: "Program\nCoordinator" },
+  { name: "Mr. Ryan\nLee", org: "Operations\nManager" },
 ];
 
-function PersonCard({ name, role, sub, bar = "bg-brand-blue" }) {
+function AvatarCircle({ name, size = "h-[72px] w-[72px]" }) {
   return (
-    <div className="card-lift bg-white border border-slate-100 rounded-xl2 shadow-card p-5 text-center shrink-0 w-48">
-      <Avatar
-        name={name}
-        size={64}
-        className="mx-auto mb-3 transition-transform duration-300 hover:scale-105"
-      />
-      <h4 className="font-semibold text-sm text-navy-900">{name}</h4>
-      <div className={`h-0.5 w-6 mx-auto rounded my-1.5 ${bar}`} />
-      {role && <p className="text-xs font-semibold text-brand-blue mb-0.5">{role}</p>}
-      <p className="text-xs text-slate-500 leading-snug">{sub}</p>
+    <div className={`${size} shrink-0 overflow-hidden rounded-full bg-[#E8EDF5] ring-4 ring-[#F3F6FA]`}>
+      <div className="flex h-full w-full items-center justify-center text-[22px] font-bold text-slate-600">
+        {name.replace("\n", " ").split(" ")[1]?.[0] || "U"}
+      </div>
     </div>
   );
 }
 
-export default function Committee() {
-  const [tab, setTab] = useState("technical");
-
+function PersonCard({ name, role, org, bar = "bg-[#2563EB]" }) {
   return (
-    <div>
-      <PageHero
-        variant="light"
-        breadcrumb="Committee"
-        title="Our"
-        titleAccent="Committee"
-        image={committeeHero}
-        description="A dedicated team of experts and professionals working together to make IDEAX 2026 a remarkable success."
-      />
+    <motion.div
+      whileHover={{ y: -7, scale: 1.015 }}
+      className="flex min-h-[150px] w-full items-start gap-4 rounded-[10px] border border-[#E1E9F6] bg-white p-4 shadow-[0_8px_26px_rgba(15,23,42,0.04)] transition-all duration-300 hover:border-[#C7D8FF] hover:shadow-[0_18px_40px_rgba(37,99,235,0.13)] sm:w-[190px] sm:flex-col sm:items-start"
+    >
+      <AvatarCircle name={name} size="h-[66px] w-[66px]" />
 
-      {/* STEERING COMMITTEE */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <SectionTitle
-            eyebrow="Steering Committee"
-            title="Guiding Vision. Driving Impact."
-            description="Our Steering Committee provides strategic direction and vision to ensure the highest quality and impact of the conference."
+      <div>
+        <h4 className="whitespace-pre-line text-[13px] font-bold leading-tight text-[#07113F]">
+          {name}
+        </h4>
+
+        <div className={`my-2 h-[2px] w-[25px] rounded-full ${bar}`} />
+
+        {role && (
+          <p className="text-[10px] font-bold text-[#2563EB]">{role}</p>
+        )}
+
+        <p className="mt-1 whitespace-pre-line text-[10px] font-medium leading-[1.55] text-[#1F2A44]/70">
+          {org}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+export default function Committee() {
+  return (
+    <main className="overflow-hidden bg-white text-[#07113F]">
+      {/* HERO */}
+      
+<section
+  className="relative min-h-[430px] overflow-hidden bg-[#020B25] bg-cover bg-center bg-no-repeat sm:min-h-[460px] lg:min-h-[500px]"
+  style={{
+    backgroundImage: `url(${committeeHero})`,
+  }}
+>
+  <div className="relative z-10 mx-auto flex min-h-[430px] max-w-[1420px] items-center px-5 py-6 sm:min-h-[460px] sm:px-8 lg:min-h-[500px] lg:px-16">
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.65, ease: "easeOut" }}
+      className="max-w-[560px]"
+    >
+      {/* Breadcrumb */}
+      <div className="mb-8 sm:-mt-28 flex items-center gap-2 text-[13px] font-semibold text-black/80">
+        <Link to="/" className="transition hover:text-[#13B5FF]">
+          Home
+        </Link>
+        <span className="text-black">›</span>
+        <Link to="/committee" className="font-semibold text-[#13B5FF] text-[13px]">
+          Committee
+        </Link>
+      </div>
+
+      <h1 className="text-[40px] font-[600] leading-none text-black sm:text-[46px] lg:text-[50px]">
+        Our{" "} <br />
+        <span className="bg-gradient-to-r from-[#47bef5] to-[#493af3] bg-clip-text text-transparent">
+          Committee
+        </span>
+      </h1>
+
+      <div className="mt-4 flex h-[4px] w-[70px] overflow-hidden rounded-full">
+        <span className="w-[55%] bg-[#13B5FF]" />
+        <span className="w-[45%] bg-[#FFC21A]" />
+      </div>
+
+      <p className="mt-7 max-w-[350px] text-[15px] font-medium leading-[1.75] text-black/90">
+       A dedicated team of experts and professionals working together to
+              make IDEAX 2026 a remarkable success.
+      </p>
+    </motion.div>
+  </div>
+
+
+</section>
+
+
+      {/* STEERING */}
+    <section className="bg-white px-5 py-8 sm:px-8 lg:px-16">
+  <div className="mx-auto max-w-[1340px] text-center">
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <p className="text-[15px] font-semibold uppercase tracking-wide text-[#2563EB]">
+        Steering Committee
+      </p>
+
+      <div className="mx-auto mt-3 flex h-[4px] w-[110px] items-center justify-between">
+        <span className="h-[7px] w-[7px] rounded-full bg-[#2563EB]" />
+        <span className="h-[3px] w-[36px] bg-[#C7D8FF]" />
+        <span className="h-[3px] w-[24px] bg-[#2563EB]" />
+        <span className="h-[3px] w-[24px] bg-[#FFC21A]" />
+        <span className="h-[3px] w-[36px] bg-[#C7D8FF]" />
+
+        <span className="h-[7px] w-[7px] rounded-full bg-[#2563EB]" />
+      </div>
+
+      <h2 className="mt-6 text-[28px] font-semibold leading-tight text-[#07113F] sm:text-[34px]">
+        Guiding Vision. Driving Impact.
+      </h2>
+
+      <p className="mx-auto mt-4 max-w-[690px] text-[15px] font-medium leading-[1.6] text-[#1F2A44]/75">
+        Our Steering Committee provides strategic direction and vision
+        <br className="hidden sm:block" />
+        to ensure the highest quality and impact of the conference.
+      </p>
+    </motion.div>
+
+    <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+      {STEERING.map((m, i) => (
+        <motion.div
+          key={m.name}
+          initial={{ opacity: 0, y: 26 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45, delay: i * 0.06 }}
+          whileHover={{ y: -8, scale: 1.015 }}
+          className="group flex min-h-[200px] flex-col items-start rounded-[12px] border border-[#E1E9F6] bg-white p-4 text-left shadow-[0_8px_26px_rgba(15,23,42,0.04)] transition-all duration-300 hover:border-[#C7D8FF] hover:shadow-[0_22px_50px_rgba(37,99,235,0.14)]"
+        >
+          <div className="flex items-center gap-3">
+            <div className="h-[88px] w-[88px] shrink-0 overflow-hidden rounded-full bg-[#E8EDF5] ring-4 ring-[#F3F6FA] transition-transform duration-300 group-hover:scale-105">
+              <div className="flex h-full w-full items-center justify-center text-[28px] font-semibold text-slate-600">
+                {m.name.replace("\n", " ").split(" ")[1]?.[0]}
+              </div>
+            </div>
+
+            <div>
+              <h3 className=" text-[15px] font-semibold leading-[1.25] text-[#07113F]">
+                {m.name}
+              </h3>
+              <div className="mt-3 h-[3px] w-[28px] rounded-full bg-[#2563EB]" />
+            </div>
+          </div>
+
+          <p className="mt-6 text-[15px] font-semibold text-[#2563EB]">
+            {m.role}
+          </p>
+
+          <p className="mt-2 whitespace-pre-line text-[13px] font-medium leading-[1.65] text-[#1F2A44]/75">
+            {m.org}
+          </p>
+        </motion.div>
+      ))}
+    </div>
+
+    <Link
+      to="/committee"
+      className="mt-10 inline-flex h-[50px] items-center justify-center gap-5 rounded-[6px] border-2 border-[#2563EB] px-9 text-[15px] font-bold uppercase text-[#2563EB] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#2563EB] hover:text-white hover:shadow-[0_12px_30px_rgba(37,99,235,0.22)]"
+    >
+      View Full Steering Committee <span className="text-[22px] leading-none">→</span>
+    </Link>
+  </div>
+</section>
+
+      {/* TECHNICAL */}
+      <section className="bg-white px-5 pb-8 sm:px-8 lg:px-16">
+        <div className="mx-auto max-w-[1340px] space-y-7">
+          <CommitteeRow
+            icon={Users2}
+            title="Technical Program Committee"
+            desc="Responsible for the review of submissions and curating a high-quality technical program."
+            color="#2563EB"
+            bg="bg-[#EEF4FF]"
+            members={TECHNICAL}
           />
-          <div className="flex flex-wrap justify-center gap-6">
-            {STEERING.map((m, i) => (
-              <FadeUp key={m.name} delay={i * 0.06}>
-                <PersonCard name={m.name} role={m.role} sub={m.org} />
-              </FadeUp>
-            ))}
-          </div>
-          <div className="flex justify-center mt-8">
-            <Button variant="blueOutline">View Full Steering Committee</Button>
-          </div>
-        </div>
-      </section>
 
-      {/* TECHNICAL + ORGANIZING TABS */}
-      <section className="bg-white pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          {/* Technical Program Committee */}
-          <FadeUp className="bg-blue-50/60 rounded-xl2 p-6 flex flex-col lg:flex-row items-center gap-6">
-            <div className="flex items-start gap-4 lg:w-72 shrink-0">
-              <span className="w-12 h-12 rounded-xl bg-white shadow-card flex items-center justify-center shrink-0">
-                <Users2 size={22} className="text-brand-blue" />
-              </span>
-              <div>
-                <h4 className="font-semibold text-navy-900">Technical Program Committee</h4>
-                <p className="text-xs text-slate-500 mt-1 mb-3">
-                  Responsible for the review of submissions and curating a high-quality technical
-                  program.
-                </p>
-                <Button variant="blueOutline" className="!px-4 !py-2 text-xs">
-                  View All Members
-                </Button>
-              </div>
-            </div>
-            <div className="flex gap-5 overflow-x-auto flex-1 w-full lg:justify-end">
-              {TECHNICAL.map((m) => (
-                <PersonCard key={m.name} name={m.name} sub={m.org} />
-              ))}
-              <button className="hidden sm:flex w-10 h-10 rounded-full bg-white shadow-card items-center justify-center self-center shrink-0 hover:bg-brand-blue hover:text-white transition-colors">
-                <ChevronRight size={16} />
-              </button>
-            </div>
-          </FadeUp>
-
-          {/* Organizing Committee */}
-          <FadeUp delay={0.08} className="bg-orange-50/60 rounded-xl2 p-6 flex flex-col lg:flex-row items-center gap-6">
-            <div className="flex items-start gap-4 lg:w-72 shrink-0">
-              <span className="w-12 h-12 rounded-xl bg-white shadow-card flex items-center justify-center shrink-0">
-                <UserCog size={22} className="text-orange-500" />
-              </span>
-              <div>
-                <h4 className="font-semibold text-navy-900">Organizing Committee</h4>
-                <p className="text-xs text-slate-500 mt-1 mb-3">
-                  Managing the planning, coordination and execution of IDEAX 2026.
-                </p>
-                <Button variant="orange" className="!px-4 !py-2 text-xs">
-                  View All Members
-                </Button>
-              </div>
-            </div>
-            <div className="flex gap-5 overflow-x-auto flex-1 w-full lg:justify-end">
-              {ORGANIZING.map((m) => (
-                <PersonCard key={m.name} name={m.name} sub={m.org} bar="bg-orange-500" />
-              ))}
-              <button className="hidden sm:flex w-10 h-10 rounded-full bg-white shadow-card items-center justify-center self-center shrink-0 hover:bg-orange-500 hover:text-white transition-colors">
-                <ChevronRight size={16} />
-              </button>
-            </div>
-          </FadeUp>
+          <CommitteeRow
+            icon={UserCog}
+            title="Organizing Committee"
+            desc="Managing the planning, coordination and execution of IDEAX 2026."
+            color="#FF8A00"
+            bg="bg-[#FFF4E8]"
+            members={ORGANIZING}
+            orange
+          />
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-navy-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4 text-white">
-            <span className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-              <UserPlus size={20} />
+      <section className="bg-white px-5 pb-7 sm:px-8 lg:px-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55 }}
+          className="relative mx-auto flex max-w-[1340px] flex-col items-start justify-between gap-5 overflow-hidden rounded-[10px] px-6 py-6 text-white shadow-[0_14px_35px_rgba(15,23,42,0.12)] sm:flex-row sm:items-center sm:px-10"
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(100deg,#03094B_0%,#07126E_48%,#180079_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_88%_35%,rgba(139,92,246,.65),transparent_22%),radial-gradient(circle_at_78%_75%,rgba(37,99,235,.45),transparent_28%)]" />
+
+          <div className="relative z-10 flex items-center gap-4 sm:gap-5">
+            <span className="flex h-[54px] w-[54px] shrink-0 items-center justify-center rounded-full bg-[#101B7A] sm:h-[66px] sm:w-[66px]">
+              <UserPlus size={28} />
             </span>
+
             <div>
-              <h4 className="font-bold text-lg">Be Part of the Team</h4>
-              <p className="text-white/70 text-sm max-w-md">
-                We are always looking for enthusiastic volunteers to help make IDEAX 2026 a
-                success.
+              <h3 className="text-[19px] font-bold sm:text-[22px]">
+                Be Part of the Team
+              </h3>
+              <p className="mt-2 max-w-[520px] text-[12px] font-medium leading-relaxed text-white/82 sm:text-[13px]">
+                We are always looking for enthusiastic volunteers to help make
+                IDEAX 2026 a success.
               </p>
             </div>
           </div>
-          <Button variant="white" className="shrink-0">
-            Join as Volunteer
-          </Button>
-        </div>
+
+          <Link
+            to="/registration"
+            className="relative z-10 inline-flex h-[40px] w-full items-center justify-center gap-3 rounded-[6px] bg-white px-7 text-[12px] font-bold uppercase text-[#2563EB] transition hover:bg-[#FFC21A] hover:text-[#07113F] sm:w-auto"
+          >
+            Join as Volunteer <span>→</span>
+          </Link>
+        </motion.div>
       </section>
-    </div>
+    </main>
+  );
+}
+
+function CommitteeRow({ icon: Icon, title, desc, color, bg, members, orange }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className={`rounded-[12px] ${bg} p-5 sm:p-6`}
+    >
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-center">
+        <div className="flex gap-4 lg:w-[360px]">
+          <span className="flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-[10px] bg-white shadow-[0_10px_25px_rgba(15,23,42,.08)]">
+            <Icon size={30} style={{ color }} />
+          </span>
+
+          <div>
+            <h3 className="text-[12px] font-bold uppercase" style={{ color }}>
+              {title}
+            </h3>
+            <p className="mt-2 text-[11px] font-medium leading-relaxed text-[#1F2A44]/70">
+              {desc}
+            </p>
+
+            <Link
+              to="/committee"
+              className="mt-4 inline-flex h-[32px] items-center gap-2 rounded-[5px] border px-4 text-[10px] font-bold uppercase transition hover:text-white"
+              style={{ borderColor: color, color }}
+            >
+              View All Members <span>→</span>
+            </Link>
+          </div>
+        </div>
+
+        <div className="flex flex-1 gap-4 overflow-x-auto pb-2 lg:justify-end">
+          {members.map((m) => (
+            <div key={m.name} className="min-w-[190px]">
+              <PersonCard
+                name={m.name}
+                org={m.org}
+                bar={orange ? "bg-[#FF8A00]" : "bg-[#2563EB]"}
+              />
+            </div>
+          ))}
+
+          <button className="hidden h-10 w-10 shrink-0 items-center justify-center self-center rounded-full bg-white shadow-[0_10px_25px_rgba(15,23,42,.08)] transition hover:scale-110 sm:flex">
+            <ChevronRight size={17} style={{ color }} />
+          </button>
+        </div>
+      </div>
+    </motion.div>
   );
 }
