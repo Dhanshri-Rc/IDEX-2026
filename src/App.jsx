@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
+
 export default function App() {
   const location = useLocation();
 
