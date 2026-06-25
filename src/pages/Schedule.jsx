@@ -1,352 +1,349 @@
-import { useState } from "react";
+import React from "react";
+import { motion } from "framer-motion";
 import {
-  Calendar,
+  CalendarDays,
   MapPin,
-  Laptop,
-  Clock,
-  ChevronDown,
-  Download,
+  Monitor,
+  Clock3,
   Users,
   Send,
-  Mic2,
-  User,
-  Coffee,
+  Mic,
+  Network,
   BarChart3,
   Bell,
-  BookOpen,
+  Download,
+  ChevronDown,
+  ArrowRight,
 } from "lucide-react";
-import Button from "../components/Button";
-import SectionTitle from "../components/SectionTitle";
-import FadeUp from "../components/FadeUp";
-import PageHero from "../components/PageHero";
-import scheduleHero from "../assets/hero/schedule-hero.png";
+import { Link } from "react-router-dom";
 
-const META = [
-  { icon: Calendar, title: "10 – 12", subtitle: "December, 2026" },
-  { icon: MapPin, title: "Singapore,", subtitle: "Asia" },
-  { icon: Laptop, title: "Hybrid", subtitle: "(In-person & Online)" },
-  { icon: Clock, title: "3 Days", subtitle: "of Inspiring Sessions" },
-];
+import scheduleHero from "../assets/hero/ContactBg.png";
+import scheduleCta from "../assets/hero/tracksCta.png";
 
-const DAYS = [
-  { key: "all", label: "All Days", date: "" },
-  { key: "day1", label: "Day 1", date: "10 Dec, 2026" },
-  { key: "day2", label: "Day 2", date: "11 Dec, 2026" },
-  { key: "day3", label: "Day 3", date: "12 Dec, 2026" },
-];
-
-const SESSIONS = {
-  day1: [
-    {
-      time: "08:30 – 09:30",
-      duration: "60 mins",
-      title: "Registration & Welcome Coffee",
-      desc: "Level 1, Conference Foyer",
-      icon: Users,
-      tag: "General",
-      tagColor: "bg-green-50 text-green-600",
-    },
-    {
-      time: "09:30 – 10:00",
-      duration: "30 mins",
-      title: "Opening Ceremony",
-      desc: "Welcome Address & Conference Overview",
-      icon: Send,
-      tag: "General",
-      tagColor: "bg-blue-50 text-blue-600",
-    },
-    {
-      time: "10:00 – 11:00",
-      duration: "60 mins",
-      title: "Keynote Speech",
-      desc: "The Future of AI and Decision Engineering",
-      person: "Prof. Michael Anderson, Stanford University, USA",
-      icon: User,
-      tag: "Keynote",
-      tagColor: "bg-purple-50 text-purple-600",
-    },
-    {
-      time: "11:15 – 12:45",
-      duration: "90 mins",
-      title: "Technical Session 1",
-      desc: "AI & Machine Learning Innovations",
-      icon: BarChart3,
-      tag: "Track 01",
-      tagColor: "bg-orange-50 text-orange-600",
-    },
-    {
-      time: "12:45 – 14:00",
-      duration: "75 mins",
-      title: "Networking Lunch",
-      desc: "Level 2, Grand Ballroom",
-      icon: Coffee,
-      tag: "General",
-      tagColor: "bg-green-50 text-green-600",
-    },
-    {
-      time: "14:00 – 15:30",
-      duration: "90 mins",
-      title: "Technical Session 2",
-      desc: "Data Science & Analytics",
-      icon: BarChart3,
-      tag: "Track 02",
-      tagColor: "bg-blue-50 text-blue-600",
-    },
-  ],
-  day2: [
-    {
-      time: "09:00 – 10:00",
-      duration: "60 mins",
-      title: "Keynote Speech",
-      desc: "Decision Engineering at Scale",
-      person: "Prof. Fei-Fei Li, Stanford University, USA",
-      icon: User,
-      tag: "Keynote",
-      tagColor: "bg-purple-50 text-purple-600",
-    },
-    {
-      time: "10:15 – 11:45",
-      duration: "90 mins",
-      title: "Technical Session 3",
-      desc: "Optimization & Decision Engineering",
-      icon: BarChart3,
-      tag: "Track 03",
-      tagColor: "bg-green-50 text-green-600",
-    },
-    {
-      time: "12:00 – 13:00",
-      duration: "60 mins",
-      title: "Panel Discussion",
-      desc: "Ethics & Responsible AI",
-      icon: Mic2,
-      tag: "Panel",
-      tagColor: "bg-rose-50 text-rose-600",
-    },
-    {
-      time: "13:00 – 14:00",
-      duration: "60 mins",
-      title: "Lunch Break",
-      desc: "Level 2, Grand Ballroom",
-      icon: Coffee,
-      tag: "General",
-      tagColor: "bg-green-50 text-green-600",
-    },
-    {
-      time: "14:15 – 15:45",
-      duration: "90 mins",
-      title: "Technical Session 4",
-      desc: "Emerging Computing Technologies",
-      icon: BarChart3,
-      tag: "Track 04",
-      tagColor: "bg-purple-50 text-purple-600",
-    },
-  ],
-  day3: [
-    {
-      time: "09:00 – 10:00",
-      duration: "60 mins",
-      title: "Keynote Speech",
-      desc: "Human-Centric AI Systems",
-      person: "Prof. Virginia Dignum, Umeå University, Sweden",
-      icon: User,
-      tag: "Keynote",
-      tagColor: "bg-purple-50 text-purple-600",
-    },
-    {
-      time: "10:15 – 11:45",
-      duration: "90 mins",
-      title: "Technical Session 5",
-      desc: "Intelligent Systems Applications",
-      icon: BarChart3,
-      tag: "Track 05",
-      tagColor: "bg-orange-50 text-orange-600",
-    },
-    {
-      time: "12:00 – 13:00",
-      duration: "60 mins",
-      title: "Best Paper Awards & Closing Ceremony",
-      desc: "Level 1, Main Hall",
-      icon: Send,
-      tag: "General",
-      tagColor: "bg-blue-50 text-blue-600",
-    },
-  ],
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-const ALL_SESSIONS = [...SESSIONS.day1, ...SESSIONS.day2, ...SESSIONS.day3];
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
 
-export default function Schedule() {
-  const [activeDay, setActiveDay] = useState("all");
-  const [openItem, setOpenItem] = useState(null);
+const scheduleItems = [
+  {
+    time: "08:30 – 09:30",
+    duration: "60 mins",
+    icon: Users,
+    title: "Registration & Welcome Coffee",
+    desc: "Level 1, Conference Foyer",
+    tag: "General",
+    color: "#12B8A6",
+  },
+  {
+    time: "09:30 – 10:00",
+    duration: "30 mins",
+    icon: Send,
+    title: "Opening Ceremony",
+    desc: "Welcome Address & Conference Overview",
+    tag: "General",
+    color: "#0B63FF",
+  },
+  {
+    time: "10:00 – 11:00",
+    duration: "60 mins",
+    icon: Mic,
+    title: "Keynote Speech",
+    desc: "The Future of AI and Decision Engineering",
+    speaker: "Prof. Michael Anderson, Stanford University, USA",
+    tag: "Keynote",
+    color: "#7C3AED",
+  },
+  {
+    time: "11:15 – 12:45",
+    duration: "90 mins",
+    icon: Network,
+    title: "Technical Session 1",
+    desc: "AI & Machine Learning Innovations",
+    tag: "Track 01",
+    color: "#FF7A00",
+  },
+  {
+    time: "12:45 – 14:00",
+    duration: "75 mins",
+    icon: Users,
+    title: "Networking Lunch",
+    desc: "Level 2, Grand Ballroom",
+    tag: "General",
+    color: "#12B8A6",
+  },
+  {
+    time: "14:00 – 15:30",
+    duration: "90 mins",
+    icon: BarChart3,
+    title: "Technical Session 2",
+    desc: "Data Science & Analytics",
+    tag: "Track 02",
+    color: "#0B63FF",
+  },
+];
 
-  const visibleSessions = activeDay === "all" ? SESSIONS.day1 : SESSIONS[activeDay];
-  const dayLabel =
-    activeDay === "all"
-      ? "Day 1 · Thursday, 10 December 2026"
-      : `${DAYS.find((d) => d.key === activeDay)?.label} · ${
-          DAYS.find((d) => d.key === activeDay)?.date
-        }`;
-
+export default function SchedulePage() {
   return (
-    <div>
-      <PageHero
-        variant="light"
-        breadcrumb="Schedule"
-        title="Conference"
-        titleAccent="Schedule"
-        image={scheduleHero}
-        description="Explore the full program of IDEAX 2026. Plan your experience and make the most of every session."
-      />
-
-      {/* META STRIP */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
-          <FadeUp>
-            <div className="bg-white shadow-card rounded-xl2 p-6 grid grid-cols-2 sm:grid-cols-4 gap-6">
-              {META.map((m) => (
-                <div key={m.title} className="flex items-center gap-3 justify-center sm:justify-start">
-                  <span className="w-11 h-11 rounded-full bg-surface-muted flex items-center justify-center shrink-0">
-                    <m.icon size={20} className="text-brand-blue" />
-                  </span>
-                  <div>
-                    <div className="font-bold text-navy-900 text-sm leading-tight">{m.title}</div>
-                    <div className="text-xs text-slate-500">{m.subtitle}</div>
-                  </div>
-                </div>
-              ))}
+    <main className="min-h-screen bg-white text-[#07113F] overflow-hidden">
+      {/* Hero */}
+     <section
+        className="
+    relative
+    min-h-[400px] sm:min-h-[420px] lg:min-h-[500px]
+    bg-white
+    bg-no-repeat
+    bg-top
+    bg-contain
+    lg:bg-[length:100%_100%]
+    bg-[length:100%_90%]
+  "
+        style={{ backgroundImage: `url(${scheduleHero})` }}
+      >
+        <div className="relative z-10 max-w-[1420px] mx-auto px-4 sm:px-8 lg:px-16 pt-8 sm:pt-12 lg:pt-14">
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={fadeUp}
+            className="max-w-[480px]"
+          >
+            <div className="flex items-center gap-3 text-[#07113F]/80 text-[13px]">
+              <Link to="/" className="hover:text-[#0B63FF]">Home</Link>
+              <span>›</span>
+              <span className="text-[#0B63FF]">Schedule</span>
             </div>
-          </FadeUp>
+
+            <h1 className="mt-6 font-[600] leading-[1.1]">
+              <span className="block text-[#07113F] text-[36px] sm:text-[38px] lg:text-[42px]">
+                Conference
+              </span>
+              <span className="block text-[#0B63FF] text-[38px] sm:text-[40px] lg:text-[48px]">
+                Schedule
+              </span>
+            </h1>
+
+            <div className="mt-4 flex h-[4px] w-[70px] overflow-hidden rounded-full">
+        <span className="w-[55%] bg-[#13B5FF]" />
+        <span className="w-[45%] bg-[#FFC21A]" />
+      </div>
+
+            <p className="mt-7 max-w-[300px] text-[#07113F] text-[15px] sm:text-[15px] leading-8">
+              Explore the full program of IDEAX 2026. Plan your experience and
+              make the most of every session.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* PROGRAM */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <SectionTitle
-            eyebrow="Conference Program"
-            title="Three Days of Insight, Innovation & Impact"
-            description="A carefully curated program featuring keynote speeches, technical sessions, panel discussions, workshops and networking opportunities."
-          />
-
-          {/* Day tabs */}
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            {DAYS.map((d) => (
-              <button
-                key={d.key}
-                onClick={() => setActiveDay(d.key)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium border transition-all duration-300 ${
-                  activeDay === d.key
-                    ? "bg-brand-blue text-white border-brand-blue shadow-glowBlue"
-                    : "bg-white text-slate-600 border-slate-200 hover:border-brand-blue/40"
-                }`}
+      <section className="relative z-10 px-4 sm:px-8 lg:px-16 pb-10 -mt-4">
+        <div className="max-w-[1240px] mx-auto">
+          {/* Info Strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 -mt-1 bg-white rounded-[12px] px-6 py-5 shadow-[0_8px_28px_rgba(0,30,100,0.12)] border border-[#E5ECF7]"
+          >
+            {[
+              [CalendarDays, "10 – 12", "December, 2026", "#0B63FF"],
+              [MapPin, "Singapore,", "Asia", "#FF9900"],
+              [Monitor, "Hybrid", "(In-person & Online)", "#14B8A6"],
+              [Clock3, "3 Days", "of Inspiring Sessions", "#7C3AED"],
+            ].map(([Icon, title, desc, color], i) => (
+              <motion.div
+                key={title}
+                whileHover={{ y: -6, scale: 1.02 }}
+                className={`flex items-center gap-4 ${i !== 3 ? "lg:border-r lg:border-[#D8E2F1]" : ""}`}
               >
-                <Calendar size={15} />
-                {d.label}
-                {d.date && <span className="text-xs opacity-70">{d.date}</span>}
-              </button>
+                <div
+                  className="w-14 h-14 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: `${color}15` }}
+                >
+                  <Icon className="w-7 h-7" style={{ color }} />
+                </div>
+                <div>
+                  <h4 className="text-[15px] font-[600] text-[#0637C8]">{title}</h4>
+                  <p className="text-[12px] font-medium">{desc}</p>
+                </div>
+              </motion.div>
             ))}
-            <div className="ml-auto flex items-center gap-3">
-              <select className="text-sm border border-slate-200 rounded-lg px-3 py-2.5 text-slate-600 input-glow">
-                <option>All Tracks</option>
-                <option>Track 01</option>
-                <option>Track 02</option>
-              </select>
-              <Button variant="blueOutline" icon={false} className="!py-2.5">
-                <Download size={15} /> Download Schedule
-              </Button>
+          </motion.div>
+
+          {/* Heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55 }}
+            className="text-center pt-8"
+          >
+           <div className="flex flex-col items-center">
+  <p className="uppercase text-[#0B63FF] text-[14px] font-[600]">
+    Conference Program
+  </p>
+
+  <div className="mt-4 flex h-[3px] w-[60px] overflow-hidden rounded-full">
+    <span className="w-[55%] bg-[#13B5FF]" />
+    <span className="w-[45%] bg-[#FFC21A]" />
+  </div>
+</div>
+            <h2 className="mt-4 text-[24px] sm:text-[30px] font-[600] text-[#07113F]">
+              Three Days of Insight, Innovation & Impact
+            </h2>
+            <p className="mt-3 max-w-[660px] mx-auto text-[14px] text-[#4B5579] leading-7">
+              A carefully curated program featuring keynote speeches, technical
+              sessions, panel discussions, workshops and networking opportunities.
+            </p>
+          </motion.div>
+
+          {/* Filters */}
+          <div className="mt-8 flex flex-col lg:flex-row justify-between gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {["All Days", "Day 1\n10 Dec, 2026", "Day 2\n11 Dec, 2026", "Day 3\n12 Dec, 2026"].map(
+                (d, i) => (
+                  <button
+                    key={d}
+                    className={`rounded-[8px] border px-5 py-3 text-left text-[13px] font-semibold transition-all hover:-translate-y-1 ${
+                      i === 0
+                        ? "bg-[#0B63FF] text-white border-[#0B63FF] shadow-[0_10px_24px_rgba(11,99,255,0.28)]"
+                        : "bg-white text-[#07113F] border-[#D8E2F1] hover:border-[#0B63FF]"
+                    }`}
+                  >
+                    <CalendarDays className="inline w-4 h-4 mr-2" />
+                    {d.split("\n")[0]}
+                    {d.includes("\n") && (
+                      <span className="block ml-6 text-[12px] font-medium opacity-80">
+                        {d.split("\n")[1]}
+                      </span>
+                    )}
+                  </button>
+                )
+              )}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button className="h-[46px] px-6 rounded-[8px] bg-[#F1F5FF] text-[13px] font-semibold flex items-center justify-center gap-8">
+                All Tracks <ChevronDown className="w-4 h-4" />
+              </button>
+              <button className="h-[46px] px-6 rounded-[8px] border border-[#0B63FF] text-[#0B63FF] text-[13px] font-semibold flex items-center justify-center gap-3 hover:bg-[#0B63FF] hover:text-white transition">
+                <Download className="w-4 h-4" /> Download Schedule
+              </button>
             </div>
           </div>
 
-          {/* Session list */}
-          <div className="border border-slate-100 rounded-xl2 shadow-card overflow-hidden">
-            <div className="flex items-center justify-between bg-surface-light px-5 py-3 border-b border-slate-100">
-              <div className="flex items-center gap-2 text-sm font-semibold text-navy-900">
-                <Calendar size={15} className="text-brand-blue" /> {dayLabel}
-              </div>
-              <span className="text-xs text-slate-400">All times are in SGT (GMT+8)</span>
+          {/* Schedule Table */}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="mt-6 rounded-[12px] overflow-hidden border border-[#E1E9F6] shadow-[0_10px_30px_rgba(0,30,100,0.08)]"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-[#F4F8FF] px-5 py-4 text-[13px] font-[600] text-[#0637C8]">
+              <span className="flex items-center gap-2">
+                <CalendarDays className="w-4 h-4" />
+                Day 1 <span>•</span> Thursday, 10 December 2026
+              </span>
+              <span className="text-[#4B5579] font-medium">
+                All times are in SGT (GMT+8)
+              </span>
             </div>
 
-            <div>
-              {visibleSessions.map((s, i) => (
+            <div className="bg-white">
+              {scheduleItems.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={item.title}
+                    variants={fadeUp}
+                    whileHover={{ backgroundColor: "#F8FBFF" }}
+                    className="relative grid grid-cols-1 md:grid-cols-[150px_80px_1fr_120px_30px] gap-4 px-5 py-4 border-b border-[#E7EDF7] items-center"
+                  >
+                    <div className="md:border-r md:border-[#DDE6F4]">
+                      <p className="text-[14px] font-[600] text-[#003BCB]">{item.time}</p>
+                      <p className="text-[12px] text-[#4B5579]">{item.duration}</p>
+                    </div>
+
+                    <div
+                      className="w-14 h-14 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: `${item.color}15` }}
+                    >
+                      <Icon className="w-7 h-7" style={{ color: item.color }} />
+                    </div>
+
+                    <div>
+                      <h4 className="text-[15px] font-[600] text-[#07113F]">
+                        {item.title}
+                      </h4>
+                      <p className="text-[12px] font-medium text-[#1F2A44]">
+                        {item.desc}
+                      </p>
+                      {item.speaker && (
+                        <p className="mt-1 text-[12px] text-[#0B63FF] font-medium">
+                          {item.speaker}
+                        </p>
+                      )}
+                    </div>
+
+                    <span
+                      className="w-fit rounded-md px-4 py-1 text-[12px] font-semibold"
+                      style={{ color: item.color, backgroundColor: `${item.color}16` }}
+                    >
+                      {item.tag}
+                    </span>
+
+                    <ChevronDown className="w-4 h-4 text-[#0B63FF]" />
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            <button className="w-full py-4 text-[13px] font-[600] text-[#0B63FF] hover:bg-[#F4F8FF] transition">
+              View Full Day 1 Schedule <ChevronDown className="inline w-4 h-4 ml-2" />
+            </button>
+          </motion.div>
+
+          {/* Bottom CTA Cards */}
+          <div
+            className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-6"
+          >
+            {[
+              [CalendarDays, "Plan Your Experience", "Browse sessions, tracks and speakers to build your personalized schedule.", "VIEW PROGRAM GUIDE", "#0B63FF"],
+              [Bell, "Don’t Miss a Session", "Add sessions to your calendar and get timely reminders.", "ADD TO CALENDAR", "#FF9900"],
+            ].map(([Icon, title, desc, btn, color]) => (
+              <motion.div
+                key={title}
+                whileHover={{ y: -7, scale: 1.01 }}
+                className="rounded-[12px] bg-white/80 backdrop-blur p-7 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left shadow-[0_8px_24px_rgba(0,30,100,0.08)]"
+              >
                 <div
-                  key={i}
-                  className="border-b last:border-b-0 border-slate-100 px-5 py-4 flex items-start gap-4 hover:bg-surface-light/60 transition-colors"
+                  className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg"
+                  style={{ backgroundColor: `${color}12` }}
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-blue mt-2 shrink-0" />
-                  <div className="w-28 sm:w-32 shrink-0">
-                    <div className="text-sm font-semibold text-brand-blue">{s.time}</div>
-                    <div className="text-xs text-slate-400">{s.duration}</div>
-                  </div>
-                  <span className="w-9 h-9 rounded-full bg-surface-muted flex items-center justify-center shrink-0">
-                    <s.icon size={16} className="text-brand-blue" />
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-navy-900 text-sm">{s.title}</h4>
-                    <p className="text-xs text-slate-500">{s.desc}</p>
-                    {s.person && (
-                      <p className="text-xs text-brand-blue mt-1 font-medium">{s.person}</p>
-                    )}
-                  </div>
-                  <span
-                    className={`text-[11px] font-semibold px-2.5 py-1 rounded-full shrink-0 ${s.tagColor}`}
-                  >
-                    {s.tag}
-                  </span>
+                  <Icon className="w-10 h-10" style={{ color }} />
+                </div>
+
+                <div>
+                  <h3 className="text-[18px] font-[600] text-[#07113F]">{title}</h3>
+                  <p className="mt-2 text-[13px] leading-6 text-[#4B5579]">{desc}</p>
                   <button
-                    onClick={() => setOpenItem(openItem === i ? null : i)}
-                    className="shrink-0"
+                    className="mt-4 px-5 py-3 rounded-[6px] border text-[12px] font-[600] flex items-center gap-3 mx-auto sm:mx-0 hover:scale-105 transition"
+                    style={{ color, borderColor: color }}
                   >
-                    <ChevronDown
-                      size={16}
-                      className={`text-slate-400 transition-transform ${
-                        openItem === i ? "rotate-180" : ""
-                      }`}
-                    />
+                    {btn} <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="text-center mt-4">
-            <button className="text-brand-blue text-sm font-medium inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">
-              View Full Day Schedule <ChevronDown size={15} />
-            </button>
-          </div>
-
-          {/* bottom cards */}
-          <div className="grid sm:grid-cols-2 gap-6 mt-12">
-            <FadeUp className="bg-surface-light rounded-xl2 p-6 flex items-start gap-4">
-              <span className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-                <BookOpen size={20} className="text-brand-blue" />
-              </span>
-              <div>
-                <h4 className="font-semibold text-navy-900 mb-1">Plan Your Experience</h4>
-                <p className="text-sm text-slate-500 mb-3">
-                  Browse sessions, tracks and speakers to build your personalized schedule.
-                </p>
-                <Button variant="blueOutline" className="!px-4 !py-2 text-xs">
-                  View Program Guide
-                </Button>
-              </div>
-            </FadeUp>
-            <FadeUp delay={0.08} className="bg-orange-50 rounded-xl2 p-6 flex items-start gap-4">
-              <span className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center shrink-0">
-                <Bell size={20} className="text-orange-500" />
-              </span>
-              <div>
-                <h4 className="font-semibold text-navy-900 mb-1">Don't Miss a Session</h4>
-                <p className="text-sm text-slate-500 mb-3">
-                  Add sessions to your calendar and get timely reminders.
-                </p>
-                <Button variant="orange" className="!px-4 !py-2 text-xs">
-                  Add to Calendar
-                </Button>
-              </div>
-            </FadeUp>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
