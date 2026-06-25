@@ -127,7 +127,10 @@ export default function AboutIdeax2026() {
               and <span className="text-[#0B63FF]">Artificial Intelligence</span>
             </h3>
 
-            <div className="mt-6 sm:mt-7 w-[90px] h-[5px] bg-gradient-to-r from-[#0B63FF] to-[#FFAA00] rounded-full" />
+            <div className="mt-4 flex h-[4px] w-[70px] overflow-hidden rounded-full">
+        <span className="w-[55%] bg-[#13B5FF]" />
+        <span className="w-[45%] bg-[#FFC21A]" />
+      </div>
 
             <p className="mt-6 sm:mt-8 max-w-[360px] text-[13px] sm:text-[14px] lg:text-[15px] leading-6 font-semibold text-[#07113F]/90">
               IDEAX 2026 is a premier international platform that brings together researchers,
