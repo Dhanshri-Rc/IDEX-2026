@@ -21,7 +21,7 @@ import {
 import { Link } from "react-router-dom";
 
 import registrationHero from "../assets/hero/RegistrationBg.png";
-import ctaBg from "../assets/hero/ctaa.png";
+import ctaBg from "../assets/hero/AboutCta.png";
 import noteImg from "../assets/hero/RgNote.png";
 import questionImg from "../assets/hero/RgQue.png";
 
