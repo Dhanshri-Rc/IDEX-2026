@@ -1,26 +1,38 @@
+import React from "react";
+import { motion } from "framer-motion";
 import {
-  BrainCircuit,
-  LineChart,
-  Settings2,
+  Brain,
+  BarChart3,
+  Settings,
   Cloud,
   Cpu,
-  Users2,
+  Users,
+  ArrowRight,
   Send,
+  MapPin,
+  Mail,
+  Phone,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import Button from "../components/Button";
-import SectionTitle from "../components/SectionTitle";
-import FadeUp from "../components/FadeUp";
-import PageHero from "../components/PageHero";
-import innerHeroDark from "../assets/hero/inner-hero-dark.png";
+import tracksBG from "../assets/hero/trackssBG.png";
+import trackCtaBg from "../assets/hero/tracksCta.png";
 
-const TRACKS = [
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const tracks = [
   {
-    num: "01",
-    icon: BrainCircuit,
+    no: "01",
+    icon: Brain,
+    color: "#E91E8F",
     title: "Artificial Intelligence & Machine Learning",
-    color: "bg-pink-500",
-    textColor: "text-pink-600",
     items: [
       "Deep Learning",
       "Machine Learning Algorithms",
@@ -31,11 +43,10 @@ const TRACKS = [
     ],
   },
   {
-    num: "02",
-    icon: LineChart,
+    no: "02",
+    icon: BarChart3,
+    color: "#0B63FF",
     title: "Data Science & Decision Analytics",
-    color: "bg-blue-500",
-    textColor: "text-blue-600",
     items: [
       "Predictive Analytics",
       "Data Mining",
@@ -46,11 +57,10 @@ const TRACKS = [
     ],
   },
   {
-    num: "03",
-    icon: Settings2,
+    no: "03",
+    icon: Settings,
+    color: "#0E8F54",
     title: "Optimization & Decision Engineering",
-    color: "bg-green-500",
-    textColor: "text-green-600",
     items: [
       "Operations Research",
       "Optimization Algorithms",
@@ -61,11 +71,10 @@ const TRACKS = [
     ],
   },
   {
-    num: "04",
+    no: "04",
     icon: Cloud,
+    color: "#6938D3",
     title: "Emerging Computing Technologies",
-    color: "bg-purple-500",
-    textColor: "text-purple-600",
     items: [
       "Cloud & Edge Computing",
       "Internet of Things (IoT)",
@@ -76,11 +85,10 @@ const TRACKS = [
     ],
   },
   {
-    num: "05",
+    no: "05",
     icon: Cpu,
+    color: "#FF7417",
     title: "Intelligent Systems Applications",
-    color: "bg-orange-500",
-    textColor: "text-orange-600",
     items: [
       "Healthcare AI",
       "Smart Cities",
@@ -91,11 +99,10 @@ const TRACKS = [
     ],
   },
   {
-    num: "06",
-    icon: Users2,
+    no: "06",
+    icon: Users,
+    color: "#0988A8",
     title: "Socio-Technical & Human-Centric AI",
-    color: "bg-teal-500",
-    textColor: "text-teal-600",
     items: [
       "Human-AI Interaction",
       "Ethics & Responsible AI",
@@ -107,79 +114,194 @@ const TRACKS = [
   },
 ];
 
-export default function Tracks() {
+export default function TracksPage() {
   return (
-    <div>
-      <PageHero
-        variant="dark"
-        breadcrumb="Tracks"
-        title="Conference"
-        titleAccent="Tracks"
-        image={innerHeroDark}
-        description="IDEAX 2026 invites high-quality research papers across a wide range of cutting-edge topics."
-      />
+    <main className="min-h-screen bg-white text-[#07113F] overflow-hidden">
+      {/* Hero */}
+      <section
+        className="
+    relative
+    min-h-[400px] sm:min-h-[420px] lg:min-h-[480px]
+    bg-white
+    bg-no-repeat
+    bg-top
+    bg-contain
+    lg:bg-[length:100%_100%]
+    bg-[length:100%_90%]
+  "
+        style={{ backgroundImage: `url(${tracksBG})` }}
+      >
+        <div className="relative z-10 max-w-[1420px] mx-auto px-4 sm:px-8 lg:px-16 pt-6 sm:pt-8 lg:pt-10">
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={fadeUp}
+            className="max-w-[520px]"
+          >
+            <div className="flex items-center gap-3 text-white/80 text-[13px]">
+              <Link to="/" className="text-[#12A8FF]">
+                Home
+              </Link>
+              <span>›</span>
+              <span>Tracks</span>
+            </div>
 
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <SectionTitle
-            eyebrow="Tracks Overview"
-            title="Explore. Innovate. Impact."
-            description="IDEAX 2026 covers a wide spectrum of themes in Innovation, Decision Engineering and Artificial Intelligence to foster collaboration and drive meaningful impact."
-          />
+            <h1 className="mt-8 font-[600] leading-none">
+              <span className="block text-white text-[30px] sm:text-[42px] lg:text-[44px]">
+                Conference
+              </span>
+              <span className="block text-[#12A8FF] text-[42px] sm:text-[54px] lg:text-[56px]">
+                Tracks
+              </span>
+            </h1>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {TRACKS.map((t, i) => (
-              <FadeUp key={t.num} delay={i * 0.06}>
-                <div className="card-lift bg-white border border-slate-100 rounded-xl2 shadow-card p-6 h-full flex flex-col">
-                  <div
-                    className={`w-12 h-12 rounded-full ${t.color} text-white flex items-center justify-center mb-4 transition-transform duration-300 hover:scale-110`}
-                  >
-                    <t.icon size={22} />
+            <div className="mt-6 w-[90px] h-[5px] rounded-full bg-gradient-to-r from-[#00B6FF] to-[#F5A300]" />
+
+            <p className="mt-7 max-w-[430px] text-white text-[14px] sm:text-[15px] leading-8">
+              IDEAX 2026 invites high-quality research papers across a wide
+              range of cutting-edge topics.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Tracks Overview */}
+      <section className="relative z-10 bg-white px-4 sm:px-8 lg:px-16 -mt-14 sm:-mt-16 lg:-mt-6">
+        <div className="max-w-[1240px] mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55 }}
+            className="text-center pt-10"
+          >
+            <p className="uppercase tracking-[3px] text-[#1247E5] text-[14px] font-[600]">
+              Tracks Overview
+            </p>
+
+            <div className="mx-auto mt-3 w-[55px] h-[3px] bg-gradient-to-r from-[#1247E5] to-[#F6A200]" />
+
+            <h2 className="mt-5 text-[16px] sm:text-[18px] lg:text-[24px] font-[700] text-[#08184A] leading-tight">
+              Explore. Innovate. Impact.
+            </h2>
+
+            <p className="mt-4 max-w-[600px] mx-auto text-[#4B5579] text-[14px] sm:text-[14px] leading-7">
+              IDEAX 2026 covers a wide spectrum of themes in Innovation,
+              Decision Engineering and Artificial Intelligence to foster
+              collaboration and drive meaningful impact.
+            </p>
+          </motion.div>
+
+          {/* Cards */}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-10"
+          >
+            {tracks.map((track) => {
+              const Icon = track.icon;
+
+              return (
+                <motion.div
+                  key={track.no}
+                  variants={fadeUp}
+                  whileHover={{ y: -10, scale: 1.015 }}
+                  className="group bg-white rounded-[14px] p-7 border border-[#E2E8F5] shadow-[0_10px_30px_rgba(0,20,80,0.08)] hover:shadow-[0_20px_45px_rgba(18,71,229,0.15)] transition-all duration-500"
+                >
+                  <div className="flex items-start gap-6">
+                    <div
+                      className="w-[58px] h-[58px] shrink-0 rounded-full flex items-center justify-center shadow-[0_15px_28px_rgba(0,0,0,0.18)] group-hover:scale-110 transition-all duration-500"
+                      style={{
+                        background: `linear-gradient(135deg, ${track.color}, ${track.color}cc)`,
+                      }}
+                    >
+                      <Icon className="w-7 h-7 text-white" />
+                    </div>
+
+                    <div>
+                      <h3
+                        className="text-[24px] font-[600] leading-none"
+                        style={{ color: track.color }}
+                      >
+                        {track.no}
+                      </h3>
+
+                      <h4 className="mt-2 text-[14px] sm:text-[16px] font-semibold leading-snug text-[#07113F]">
+                        {track.title}
+                      </h4>
+
+                      <div
+                        className="mt-4 w-[34px] h-[2px]"
+                        style={{ backgroundColor: track.color }}
+                      />
+                    </div>
                   </div>
-                  <span className={`font-bold text-sm ${t.textColor}`}>{t.num}</span>
-                  <h3 className="font-semibold text-navy-900 mt-1 mb-3 leading-snug">
-                    {t.title}
-                  </h3>
-                  <div className={`h-0.5 w-8 ${t.color} rounded mb-4`} />
-                  <ul className="text-sm text-slate-500 space-y-1.5 flex-1">
-                    {t.items.map((it) => (
-                      <li key={it} className="flex items-center gap-2">
-                        <span className={`w-1.5 h-1.5 rounded-full ${t.color}`} />
-                        {it}
+
+                  <ul className="mt-7 space-y-3">
+                    {track.items.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 text-[13px] text-[#1F2A44] font-medium"
+                      >
+                        <span
+                          className="mt-[8px] w-[5px] h-[5px] rounded-full shrink-0"
+                          style={{ backgroundColor: track.color }}
+                        />
+                        {item}
                       </li>
                     ))}
                   </ul>
-                  <button
-                    className={`text-sm font-semibold mt-5 inline-flex items-center gap-1.5 ${t.textColor} hover:gap-2.5 transition-all`}
-                  >
-                    View Track Details →
-                  </button>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
 
-          <FadeUp className="mt-12">
-            <div className="relative overflow-hidden bg-surface-light rounded-xl2 p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-4">
-                <span className="w-12 h-12 rounded-full bg-brand-blue text-white flex items-center justify-center shrink-0">
-                  <Send size={20} />
-                </span>
+                  <button
+                    className="mt-8 flex items-center gap-3 text-[13px] font-semibold group-hover:gap-5 transition-all duration-300"
+                    style={{ color: track.color }}
+                  >
+                    View Track Details <ArrowRight className="w-4 h-4" />
+                  </button>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* Bottom CTA */}
+          <motion.section
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-10 mb-8 rounded-[14px] overflow-hidden bg-cover bg-center shadow-[0_10px_30px_rgba(0,20,80,0.08)]"
+            style={{ backgroundImage: `url(${trackCtaBg})` }}
+          >
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6 px-5 sm:px-8 lg:px-10 py-4 text-center lg:text-left">
+              <div className="flex flex-col sm:flex-row items-center gap-5">
+                <motion.div
+                  whileHover={{ scale: 1.12, rotate: -8 }}
+                  className="w-[54px] h-[54px] rounded-full bg-gradient-to-br from-[#0B63FF] to-[#123FD8] flex items-center justify-center shadow-[0_15px_30px_rgba(11,99,255,0.35)]"
+                >
+                  <Send className="w-7 h-7 text-white" />
+                </motion.div>
+
                 <div>
-                  <h4 className="font-bold text-lg text-navy-900">Don't see your topic?</h4>
-                  <p className="text-slate-500 text-sm">
-                    We welcome interdisciplinary submissions that drive innovation and create
-                    impact across domains.
+                  <h3 className="text-[18px] sm:text-[22px] font-[600] text-[#08184A]">
+                    Don’t see your topic?
+                  </h3>
+
+                  <p className="mt-2 max-w-[620px] text-[#4B5579] text-[14px] sm:text-[14px] leading-6">
+                    We welcome interdisciplinary submissions that drive
+                    innovation and create impact across domains.
                   </p>
                 </div>
               </div>
-              <Button as={Link} to="/registration" variant="navy" className="shrink-0">
-                Submit Your Paper
-              </Button>
+
+              <button className="shrink-0 bg-[#123FD8] text-white px-4 py-4 rounded-xl text-[13px] font-medium flex items-center gap-3 hover:scale-105 hover:bg-[#0B2FB3] transition-all duration-300 shadow-[0_12px_30px_rgba(18,63,216,0.3)]">
+                SUBMIT YOUR PAPER <ArrowRight className="w-5 h-5" />
+              </button>
             </div>
-          </FadeUp>
+          </motion.section>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
