@@ -6,7 +6,7 @@ import {
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Linkedin, Twitter, Facebook, Youtube } from "../components/SocialIcons";
-import contactHero from "../assets/hero/contactbg.png";
+import contactHero from "../assets/hero/ContactBg.png";
 import cta from "../assets/hero/AboutCta.png"
 
 const META = [
