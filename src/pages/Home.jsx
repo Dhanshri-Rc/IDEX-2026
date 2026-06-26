@@ -8,9 +8,9 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
-import homeHero from "../assets/hero/HomeBG.png";
+import homeHero from "../assets/hero/ideax-2026-homepage-hero-banner.webp";
 import { useState } from "react";
-import profile from "../assets/hero/emly.jpg"
+import profile from "../assets/hero/ideax-2026-conference-illustration.webp"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },

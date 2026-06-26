@@ -17,8 +17,8 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import scheduleHero from "../assets/hero/ContactBg.png";
-import scheduleCta from "../assets/hero/tracksCta.png";
+import scheduleHero from "../assets/hero/ideax-2026-contact-page-banner.webp";
+import scheduleCta from "../assets/hero/ideax-2026-conference-tracks-call-to-action.webp";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },

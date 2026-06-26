@@ -1,9 +1,9 @@
 import { Users2, UserCog, ChevronRight, UserPlus, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import committeeHero from "../assets/hero/CommiteBg.png";
-import cta from "../assets/hero/commiteCta.png";
-import profile from "../assets/hero/emly.jpg"
+import committeeHero from "../assets/hero/ideax-2026-committee-banner.webp";
+import cta from "../assets/hero/ideax-2026-committee-call-to-action-banner.webp";
+import profile from "../assets/hero/ideax-2026-conference-illustration.webp"
 import { useState } from "react";
 
 const STEERING = [
@@ -39,7 +39,7 @@ const [organizingIndex, setOrganizingIndex] = useState(0);
       {/* HERO */}
       
 <section
-  className="relative min-h-[430px] overflow-hidden bg-[#020B25] bg-cover bg-center bg-no-repeat sm:min-h-[460px] lg:min-h-[500px]"
+  className="relative min-h-[430px] overflow-hidden bg-[#020B25] bg-cover bg-center bg-no-repeat sm:min-h-[460px] lg:min-h-[540px]"
   style={{
     backgroundImage: `url(${committeeHero})`,
   }}

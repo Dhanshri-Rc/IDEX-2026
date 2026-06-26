@@ -20,10 +20,10 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import registrationHero from "../assets/hero/RegistrationBg.png";
-import ctaBg from "../assets/hero/AboutCta.png";
-import noteImg from "../assets/hero/RgNote.png";
-import questionImg from "../assets/hero/RgQue.png";
+import registrationHero from "../assets/hero/ideax-2026-registration-banner.webp";
+import ctaBg from "../assets/hero/ideax-2026-about-call-to-action-banner.webp";
+import noteImg from "../assets/hero/ideax-2026-registration-guidelines.webp";
+import questionImg from "../assets/hero/ideax-2026-registration-faq.webp";
 
 
 

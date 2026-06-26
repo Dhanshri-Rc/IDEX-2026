@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Logo from "../assets/icons/Logo";
-import hlogo from "../assets/hero/flogo.png"
+
+import hlogo from "../assets/hero/ideax-2026-white-logo.webp"
 
 const LINKS = [
   { label: "Home", to: "/" },
@@ -37,16 +37,19 @@ export default function Navbar() {
         scrolled ? "shadow-[0_8px_25px_rgba(15,23,42,0.08)]" : ""
       }`}
     >
-      <nav className="relative mx-auto flex h-[65px]  max-w-[1420px] items-center justify-between px-5 sm:px-8 lg:px-16">
+      <nav className="relative mx-auto flex h-[68px] max-w-[1420px] items-center justify-between px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
-          {/* <Logo size={55} /> */}
-<img src={hlogo} alt="logo" className="w-[190px]" />
+      <img
+  src={hlogo}
+  alt="logo"
+  className="w-[145px] sm:w-[165px] md:w-[175px] lg:w-[190px]"
+/>
         
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden items-center gap-7 lg:flex">
+      <div className="hidden lg:flex items-center gap-5 xl:gap-7">
           {LINKS.map((link) => (
             <NavLink
               key={link.to}
@@ -66,49 +69,90 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setOpen((p) => !p)}
-          className="flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 text-[#07113F] transition-all duration-300 hover:bg-[#F4F7FF] lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 text-[#07113F] transition-all duration-300 hover:bg-[#F4F7FF] lg:hidden"
           aria-label="Toggle menu"
         >
-          {open ? <X size={24} /> : <Menu size={24} />}
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
 
         {/* Mobile Menu - not full width */}
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ opacity: 0, y: -12, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -12, scale: 0.96 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              className="absolute right-5 top-[78px] z-50 w-[285px] overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-[0_20px_55px_rgba(15,23,42,0.18)] sm:right-8 lg:hidden"
-            >
-              <div className="flex flex-col gap-1">
-                {LINKS.map((link, index) => (
-                  <motion.div
-                    key={link.to}
-                    initial={{ opacity: 0, x: 16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.25, delay: index * 0.03 }}
-                  >
-                    <NavLink
-                      to={link.to}
-                      onClick={() => setOpen(false)}
-                      className={({ isActive }) =>
-                        `block rounded-lg px-4 py-3 text-[13px] font-extrabold uppercase transition-all duration-300 ${
-                          isActive
-                            ? "bg-[#2563EB] text-white"
-                            : "text-[#07113F] hover:bg-[#F4F7FF] hover:text-[#2563EB]"
-                        }`
-                      }
-                    >
-                      {link.label}
-                    </NavLink>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      <AnimatePresence>
+  {open && (
+    <>
+      {/* Overlay */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
+        onClick={() => setOpen(false)}
+        className="fixed inset-0 z-40 bg-black/45 backdrop-blur-[2px] lg:hidden"
+      />
+
+      {/* Sidebar */}
+      <motion.aside
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 26,
+        }}
+        className="fixed right-0 top-0 z-50 flex h-screen w-[220px] flex-col bg-white shadow-[0_20px_60px_rgba(15,23,42,0.25)] sm:w-[220px] lg:hidden"
+      >
+        {/* Header */}
+        <div className="flex h-[72px] items-center justify-between border-b border-slate-200 px-5">
+          <img
+            src={hlogo}
+            alt="logo"
+            className="w-[135px]"
+          />
+
+          <button
+            onClick={() => setOpen(false)}
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 hover:bg-[#F4F7FF]"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        {/* Navigation */}
+        <div className="flex-1 overflow-y-auto px-6 py-3">
+          <div className="flex flex-col gap-2">
+            {LINKS.map((link, index) => (
+              <motion.div
+                key={link.to}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  delay: index * 0.05,
+                  duration: 0.3,
+                }}
+              >
+                <NavLink
+                  to={link.to}
+                  onClick={() => setOpen(false)}
+                  className={({ isActive }) =>
+                    `flex items-center rounded-xl px-8 py-2 text-[14px] font-bold transition-all duration-300 ${
+                      isActive
+                        ? " text-blue-500 "
+                        : "text-[#07113F]  hover:text-[#2563EB]"
+                    }`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+       
+      </motion.aside>
+    </>
+  )}
+</AnimatePresence>
       </nav>
     </header>
   );

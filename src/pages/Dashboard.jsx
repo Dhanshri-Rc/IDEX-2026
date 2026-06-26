@@ -31,8 +31,8 @@ import {
 } from "lucide-react";
 
 import Logo from "../assets/icons/Logo";
-import dashboardCtaBg from "../assets/hero/dashboardBG.png";
-import footerTrophyBg from "../assets/hero/dashboardBG.png";
+import dashboardCtaBg from "../assets/hero/ideax-2026-dashboard-background.webp";
+import footerTrophyBg from "../assets/hero/ideax-2026-dashboard-background.webp";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { Linkedin, Twitter, Facebook, Youtube } from "./SocialIcons";
-import Logo from "../assets/hero/logo.png";
+import Logo from "../assets/hero/ideax-2026-official-logo.webp";
 
 const QUICK_LINKS = [
   

@@ -2,9 +2,9 @@ import { Mic2, Users2, Globe2, Briefcase, UserPlus, ArrowRight } from "lucide-re
 import { Linkedin } from "../components/SocialIcons";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import speakerHero from "../assets/hero/bgspeaker.png";
-import profile from "../assets/hero/emly.jpg"
-import cta from "../assets/hero/SpeakerCta.png"
+import speakerHero from "../assets/hero/ideax-2026-speakers-hero-banner.webp";
+import profile from "../assets/hero/ideax-2026-conference-illustration.webp"
+import cta from "../assets/hero/ideax-2026-speakers-call-to-action-banner.webp"
 
 
 const STATS = [

@@ -24,9 +24,9 @@ import {
   Lightbulb,
 } from "lucide-react";
 
-import heroBg from "../assets/hero/AboutBg.png";
-import ctaBg from "../assets/hero/AboutCta.png";
-import whyBg from "../assets/hero/AboutPract.png";
+import heroBg from "../assets/hero/ideax-2026-about-conference-banner.webp";
+import ctaBg from "../assets/hero/ideax-2026-about-call-to-action-banner.webp";
+import whyBg from "../assets/hero/ideax-2026-about-conference-illustration.webp";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -107,7 +107,7 @@ export default function AboutIdeax2026() {
     <div className="min-h-screen bg-white text-[#07113F] font-sans overflow-hidden">
       {/* Hero */}
       <section
-        className="relative min-h-[500px] sm:min-h-[570px] lg:min-h-[670px] bg-[#020b22] bg-cover bg-center bg-no-repeat"
+        className="relative min-h-[500px] sm:min-h-[570px] lg:min-h-[570px] bg-[#020b22] bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroBg})` }}
       >
         <div className="absolute inset-0 bg-white/45 sm:bg-white/25 lg:bg-transparent" />

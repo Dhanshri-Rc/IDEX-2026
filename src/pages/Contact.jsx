@@ -6,8 +6,8 @@ import {
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Linkedin, Twitter, Facebook, Youtube } from "../components/SocialIcons";
-import contactHero from "../assets/hero/ContactBg.png";
-import cta from "../assets/hero/AboutCta.png"
+import contactHero from "../assets/hero/ideax-2026-contact-page-banner.webp";
+import cta from "../assets/hero/ideax-2026-about-call-to-action-banner.webp"
 
 const META = [
   { icon: Calendar, title: "10 – 12", subtitle: "December, 2026", color: "text-[#2563EB]" },
@@ -44,7 +44,7 @@ export default function Contact() {
           backgroundImage: `url(${contactHero})`,
         }}
       >
-        <div className="relative z-10 mx-auto flex min-h-[430px] max-w-[1420px] items-center px-5 py-6 sm:min-h-[460px] sm:px-8 lg:min-h-[500px] lg:px-16">
+        <div className="relative z-10 mx-auto flex min-h-[430px] max-w-[1420px] items-center px-5 py-6 sm:min-h-[460px] sm:px-8 lg:min-h-[530px] lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}

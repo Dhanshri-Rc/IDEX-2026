@@ -6,13 +6,11 @@ import {
   Eye,
   EyeOff,
   ArrowRight,
-  Users,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import Logo from "../assets/icons/Logo";
-import loginBg from "../assets/hero/LohinBg.png";
-import logo from "../assets/hero/logo.png";
+import loginBg from "../assets/hero/ideax-2026-login-background.webp";
+import logo from "../assets/hero/ideax-2026-official-logo.webp";
 
 const STATIC_EMAIL = "admin@ideax.com";
 const STATIC_PASSWORD = "admin123";
@@ -57,13 +55,13 @@ export default function Login() {
         transition={{ duration: 0.65, ease: "easeOut" }}
         className="mx-auto w-full max-w-[660px] overflow-hidden rounded-[14px] border border-[#DCE6F5] bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]"
       >
-       <div className="grid min-h-[480px] grid-cols-1 lg:grid-cols-[300px_360px] justify-center">
+        <div className="grid grid-cols-1 overflow-hidden md:grid-cols-[280px_1fr] lg:grid-cols-[300px_360px]">
           {/* LEFT SIDE */}
           <motion.aside
             initial={{ opacity: 0, x: -28 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, ease: "easeOut" }}
-            className="relative min-h-[340px] overflow-hidden bg-[#03124C] p-7 text-white sm:p-9 lg:min-h-full"
+            className="relative min-h-[220px] overflow-hidden bg-[#03124C] p-6 text-white sm:min-h-[260px] sm:p-8 md:min-h-[480px] lg:min-h-[480px]"
           >
             <img
               src={loginBg}
@@ -71,15 +69,14 @@ export default function Login() {
               className="absolute inset-0 h-full w-full object-cover"
             />
 
-            
-
             <div className="relative z-10 flex h-full flex-col">
               <Link to="/" className="flex items-center gap-3">
-              <img src={logo} alt="" className="w-[250px]"/>
-
-               
+                <img
+                  src={logo}
+                  alt="IDEAX 2026"
+                  className="w-[170px] sm:w-[220px] lg:w-[250px]"
+                />
               </Link>
-
             </div>
           </motion.aside>
 
@@ -88,27 +85,25 @@ export default function Login() {
             initial={{ opacity: 0, y: 26 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: "easeOut" }}
-            className="flex flex-col justify-center bg-white px-5 py-8 sm:px-10 lg:px-10"
+            className="flex min-h-[430px] flex-col justify-center bg-white px-5 py-8 sm:px-8 md:min-h-[480px] md:px-8 lg:px-8"
           >
-            <div className=" w-full max-w-[300px]">
-              <div className="">
-           <div className="flex items-center justify-center gap-4">
-  <motion.div
-    whileHover={{ scale: 1.08, rotate: -8 }}
-    transition={{ duration: 0.25 }}
-    className="flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full bg-[#EEF4FF]"
-  >
-    <Send size={20} className="text-[#2563EB]" />
-  </motion.div>
+            <div className="mx-auto w-full max-w-[300px] sm:max-w-[340px] md:max-w-[300px]">
+              <div>
+                <div className="flex items-center justify-center gap-3 sm:gap-4">
+                  <motion.div
+                    whileHover={{ scale: 1.08, rotate: -8 }}
+                    transition={{ duration: 0.25 }}
+                    className="flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full bg-[#EEF4FF]"
+                  >
+                    <Send size={20} className="text-[#2563EB]" />
+                  </motion.div>
 
-  <h2 className="text-[20px] font-semibold leading-tight text-[#07113F] sm:text-[23px]">
-   Welcom to IDEAX
-  </h2>
-</div>
+                  <h2 className="text-[18px] font-semibold leading-tight text-[#07113F] sm:text-[20px] lg:text-[23px]">
+                    Welcom to IDEAX
+                  </h2>
+                </div>
 
-               
-
-                <p className="mt-3 text-[13px] font-medium text-[#64748B] mx-2">
+                <p className="mt-3 text-center text-[12px] font-medium text-[#64748B] sm:text-[13px]">
                   Access your dashboard using credentials.
                 </p>
               </div>
@@ -133,7 +128,7 @@ export default function Login() {
                         setForm({ ...form, email: e.target.value })
                       }
                       placeholder="Enter your email address"
-                      className="h-[50px] w-full rounded-[8px] border border-[#D9E3F2] bg-white pl-12 pr-4 text-[13px] font-medium outline-none transition focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.10)]"
+                      className="h-[48px] w-full rounded-[8px] border border-[#D9E3F2] bg-white pl-12 pr-4 text-[13px] font-medium outline-none transition focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.10)] sm:h-[50px]"
                     />
                   </div>
                 </div>
@@ -157,7 +152,7 @@ export default function Login() {
                         setForm({ ...form, password: e.target.value })
                       }
                       placeholder="Enter your password"
-                      className="h-[50px] w-full rounded-[8px] border border-[#D9E3F2] bg-white pl-12 pr-12 text-[13px] font-medium outline-none transition focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.10)]"
+                      className="h-[48px] w-full rounded-[8px] border border-[#D9E3F2] bg-white pl-12 pr-12 text-[13px] font-medium outline-none transition focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.10)] sm:h-[50px]"
                     />
 
                     <button
@@ -182,7 +177,7 @@ export default function Login() {
 
                 <button
                   type="submit"
-                  className="inline-flex h-[50px] w-full items-center justify-center gap-3 rounded-[8px] bg-[#0B5BFF] text-[14px] font-extrabold text-white shadow-[0_12px_28px_rgba(37,99,235,0.25)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#0648D9]"
+                  className="inline-flex h-[48px] w-full items-center justify-center gap-3 rounded-[8px] bg-[#0B5BFF] text-[14px] font-extrabold text-white shadow-[0_12px_28px_rgba(37,99,235,0.25)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#0648D9] sm:h-[50px]"
                 >
                   Login <ArrowRight size={18} />
                 </button>

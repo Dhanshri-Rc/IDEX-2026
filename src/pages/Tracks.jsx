@@ -14,8 +14,8 @@ import {
   Phone,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import tracksBG from "../assets/hero/trackssBG.png";
-import trackCtaBg from "../assets/hero/tracksCta.png";
+import tracksBG from "../assets/hero/ideax-2026-conference-tracks-banner.webp";
+import trackCtaBg from "../assets/hero/ideax-2026-conference-tracks-call-to-action.webp";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
