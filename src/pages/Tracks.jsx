@@ -120,15 +120,7 @@ export default function TracksPage() {
       {/* Hero */}
       <section
         className="
-    relative
-    min-h-[400px] sm:min-h-[420px] lg:min-h-[480px]
-    bg-white
-    bg-no-repeat
-    bg-top
-    bg-contain
-    lg:bg-[length:100%_100%]
-    bg-[length:100%_90%]
-  "
+    relative min-h-[360px] bg-cover bg-center bg-no-repeat sm:min-h-[420px] lg:min-h-[500px] lg:bg-[length:100%_100%]"
         style={{ backgroundImage: `url(${tracksBG})` }}
       >
         <div className="relative z-10 max-w-[1420px] mx-auto px-4 sm:px-8 lg:px-16 pt-6 sm:pt-8 lg:pt-10">
