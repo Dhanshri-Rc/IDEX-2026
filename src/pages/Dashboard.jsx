@@ -30,9 +30,6 @@ import {
   X,
 } from "lucide-react";
 
-import Logo from "../assets/icons/Logo";
-import dashboardCtaBg from "../assets/hero/ideax-2026-dashboard-background.webp";
-import footerTrophyBg from "../assets/hero/ideax-2026-dashboard-background.webp";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -40,14 +37,14 @@ const fadeUp = {
 };
 
 const NAV = [
-  { icon: LayoutDashboard, label: "Dashboard", active: true },
-  { icon: FileEdit, label: "Submit Paper" },
-  { icon: CheckSquare, label: "Check Status" },
-  { icon: FileSignature, label: "Copyright Form" },
-  { icon: FolderOpen, label: "My Submissions" },
-  { icon: UserCircle, label: "Profile" },
-  { icon: Mail, label: "Messages", badge: 3 },
-  { icon: Bell, label: "Notifications", badge: 2 },
+  { icon: LayoutDashboard, label: "Dashboard", to: "/dashboard", active: true },
+  { icon: FileEdit, label: "Submit Paper", to: "/submit-paper" },
+  { icon: CheckSquare, label: "Check Status", to: "/check-status" },
+  { icon: FileSignature, label: "Copyright Form", to: "/copyright-form" },
+  { icon: FolderOpen, label: "My Submissions", to: "/my-submissions" },
+  { icon: UserCircle, label: "Profile", to: "/profile" },
+  { icon: Mail, label: "Messages", to: "/messages", badge: 3 },
+  { icon: Bell, label: "Notifications", to: "/notifications", badge: 2 },
 ];
 
 const STATS = [
@@ -92,6 +89,7 @@ const QUICK_ACTIONS = [
     desc: "Submit your original research paper for review.",
     color: "#0B63FF",
     btn: "Submit New Paper",
+    to: "/submit-paper",
   },
   {
     icon: Search,
@@ -99,6 +97,7 @@ const QUICK_ACTIONS = [
     desc: "Check the status of your submitted paper.",
     color: "#0E8F54",
     btn: "Check Status",
+    to: "/check-status",
   },
   {
     icon: Copyright,
@@ -106,6 +105,7 @@ const QUICK_ACTIONS = [
     desc: "Submit the copyright transfer form for your paper.",
     color: "#FF7417",
     btn: "Submit Copyright",
+    to: "/copyright-form",
   },
 ];
 
@@ -147,87 +147,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-[#F7F9FF] text-[#07113F]">
-      <div className="flex">
-        {/* SIDEBAR */}
-        <aside
-          className={`fixed lg:sticky top-0 z-50 h-screen w-[280px] bg-[#020B26] text-white flex flex-col transition-transform duration-300 ${
-            mobileNavOpen
-              ? "translate-x-0"
-              : "-translate-x-full lg:translate-x-0"
-          }`}
-        >
-          {/* Logo */}
-          <div className="px-4 pt-5 pb-4">
-            <Link to="/" className="flex items-center gap-2">
-              <Logo size={36} />
-              <div>
-                <h2 className="text-[16px] font-[600] leading-none">
-                  IDEAX <span className="text-[#F5A400]">2026</span>
-                </h2>
-                <p className="mt-1 text-[7px] font-semibold tracking-[1.4px] text-white/70">
-                  INNOVATE • DECIDE • TRANSFORM
-                </p>
-              </div>
-            </Link>
-          </div>
 
-          <div className="px-4 pt-3 pb-3 text-[10px] uppercase text-white/55">
-            Participant Dashboard
-          </div>
-
-          {/* Nav */}
-          <nav className="flex-1 px-3 space-y-1 overflow-y-auto">
-            {NAV.map((item) => (
-              <button
-                key={item.label}
-                className="w-full flex items-center gap-3 px-3 py-[10px] rounded-[7px] text-[12px] font-semibold transition-all hover:bg-[#0B63FF]"
-              >
-                <item.icon size={15} strokeWidth={2} />
-                <span className="flex-1 text-left">{item.label}</span>
-
-                {item.badge && (
-                  <span className="bg-[#0B63FF] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center">
-                    {item.badge}
-                  </span>
-                )}
-              </button>
-            ))}
-
-            <button
-              onClick={() => navigate("/login")}
-              className="w-full flex items-center gap-3 px-3 py-[10px] rounded-[7px] text-[12px] font-semibold text-white/85 hover:bg-white/10 transition-all"
-            >
-              <LogOut size={15} />
-              Logout
-            </button>
-          </nav>
-
-          {/* CTA Trophy Card */}
-          <div
-            className="mx-4 mb-4 min-h-[215px] rounded-[9px] border border-[#1B4AA8]/70 bg-cover bg-bottom px-4 pt-5 pb-3 overflow-hidden"
-            style={{
-              backgroundImage: `
-      linear-gradient(180deg, rgba(2,11,38,0.15) 0%, rgba(2,11,38,0.1) 100%),
-      url(${footerTrophyBg})
-    `,
-            }}
-          >
-            <h3 className="text-[18px] font-semibold leading-[1.25] text-white">
-              Be a Part of <br /> IDEAX 2026
-            </h3>
-
-            <p className="mt-4 max-w-[170px] text-[12px] leading-6 text-white/85">
-              Join researchers and industry experts from around the world.
-            </p>
-
-            <Link
-              to="/registration"
-              className="mt-4 inline-flex h-[34px] items-center justify-center gap-3 rounded-[5px] border border-white/35 px-4 text-[12px] font-semibold text-white hover:bg-white hover:text-[#07113F] transition"
-            >
-              Register Now <ArrowRight size={14} />
-            </Link>
-          </div>
-        </aside>
 
         {mobileNavOpen && (
           <button
@@ -236,60 +156,7 @@ export default function Dashboard() {
           />
         )}
 
-        {/* MAIN */}
-        <div className="min-w-0 flex-1">
-          {/* TOP BAR */}
-          <header className="sticky top-0 z-30 bg-white border-b border-[#E5ECF7]">
-            <div className=" h-[80px] sm:h-[90px] lg:h-[88px] flex items-center justify-between gap-4 px-4 sm:px-6 lg:px-8  py-1 sm:py-2 lg:py-4">
-              <button
-                className="lg:hidden w-10 h-10 rounded-lg border border-[#E5ECF7] flex items-center justify-center"
-                onClick={() => setMobileNavOpen(true)}
-              >
-                <Menu size={22} />
-              </button>
-
-              <div className="hidden md:block max-w-[300px] text-[12px] lg:text-[14px] font-semibold leading-6 text-[#07113F]">
-                International Conference on Innovation, Decision Engineering and
-                Artificial Intelligence
-              </div>
-
-              <div className="ml-auto flex items-center gap-4 sm:gap-16">
-                <div className="hidden lg:flex items-center gap-3 border-l border-[#E5ECF7] pl-8">
-                  <Calendar size={25} className="text-[#0B63FF]" />
-                  <div>
-                    <p className="text-[12px] font-semibold">
-                      10 – 12 Dec, 2026
-                    </p>
-                    <p className="text-[12px] text-[#4B5579]">Singapore</p>
-                  </div>
-                </div>
-                <button className="relative">
-                  <Mail size={24} className="text-[#0B63FF]" />
-                  <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] flex items-center justify-center">
-                    3
-                  </span>
-                </button>
-
-                <button className="relative">
-                  <Bell size={24} className="text-[#0B63FF]" />
-                  <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] flex items-center justify-center">
-                    2
-                  </span>
-                </button>
-
-                <div className="flex items-center gap-3">
-                  <span className="w-10 h-10 rounded-full bg-[#5AA9FF] text-white flex items-center justify-center font-semibold">
-                    RA
-                  </span>
-                  <div className="hidden sm:block">
-                    <p className="text-[14px] font-semibold">Rahul Arora</p>
-                    <p className="text-[12px] text-[#4B5579]">Participant</p>
-                  </div>
-                  <ChevronDown size={16} />
-                </div>
-              </div>
-            </div>
-          </header>
+       
 
           <main className="px-4 sm:px-6 lg:px-8 py-8 space-y-8">
             {/* Welcome */}
@@ -373,21 +240,13 @@ export default function Dashboard() {
                     <p className="mt-3 mx-auto max-w-[190px] text-[12px] leading-6 text-[#4B5579]">
                       {a.desc}
                     </p>
-
-                    <button
-                      className="mt-6 inline-flex items-center justify-center gap-3 rounded-md border px-6 py-2 text-[12px] font-[600] hover:text-white transition"
-                      style={{ borderColor: a.color, color: a.color }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = a.color;
-                        e.currentTarget.style.color = "#fff";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "transparent";
-                        e.currentTarget.style.color = a.color;
-                      }}
-                    >
-                      {a.btn} <ArrowRight size={15} />
-                    </button>
+<Link
+  to={a.to}
+  className="mt-6 inline-flex items-center justify-center gap-3 rounded-md border px-6 py-2 text-[12px] font-[600] hover:text-white transition"
+  style={{ borderColor: a.color, color: a.color }}
+>
+  {a.btn} <ArrowRight size={15} />
+</Link>
                   </motion.div>
                 ))}
               </div>
@@ -572,7 +431,5 @@ export default function Dashboard() {
             </section>
           </main>
         </div>
-      </div>
-    </div>
   );
 }
