@@ -156,15 +156,14 @@ export default function Dashboard() {
           />
         )}
 
-       
 
-          <main className="px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+          <main className="px-4 sm:px-6 lg:px-8 space-y-8">
             {/* Welcome */}
             <motion.div initial="hidden" animate="show" variants={fadeUp}>
-              <h1 className="lg:text-[16px] font-[600]">
+              <h1 className="text-[20px] font-[600]">
                 Welcome back, Rahul! 👋
               </h1>
-              <p className="mt-2 text-[12px] text-[#4B5579]">
+              <p className="mt-2 text-[14px] text-[#4B5579]">
                 Here’s an overview of your paper submission activities.
               </p>
             </motion.div>

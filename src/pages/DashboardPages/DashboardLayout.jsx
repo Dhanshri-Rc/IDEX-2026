@@ -71,7 +71,7 @@ export default function DashboardLayout() {
     key={item.label}
     to={item.to}
     onClick={() => setMobileNavOpen(false)}
-    className={`w-full flex items-center gap-3 px-3 py-[10px] rounded-[7px] text-[12px] font-semibold transition-all ${
+    className={`w-full flex items-center gap-3 px-3 py-[8px] rounded-[7px] text-[13px] font-semibold transition-all ${
       item.active
         ? "bg-[#0B63FF] text-white"
         : "text-white/85 hover:bg-[#0B63FF] hover:text-white"
