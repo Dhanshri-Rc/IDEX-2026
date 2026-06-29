@@ -92,13 +92,13 @@ export default function DashboardLayout() {
   </Link>
 ))}
 
-            <button
+            {/* <button
               onClick={() => navigate("/login")}
               className="w-full flex items-center gap-3 px-3 py-[10px] rounded-[7px] text-[12px] font-semibold text-white/85 hover:bg-white/10 transition-all"
             >
               <LogOut size={15} />
               Logout
-            </button>
+            </button> */}
           </nav>
 
           {/* CTA Trophy Card */}
