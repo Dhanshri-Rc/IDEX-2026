@@ -17,6 +17,7 @@ import {
   Mail,
   Phone,
   ArrowRight,
+  CheckCircle2,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import registrationHero from "../assets/hero/ideax-2026-registration-banner.webp";
@@ -109,7 +110,7 @@ const included = [
   [Gift, "Conference Kit", "Exclusive conference kit with essential materials and souvenirs."],
   [FileBadge, "Certificate", "E-certificate of participation for all registered delegates."],
   [ClipboardCheck, "Peer Review", "All accepted papers will go through a rigorous peer review."],
-  [BookOpenCheck, "Publication", "Accepted & presented papers will be published in Springer / Scopus Indexed Proceedings."],
+  [BookOpenCheck, "Publication", "Accepted & presented papers will be published in Scopus Indexed Proceedings and Journals additionals APC required to be paid by authors."],
  
   [Users, "Networking", "Connect with global experts and fellow participants."],
 ];
@@ -125,7 +126,7 @@ function PricingCard({ card, features }) {
       className="rounded-[12px] border border-[#E1E9F6] bg-white p-2 shadow-[0_8px_24px_rgba(0,30,100,0.06)] transition-all duration-300"
     >
       <div
-        className="mx-auto flex h-14 w-14 items-center justify-center rounded-full shadow-md"
+        className="mx-auto flex h-12 w-12 items-center justify-center rounded-full shadow-md"
         style={{ backgroundColor: card.color }}
       >
         <Icon className="h-6 w-6 text-white" />
@@ -135,16 +136,20 @@ function PricingCard({ card, features }) {
         {card.title}
       </h3>
 
-      <h4 className="mt-4 text-center text-[22px] font-semibold" style={{ color: card.color }}>
+      <h4 className="mt-4 text-center text-[18px] font-semibold" style={{ color: card.color }}>
         {card.price}
       </h4>
 
-      <ul className="mt-5 space-y-3">
+      <ul className="mt-3 space-y-2">
         {features.map((item) => (
-          <li key={item} className="flex items-start gap-1 text-[11px] font-medium text-[#1F2A44]">
-            <Check className="mt-[2px] h-4 w-4 shrink-0" style={{ color: card.color }} />
-            {item}
-          </li>
+         <li key={item} className="flex items-start gap-2 text-[11px] font-medium text-[#1F2A44]">
+  <CheckCircle2
+    className="mt-[2px] h-3 w-3 shrink-0"
+    style={{ color: card.color }}
+  />
+  <span>{item}</span>
+</li>
+
         ))}
       </ul>
 
@@ -337,7 +342,7 @@ export default function RegistrationPage() {
               What’s Included in Every Registration
             </h3>
 
-            <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
+            <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
               {included.map(([Icon, title, desc]) => (
                 <motion.div
                   key={title}
@@ -370,10 +375,10 @@ export default function RegistrationPage() {
                 </h3>
                 <ul className="mt-3 list-disc space-y-2 pl-5 text-[12px] font-medium leading-5 text-[#1F2A44]">
                   <li>Registration is mandatory for paper presentation.</li>
-                  <li>Registration once made is non-transferable.</li>
-                  <li>No refund will be provided for cancellations.</li>
-                  <li>Group registration available for 5 or more participants.</li>
-                  <li>Early bird discounts available till 31 August, 2026.</li>
+                  <li>Registration once made is non-transferable Also no refund will be provided for cancellations.</li>
+                  
+                  <li>Extended manuscript of the conference will be forwaded to scopus indexed proceedings and journals for possible publications.</li>
+                  <li>Article process chnages for extened scopus publications needs to be paid by authors separetely </li>
                 </ul>
               </div>
             </motion.div>
