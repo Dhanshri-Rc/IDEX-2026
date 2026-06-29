@@ -16,6 +16,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import CopyrightForm from "./pages/DashboardPages/CopyrightForm";
 import DashboardLayout from "./pages/DashboardPages/DashboardLayout";
+import SubmitPaper1 from "./pages/DashboardPages/SubmitPaper1";
 
 export default function App() {
   const location = useLocation();
@@ -93,9 +94,10 @@ export default function App() {
           <Route path="/login" element={<ParticipantLogin />} />
           <Route element={<DashboardLayout />}>
     <Route path="/dashboard" element={<Dashboard />} />
-    {/* <Route path="/submit-paper" element={<SubmitPaper />} />
+    {/* <Route path="/submit-paper" element={<SubmitPaper />}
     <Route path="/check-status" element={<CheckStatus />} /> */}
     <Route path="/copyright-form" element={<CopyrightForm />} />
+     <Route path="/submit-paper" element={<SubmitPaper1/>} />
     {/* <Route path="/my-submissions" element={<MySubmissions />} />
     <Route path="/profile" element={<Profile />} />
     <Route path="/messages" element={<Messages />} />
