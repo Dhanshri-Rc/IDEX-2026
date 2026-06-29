@@ -16,7 +16,7 @@ import {
   ArrowRight 
 } from "lucide-react";
 
-import Logo from "../../assets/icons/Logo";
+import Logo from "../../assets/hero/ideax-2026-official-logo.webp";
 import footerTrophyBg from "../../assets/hero/ideax-2026-dashboard-background.webp";
 
 const NAV = [
@@ -43,7 +43,7 @@ export default function DashboardLayout() {
 
       {/* Sidebar */}
      <aside
-          className={`fixed lg:sticky top-0 z-50 h-screen w-[280px] bg-[#020B26] text-white flex flex-col transition-transform duration-300 ${
+          className={`fixed lg:sticky top-0 z-50 h-screen w-[250px] bg-[#020B26] text-white flex flex-col transition-transform duration-300 ${
             mobileNavOpen
               ? "translate-x-0"
               : "-translate-x-full lg:translate-x-0"
@@ -51,17 +51,13 @@ export default function DashboardLayout() {
         >
           {/* Logo */}
           <div className="px-4 pt-5 pb-4">
-            <Link to="/" className="flex items-center gap-2">
-              <Logo size={36} />
-              <div>
-                <h2 className="text-[16px] font-[600] leading-none">
-                  IDEAX <span className="text-[#F5A400]">2026</span>
-                </h2>
-                <p className="mt-1 text-[7px] font-semibold tracking-[1.4px] text-white/70">
-                  INNOVATE • DECIDE • TRANSFORM
-                </p>
-              </div>
-            </Link>
+            <Link to="/" className="flex items-center">
+  <img
+    src={Logo}
+    alt="IDEAX 2026"
+    className="h-10 w-auto object-contain"
+  />
+</Link>
           </div>
 
           <div className="px-4 pt-3 pb-3 text-[10px] uppercase text-white/55">
@@ -103,7 +99,7 @@ export default function DashboardLayout() {
 
           {/* CTA Trophy Card */}
           <div
-            className="mx-4 mb-4 min-h-[215px] rounded-[9px] border border-[#1B4AA8]/70 bg-cover bg-bottom px-4 pt-5 pb-3 overflow-hidden"
+            className="mx-4 mt-2 mb-4 min-h-[215px] rounded-[9px] border border-[#1B4AA8]/70 bg-cover bg-bottom px-4 pt-5 pb-3 overflow-hidden"
             style={{
               backgroundImage: `
       linear-gradient(180deg, rgba(2,11,38,0.15) 0%, rgba(2,11,38,0.1) 100%),
