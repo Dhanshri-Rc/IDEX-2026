@@ -21,7 +21,7 @@ import footerTrophyBg from "../../assets/hero/ideax-2026-dashboard-background.we
 
 const NAV = [
   { icon: LayoutDashboard, label: "Dashboard", to: "/dashboard" },
-  { icon: FileEdit, label: "Submit Paper", to: "/submit-paper" },
+  { icon: FileEdit, label: "Submit Paper1", to: "/submit-paper" },
   { icon: CheckSquare, label: "Check Status", to: "/check-status" },
   { icon: FileSignature, label: "Copyright Form", to: "/copyright-form" },
   { icon: FolderOpen, label: "My Submissions", to: "/my-submissions" },
