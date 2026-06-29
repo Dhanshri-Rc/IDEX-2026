@@ -1,19 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  Home,
-  FileSearch,
   FileText,
-  Copyright,
-  User,
-  Mail,
-  LogOut,
-  CalendarDays,
-  Bell,
-  ChevronDown,
   Download,
-  Eye,
   Info,
   PenLine,
   Printer,
@@ -22,8 +12,8 @@ import {
   Headphones,
   ArrowRight,
   ArrowLeft,
-  Menu,
   X,
+  Eye,
 } from "lucide-react";
 
 const fadeUp = {
@@ -36,7 +26,6 @@ const steps = [
     no: 1,
     title: "Download Form",
     desc: "Download the copyright form template",
-    active: true,
   },
   {
     no: 2,
@@ -55,176 +44,310 @@ const steps = [
   },
 ];
 
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+
 export default function CopyrightFormPage() {
-  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const [downloaded, setDownloaded] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState(null);
+  const [fileError, setFileError] = useState("");
+  const [agree, setAgree] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  const currentStep = uploadedFile ? 4 : downloaded ? 2 : 1;
+
+  const handleDownload = () => {
+    setDownloaded(true);
+
+    // Put your real PDF in public/forms/copyright-form.pdf
+    // Public assets are accessed without /public in React/Vite.
+    const link = document.createElement("a");
+    link.href = "/forms/copyright-form.pdf";
+    link.download = "copyright-form.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    setFileError("");
+
+    if (!file) return;
+
+    if (file.type !== "application/pdf") {
+      setUploadedFile(null);
+      setFileError("Only PDF files are allowed.");
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      setUploadedFile(null);
+      setFileError("File size must be less than 5 MB.");
+      return;
+    }
+
+    setUploadedFile(file);
+  };
+
+  const removeFile = () => {
+    setUploadedFile(null);
+    setFileError("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!uploadedFile) {
+      setFileError("Please upload the signed copyright form PDF.");
+      return;
+    }
+
+    if (!agree) {
+      alert("Please confirm that the copyright form is completed and signed.");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("submissionId", "IDEAX26-000123");
+      formData.append("copyrightForm", uploadedFile);
+
+      // Replace this with your real backend API call.
+      // Example:
+      // await fetch("/api/copyright-form/upload", {
+      //   method: "POST",
+      //   body: formData,
+      // });
+
+      console.log("Copyright Form Submitted:", {
+        submissionId: "IDEAX26-000123",
+        fileName: uploadedFile.name,
+        fileSize: uploadedFile.size,
+      });
+
+      alert("Copyright form submitted successfully!");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#F8FAFF] text-[#07113F] overflow-x-hidden">
-      <div className="flex">
-      
-        {open && (
-          <button className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={() => setOpen(false)} />
-        )}
+      <main className="px-4 sm:px-6 lg:px-10 ">
+        <motion.div initial="hidden" animate="show" variants={fadeUp}>
+          <h1 className="text-[20px] font-semibold">Copyright Form</h1>
+          <p className="mt-2 text-[14px] font-medium">
+            Please complete the steps below to submit the copyright form.
+          </p>
+        </motion.div>
 
-        {/* Main */}
-        <div className="flex-1 min-w-0">
-          <main className="px-4 sm:px-6 lg:px-10 ">
-            <motion.div initial="hidden" animate="show" variants={fadeUp}>
-              <h1 className="text-[20px] font-semibold">Copyright Form</h1>
-              <p className="mt-2 text-[14px] font-medium">
-                Please complete the steps below to submit the copyright form.
-              </p>
-            </motion.div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mt-8">
+          {steps.map((step, index) => {
+            const active = step.no <= currentStep;
 
-            {/* Steps */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mt-8">
-              {steps.map((step, index) => (
-  <motion.div
-    key={step.no}
-    variants={fadeUp}
-    className="relative"
-  >
-    {/* Circle */}
-    <div className="flex items-center">
-      <div
-        className={`w-10 h-10 rounded-full flex items-center justify-center ${
-          step.active
-            ? "bg-[#2155FF] text-white"
-            : "border border-[#CCD4E5] text-[#07113F]"
-        }`}
-      >
-        {step.no}
-      </div>
+            return (
+              <motion.div key={step.no} variants={fadeUp} className="relative">
+                <div className="flex items-center">
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
+                      active
+                        ? "bg-[#2155FF] text-white"
+                        : "border border-[#CCD4E5] text-[#07113F]"
+                    }`}
+                  >
+                    {active && step.no < currentStep ? <CheckCircle size={18} /> : step.no}
+                  </div>
 
-      {index !== steps.length - 1 && (
-        <div className="hidden lg:block flex-1 h-[1px] bg-[#D7DCEA] ml-4 mr-2" />
-      )}
-    </div>
-
-    <div className="mt-4">
-      <h3 className="text-[14px] font-semibold">{step.title}</h3>
-      <p className="text-[13px]">{step.desc}</p>
-    </div>
-  </motion.div>
-))}
-            </div>
-
-            <div className="grid grid-cols-1 xl:grid-cols-[1fr_390px] gap-8 mt-8">
-              {/* Left */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 bg-[#F4F8FF] border border-[#DCE8FA] rounded-[8px] px-6 py-4 text-[14px]">
-                  <Info className="text-[#0B63FF]" />
-                  Please read the instructions carefully before downloading the form.
+                  {index !== steps.length - 1 && (
+                    <div
+                      className={`hidden lg:block flex-1 h-[1px] ml-4 mr-2 ${
+                        active ? "bg-[#2155FF]" : "bg-[#D7DCEA]"
+                      }`}
+                    />
+                  )}
                 </div>
 
-                <ActionCard
-                  icon={Download}
-                  color="#0B63FF"
-                  title="1. Download Copyright Form"
-                  desc="Download the copyright form template, fill in the required details including article information and all author details."
-                  buttons={[
-                    ["Download Copyright Form (PDF)", Download],
-                    ["Preview Form", Eye],
-                  ]}
-                  footer="File size: 245 KB"
-                />
-
-                <ActionCard
-                  icon={PenLine}
-                  color="#10B981"
-                  title="2. Fill in the Form"
-                  desc="Fill in the article details and author information. All authors must sign the form."
-                  list={[
-                    "Article Title, Submission ID and Track",
-                    "All author names, affiliations and signatures",
-                    "Date and corresponding author details",
-                  ]}
-                />
-
-                <ActionCard
-                  icon={Printer}
-                  color="#F5A400"
-                  title="3. Scan the Completed Form"
-                  desc="Scan the completed and signed form clearly."
-                  list={[
-                    "Ensure all signatures are visible",
-                    "Scan in color or grayscale",
-                    "Save the file in PDF format",
-                  ]}
-                />
-
-                <ActionCard
-                  icon={UploadCloud}
-                  color="#8B5CF6"
-                  title="4. Upload the Scanned Form"
-                  desc="Upload the scanned copyright form in PDF format."
-                  buttons={[["Upload Scanned Form", UploadCloud]]}
-                  footer="Max file size: 5 MB"
-                />
-
-                <div className="flex justify-between gap-4">
-                  <button className="inline-flex items-center gap-3 rounded-[6px] border border-[#D7E2F4] px-7 py-2 text-[13px] font-semibold hover:bg-[#F4F8FF] transition">
-                    <ArrowLeft size={15} /> Back
-                  </button>
-
-                  <button className="inline-flex items-center gap-3 rounded-[6px] bg-[#0B63FF] px-8 py-3 text-[13px] font-semibold text-white hover:bg-[#004EEB] transition">
-                    Next: Upload Form <ArrowRight size={15} />
-                  </button>
+                <div className="mt-4">
+                  <h3 className="text-[14px] font-semibold">{step.title}</h3>
+                  <p className="text-[13px]">{step.desc}</p>
                 </div>
-              </div>
-
-              {/* Right */}
-              <div className="space-y-4">
-                <InfoBox title="Submission Details" icon={FileText}>
-                  <Detail label="Submission ID" value="IDEAX26-000123" />
-                  <Detail label="Paper Title" value="A Hybrid Deep Learning Approach for Intelligent Decision Support Systems" />
-                  <Detail label="Track" value="Artificial Intelligence & Machine Learning" />
-                  <Detail label="Submitted On" value="15 May, 2026" />
-                </InfoBox>
-
-                <InfoBox title="Instructions" icon={Info}>
-                  {[
-                    "Download the copyright form using the button.",
-                    "Fill all the required details and get signatures from all authors.",
-                    "Scan the completed form in clear quality.",
-                    "Upload the scanned form in PDF format.",
-                    "Maximum file size: 5 MB.",
-                  ].map((t) => (
-                    <p key={t} className="flex gap-3 text-[14px] leading-6">
-                      <CheckCircle className="text-[#0B63FF] shrink-0 mt-1" size={16} /> {t}
-                    </p>
-                  ))}
-                </InfoBox>
-
-                <InfoBox title="Need Help?" icon={Headphones}>
-                  <p className="text-[14px] leading-7">
-                    For any queries, contact us at <br />
-                    <span className="text-[#0B63FF] font-semibold">support@ideax-conference.org</span>
-                  </p>
-                </InfoBox>
-              </div>
-            </div>
-          </main>
+              </motion.div>
+            );
+          })}
         </div>
-      </div>
+
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 xl:grid-cols-[1fr_390px] gap-8 mt-8">
+          <div className="space-y-4">
+            <div className="flex items-center gap-4 bg-[#F4F8FF] border border-[#DCE8FA] rounded-[8px] px-6 py-4 text-[14px]">
+              <Info className="text-[#0B63FF] shrink-0" />
+              Please read the instructions carefully before downloading and uploading the form.
+            </div>
+
+            <ActionCard
+              icon={Download}
+              color="#0B63FF"
+              title="1. Download Copyright Form"
+              desc="Download the copyright form template, fill in the required details including article information and all author details."
+              footer={downloaded ? "Downloaded successfully." : "File size: 245 KB"}
+            >
+              <button
+                type="button"
+                onClick={handleDownload}
+                className="inline-flex items-center justify-center gap-3 border border-[#0B63FF] text-[#0B63FF] rounded-[6px] px-5 py-2 text-[14px] font-semibold hover:bg-[#0B63FF] hover:text-white transition"
+              >
+                <Download size={16} /> Download Copyright Form (PDF)
+              </button>
+            </ActionCard>
+
+            <ActionCard
+              icon={PenLine}
+              color="#10B981"
+              title="2. Fill in the Form"
+              desc="Fill in the article details and author information. All authors must sign the form."
+              list={[
+                "Article Title, Submission ID and Track",
+                "All author names, affiliations and signatures",
+                "Date and corresponding author details",
+              ]}
+            />
+
+            <ActionCard
+              icon={Printer}
+              color="#F5A400"
+              title="3. Scan the Completed Form"
+              desc="Scan the completed and signed form clearly."
+              list={[
+                "Ensure all signatures are visible",
+                "Scan in color or grayscale",
+                "Save the file in PDF format",
+              ]}
+            />
+
+            <ActionCard
+              icon={UploadCloud}
+              color="#8B5CF6"
+              title="4. Upload the Scanned Form"
+              desc="Upload the scanned copyright form in PDF format."
+              footer="Max file size: 5 MB"
+            >
+              <label className="inline-flex items-center justify-center gap-3 border border-[#0B63FF] text-[#0B63FF] rounded-[6px] px-5 py-2 text-[14px] font-semibold hover:bg-[#0B63FF] hover:text-white transition cursor-pointer">
+                <UploadCloud size={16} /> Upload Scanned Form
+                <input
+                  type="file"
+                  accept="application/pdf"
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
+              </label>
+
+              {uploadedFile && (
+                <div className="mt-4 rounded-[8px] border border-[#DCE8FA] bg-[#F8FAFF] px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <p className="text-[14px] font-semibold text-[#10B981]">{uploadedFile.name}</p>
+                    <p className="text-[12px] text-[#4B5579]">
+                      {(uploadedFile.size / 1024 / 1024).toFixed(2)} MB
+                    </p>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <a
+                      href={URL.createObjectURL(uploadedFile)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#0B63FF]"
+                    >
+                      <Eye size={15} /> View
+                    </a>
+                    <button
+                      type="button"
+                      onClick={removeFile}
+                      className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#FF2D2D]"
+                    >
+                      <X size={15} /> Remove
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {fileError && <p className="mt-3 text-[13px] font-semibold text-[#FF2D2D]">{fileError}</p>}
+            </ActionCard>
+
+            <label className="flex items-start gap-3 bg-white border border-[#DCE8FA] rounded-[10px] px-5 py-4 text-[14px] leading-6 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={agree}
+                onChange={(e) => setAgree(e.target.checked)}
+                className="mt-1 accent-[#0B63FF]"
+              />
+              <span>
+                I confirm that the uploaded copyright form is completed, scanned clearly, and signed by the required author(s).
+              </span>
+            </label>
+
+            <div className="flex justify-between gap-4">
+              <button
+                type="button"
+                onClick={() => navigate(-1)}
+                className="inline-flex items-center gap-3 rounded-[6px] border border-[#D7E2F4] px-7 py-2 text-[13px] font-semibold hover:bg-[#F4F8FF] transition"
+              >
+                <ArrowLeft size={15} /> Back
+              </button>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="inline-flex items-center gap-3 rounded-[6px] bg-[#0B63FF] px-8 py-3 text-[13px] font-semibold text-white hover:bg-[#004EEB] disabled:opacity-60 disabled:cursor-not-allowed transition"
+              >
+                {submitting ? "Submitting..." : "Submit & Go Dashboard"} <ArrowRight size={15} />
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <InfoBox title="Submission Details" icon={FileText}>
+              <Detail label="Submission ID" value="IDEAX26-000123" />
+              <Detail label="Paper Title" value="A Hybrid Deep Learning Approach for Intelligent Decision Support Systems" />
+              <Detail label="Track" value="Artificial Intelligence & Machine Learning" />
+              <Detail label="Submitted On" value="15 May, 2026" />
+              <Detail label="Copyright Form" value={uploadedFile ? "Uploaded" : "Pending"} />
+            </InfoBox>
+
+            <InfoBox title="Instructions" icon={Info}>
+              {[
+                "Download the copyright form using the button.",
+                "Fill all the required details and get signatures from all authors.",
+                "Scan the completed form in clear quality.",
+                "Upload the scanned form in PDF format.",
+                "Maximum file size: 5 MB.",
+              ].map((t) => (
+                <p key={t} className="flex gap-3 text-[14px] leading-6">
+                  <CheckCircle className="text-[#0B63FF] shrink-0 mt-1" size={16} /> {t}
+                </p>
+              ))}
+            </InfoBox>
+
+            <InfoBox title="Need Help?" icon={Headphones}>
+              <p className="text-[14px] leading-7">
+                For any queries, contact us at <br />
+                <span className="text-[#0B63FF] font-semibold">support@ideax-conference.org</span>
+              </p>
+            </InfoBox>
+          </div>
+        </form>
+      </main>
     </div>
   );
 }
 
-function SideItem({ icon: Icon, text, active }) {
-  return (
-    <button
-      className={`w-full flex items-center gap-4 px-4 py-3 rounded-[8px] mb-2 transition ${
-        active ? "bg-[#0B63FF] text-white" : "hover:bg-white/10 text-white/90"
-      }`}
-    >
-      <Icon size={22} />
-      {text}
-    </button>
-  );
-}
-
-function ActionCard({ icon: Icon, color, title, desc, list, buttons, footer }) {
+function ActionCard({ icon: Icon, color, title, desc, list, footer, children }) {
   return (
     <motion.div
       whileHover={{ y: -4 }}
@@ -250,19 +373,7 @@ function ActionCard({ icon: Icon, color, title, desc, list, buttons, footer }) {
             </ul>
           )}
 
-          {buttons && (
-            <div className="mt-4 flex flex-col sm:flex-row gap-3">
-              {buttons.map(([text, BtnIcon]) => (
-                <button
-                  key={text}
-                  className="inline-flex items-center justify-center gap-3 border border-[#0B63FF] text-[#0B63FF] rounded-[6px] px-5 py-2 text-[14px] font-semibold hover:bg-[#0B63FF] hover:text-white transition"
-                >
-                  <BtnIcon size={16} /> {text}
-                </button>
-              ))}
-            </div>
-          )}
-
+          {children && <div className="mt-4">{children}</div>}
           {footer && <p className="mt-3 text-[14px]">{footer}</p>}
         </div>
       </div>
@@ -291,7 +402,7 @@ function Detail({ label, value }) {
   return (
     <div className="grid grid-cols-[130px_1fr] gap-4 text-[14px]">
       <span>{label}</span>
-      <span className="text-right font-medium">{value}</span>
+      <span className="text-right font-medium break-words">{value}</span>
     </div>
   );
 }
