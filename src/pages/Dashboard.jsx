@@ -29,10 +29,10 @@ const fadeUp = {
 };
 
 const STATS = [
-  { icon: FileText, value: "01", label: "Submissions", sub: "Total Papers Submitted", color: "#0B63FF", link: "View all" },
-  { icon: Clock, value: "01", label: "Under Review", sub: "Currently in Review", color: "#10B981", link: "View status" },
-  { icon: CheckCircle2, value: "00", label: "Accepted", sub: "Papers Accepted", color: "#7C3AED", link: "View details" },
-  { icon: XCircle, value: "00", label: "Rejected", sub: "Papers Rejected", color: "#F97316", link: "View details" },
+  { icon: FileText, value: "01", label: "Submissions", sub: "Total Papers Submitted", color: "#0B63FF", },
+  { icon: Clock, value: "01", label: "Under Review", sub: "Currently in Review", color: "#10B981",},
+  { icon: CheckCircle2, value: "00", label: "Accepted", sub: "Papers Accepted", color: "#7C3AED",},
+  { icon: XCircle, value: "00", label: "Rejected", sub: "Papers Rejected", color: "#F97316",},
 ];
 
 const QUICK_ACTIONS = [
@@ -42,10 +42,10 @@ const QUICK_ACTIONS = [
 ];
 
 const DATES = [
-  ["Paper Submission Deadline", "30 June, 2026"],
-  ["Notification of Acceptance", "31 August, 2026"],
-  ["Camera-Ready Submission", "30 September, 2026"],
-  ["Early Bird Registration", "15 October, 2026"],
+  ["Paper Submission Deadline", "25 August, 2026"],
+  ["Notification of Acceptance", "10 September, 2026"],
+  ["Camera-Ready Submission", "5 October, 2026"],
+  ["Early Bird Registration", "18 October, 2026"],
   ["Conference Dates", "10 – 12 December, 2026"],
 ];
 
@@ -86,9 +86,6 @@ export default function Dashboard() {
 
               <h3 className="mt-5 text-[14px] font-[500]">{s.label}</h3>
               <p className="mt-1 text-[12px] text-[#4B5579]">{s.sub}</p>
-              <button className="mt-5 inline-flex items-center gap-2 text-[12px] font-[500] text-[#0B63FF]">
-                {s.link} <ArrowRight size={14} />
-              </button>
             </motion.div>
           ))}
         </div>
@@ -195,9 +192,13 @@ export default function Dashboard() {
               Our support team is here to assist you with any queries.
             </p>
             <Headphones className="mx-auto mt-5 h-20 w-20 text-[#0B63FF]" />
-            <button className="mt-6 inline-flex items-center gap-3 rounded-md border border-[#0B63FF] px-6 py-3 text-[13px] font-[500] text-[#0B63FF] hover:bg-[#0B63FF] hover:text-white transition">
-              Contact Support <ArrowRight size={15} />
-            </button>
+            <Link
+  to="/contact"
+  className="mt-6 inline-flex items-center gap-3 rounded-md border border-[#0B63FF] px-6 py-3 text-[13px] font-[500] text-[#0B63FF] hover:bg-[#0B63FF] hover:text-white transition"
+>
+  Contact Support
+  <ArrowRight size={15} />
+</Link>
           </motion.div>
         </section>
       </main>
