@@ -23,7 +23,7 @@ import {
   FileCheck,
   Lightbulb,
 } from "lucide-react";
-
+import { Link } from "react-router-dom";
 import heroBg from "../assets/hero/ideax-2026-about-conference-banner.webp";
 import ctaBg from "../assets/hero/ideax-2026-about-call-to-action-banner.webp";
 import whyBg from "../assets/hero/ideax-2026-about-conference-illustration.webp";
@@ -485,10 +485,10 @@ export default function AboutIdeax2026() {
                 </p>
               </div>
             </div>
-
+<Link to="/registration">
             <button className="shrink-0 bg-[#FFB000] text-[13px] text-[#07113F] px-5 py-3 rounded-xl font-semibold flex items-center gap-3 hover:scale-105 transition">
               REGISTER NOW <ArrowRight className="w-4 h-4" />
-            </button>
+            </button></Link>
           </div>
         </motion.section>
       </main>
