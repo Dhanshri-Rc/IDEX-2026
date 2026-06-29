@@ -151,7 +151,7 @@ function PricingCard({ card, features }) {
         ))}
       </ul>
 
-      <button
+      {/* <button
         className="mt-6 h-[40px] w-full rounded-[6px] border text-[12px] font-semibold transition-all duration-300 hover:text-white"
         style={{
           color: card.color,
@@ -167,7 +167,7 @@ function PricingCard({ card, features }) {
         }}
       >
         REGISTER NOW
-      </button>
+      </button> */}
     </motion.div>
   );
 }
@@ -433,10 +433,10 @@ export default function RegistrationPage() {
                   </p>
                 </div>
               </div>
-
+<Link to="/contact">
               <button className="inline-flex items-center gap-3 rounded-[8px] bg-[#FFC21A] px-4 py-3 text-[14px] font-semibold text-[#07113F] shadow-[0_12px_28px_rgba(255,194,26,0.35)] transition-all duration-300 hover:scale-105 hover:bg-[#FFB400]">
                 REGISTER NOW <ArrowRight className="h-5 w-5" />
-              </button>
+              </button></Link>
             </div>
           </motion.section>
         </div>

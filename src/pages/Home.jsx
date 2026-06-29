@@ -141,7 +141,7 @@ const prevSpeaker = () => {
             </div>
 
             <div className="mt-7 flex flex-wrap gap-4">
-              <Button variant="gold">Submit Paper</Button>
+              <Button as={Link} to="/contact" variant="gold">Submit Paper</Button>
               <Button as={Link} to="/registration" variant="navyOutline">Register Now</Button>
             </div>
           </motion.div>

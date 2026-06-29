@@ -249,12 +249,12 @@ export default function TracksPage() {
                     ))}
                   </ul>
 
-                  <button
+                  {/* <button
                     className="mt-8 flex items-center gap-3 text-[13px] font-semibold group-hover:gap-5 transition-all duration-300"
                     style={{ color: track.color }}
                   >
                     View Track Details <ArrowRight className="w-4 h-4" />
-                  </button>
+                  </button> */}
                 </motion.div>
               );
             })}
@@ -289,10 +289,10 @@ export default function TracksPage() {
                   </p>
                 </div>
               </div>
-
-              <button className="shrink-0 bg-[#123FD8] text-white px-4 py-4 rounded-xl text-[13px] font-medium flex items-center gap-3 hover:scale-105 hover:bg-[#0B2FB3] transition-all duration-300 shadow-[0_12px_30px_rgba(18,63,216,0.3)]">
+<Link to="/contact">
+              <button className="shrink-0 bg-[#123FD8] text-white px-4 py-3 rounded-lg text-[13px] font-medium flex items-center gap-3 hover:scale-105 hover:bg-[#0B2FB3] transition-all duration-300 shadow-[0_12px_30px_rgba(18,63,216,0.3)]">
                 SUBMIT YOUR PAPER <ArrowRight className="w-5 h-5" />
-              </button>
+              </button></Link>
             </div>
           </motion.section>
         </div>
