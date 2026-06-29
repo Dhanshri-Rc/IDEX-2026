@@ -324,11 +324,11 @@ export default function SchedulePage() {
                 );
               })}
             </div>
-
+{/* <Link to="/contact">
             <button className="w-full py-4 text-[13px] font-[600] text-[#0B63FF] hover:bg-[#F4F8FF] transition">
               View Full Day 1 Schedule{" "}
               <ChevronDown className="inline w-4 h-4 ml-2" />
-            </button>
+            </button></Link> */}
           </motion.div>
 
           {/* Bottom CTA Cards */}
@@ -372,14 +372,14 @@ export default function SchedulePage() {
                   <p className="mt-2 text-[13px] leading-6 text-[#4B5579] flex-1">
                     {desc}
                   </p>
-
+<Link to="/contact">
                   <button
                     className="mt-5 self-center sm:self-start inline-flex items-center gap-3 px-5 py-3 rounded-[6px] border text-[12px] font-medium hover:scale-105 transition-all duration-300"
                     style={{ color, borderColor: color }}
                   >
                     {btn}
                     <ArrowRight className="w-4 h-4" />
-                  </button>
+                  </button></Link>
                 </div>
               </motion.div>
             ))}

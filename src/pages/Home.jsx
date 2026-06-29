@@ -141,26 +141,41 @@ const prevSpeaker = () => {
             </div>
 
             <div className="mt-7 flex flex-wrap gap-4">
-              <Button variant="gold">Submit Paper</Button>
+              <Button as={Link} to="/contact" variant="gold">Submit Paper</Button>
               <Button as={Link} to="/registration" variant="navyOutline">Register Now</Button>
             </div>
           </motion.div>
 
-          {/* <motion.div initial={{ opacity: 0, x: 25 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .7 }} className="hidden lg:flex flex-col gap-5 justify-self-end">
-            {[
-              [Lightbulb, "INNOVATION"],
-              [BrainCircuit, "INTELLIGENCE"],
-              [BarChart3, "DECISIONS"],
-              [Target, "IMPACT"],
-            ].map(([Icon, label]) => (
-              <div key={label} className="flex items-center gap-3 text-white">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur transition hover:scale-110 hover:bg-white/20">
-                  <Icon size={18} />
-                </span>
-                <span className="text-[12px] font-bold tracking-wide">{label}</span>
-              </div>
-            ))}
-          </motion.div> */}
+       <motion.div
+  initial={{ opacity: 0, x: 25 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.7, ease: "easeOut" }}
+  className="pointer-events-auto absolute right-[40px] top-[75px] hidden flex-col gap-[14px] lg:flex xl:right-[72px]"
+>
+  {[
+    [Lightbulb, "INNOVATION"],
+    [BrainCircuit, "INTELLIGENCE"],
+    [BarChart3, "DECISIONS"],
+    [Target, "IMPACT"],
+  ].map(([Icon, label], index) => (
+    <motion.div
+      key={label}
+      initial={{ opacity: 0, x: 24 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.45, delay: index * 0.1 }}
+      whileHover={{ x: -6, scale: 1.03 }}
+      className="flex items-center gap-4 text-white"
+    >
+      <span className="flex h-[40px] w-[40px] items-center justify-center rounded-full border hover:border-white/20 bg-white/10 backdrop-blur-md shadow-[0_0_18px_rgba(59,130,246,0.22)] transition-all duration-300 border-[#11A8FF] hover:bg-white/15">
+        <Icon size={22} strokeWidth={2} className="text-white" />
+      </span>
+
+      <span className="min-w-[100px] text-[14px] font-bold tracking-wide text-white">
+        {label}
+      </span>
+    </motion.div>
+  ))}
+</motion.div>
         </div>
       </section>
 
