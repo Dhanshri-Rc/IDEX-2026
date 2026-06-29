@@ -19,13 +19,10 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-
 import registrationHero from "../assets/hero/ideax-2026-registration-banner.webp";
 import ctaBg from "../assets/hero/ideax-2026-about-call-to-action-banner.webp";
 import noteImg from "../assets/hero/ideax-2026-registration-guidelines.webp";
 import questionImg from "../assets/hero/ideax-2026-registration-faq.webp";
-
-
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
