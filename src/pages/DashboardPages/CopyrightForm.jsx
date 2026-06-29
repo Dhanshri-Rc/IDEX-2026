@@ -70,7 +70,7 @@ export default function CopyrightFormPage() {
         <div className="flex-1 min-w-0">
           <main className="px-4 sm:px-6 lg:px-10 ">
             <motion.div initial="hidden" animate="show" variants={fadeUp}>
-              <h1 className="text-[22px] font-semibold">Copyright Form</h1>
+              <h1 className="text-[20px] font-semibold">Copyright Form</h1>
               <p className="mt-2 text-[14px] font-medium">
                 Please complete the steps below to submit the copyright form.
               </p>
@@ -102,8 +102,8 @@ export default function CopyrightFormPage() {
     </div>
 
     <div className="mt-4">
-      <h3>{step.title}</h3>
-      <p>{step.desc}</p>
+      <h3 className="text-[14px] font-semibold">{step.title}</h3>
+      <p className="text-[13px]">{step.desc}</p>
     </div>
   </motion.div>
 ))}
@@ -163,12 +163,12 @@ export default function CopyrightFormPage() {
                 />
 
                 <div className="flex justify-between gap-4">
-                  <button className="inline-flex items-center gap-3 rounded-[6px] border border-[#D7E2F4] px-7 py-3 text-[14px] font-semibold hover:bg-[#F4F8FF] transition">
-                    <ArrowLeft size={17} /> Back
+                  <button className="inline-flex items-center gap-3 rounded-[6px] border border-[#D7E2F4] px-7 py-2 text-[13px] font-semibold hover:bg-[#F4F8FF] transition">
+                    <ArrowLeft size={15} /> Back
                   </button>
 
-                  <button className="inline-flex items-center gap-3 rounded-[6px] bg-[#0B63FF] px-8 py-3 text-[14px] font-semibold text-white hover:bg-[#004EEB] transition">
-                    Next: Upload Form <ArrowRight size={17} />
+                  <button className="inline-flex items-center gap-3 rounded-[6px] bg-[#0B63FF] px-8 py-3 text-[13px] font-semibold text-white hover:bg-[#004EEB] transition">
+                    Next: Upload Form <ArrowRight size={15} />
                   </button>
                 </div>
               </div>
