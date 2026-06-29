@@ -146,7 +146,7 @@ const prevSpeaker = () => {
             </div>
           </motion.div>
 
-          {/* <motion.div initial={{ opacity: 0, x: 25 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .7 }} className="hidden lg:flex flex-col gap-5 justify-self-end">
+          <motion.div initial={{ opacity: 0, x: 25 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .7 }} className="hidden lg:flex flex-col gap-5 justify-self-end">
             {[
               [Lightbulb, "INNOVATION"],
               [BrainCircuit, "INTELLIGENCE"],
@@ -160,7 +160,7 @@ const prevSpeaker = () => {
                 <span className="text-[12px] font-bold tracking-wide">{label}</span>
               </div>
             ))}
-          </motion.div> */}
+          </motion.div>
         </div>
       </section>
 
