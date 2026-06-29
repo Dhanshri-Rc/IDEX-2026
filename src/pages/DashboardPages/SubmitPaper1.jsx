@@ -806,7 +806,7 @@ function HelpCard() {
       <p className="text-[14px] leading-7">
         For any queries, contact us at
         <br />
-        <span className="text-[#0B63FF] font-semibold">support@ideax-conference.org</span>
+        <span className="text-[#0B63FF] font-semibold">submit@innovationconferences.com</span>
       </p>
     </InfoCard>
   );
