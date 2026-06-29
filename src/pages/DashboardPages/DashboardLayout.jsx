@@ -23,12 +23,15 @@ const NAV = [
   { icon: LayoutDashboard, label: "Dashboard", to: "/dashboard" },
   { icon: FileEdit, label: "Submit Paper 1", to: "/submit-paper" },
     { icon: FileEdit, label: "Submit Paper 2", to: "/submit-paper2" },
-  { icon: CheckSquare, label: "Check Status", to: "/check-status" },
+     { icon: FileEdit, label: "Submit Paper 3", to: "/submit-paper3" },
+     { icon: FileEdit, label: "Submit Paper 4", to: "/submit-paper4" },
+     { icon: FileEdit, label: "Submit Paper 5", to: "/submit-paper5" },
+  // { icon: CheckSquare, label: "Check Status", to: "/check-status" },
   { icon: FileSignature, label: "Copyright Form", to: "/copyright-form" },
-  { icon: FolderOpen, label: "My Submissions", to: "/my-submissions" },
-  { icon: UserCircle, label: "Profile", to: "/profile" },
-  { icon: Mail, label: "Messages", to: "/messages", badge: 3 },
-  { icon: Bell, label: "Notifications", to: "/notifications", badge: 2 },
+  // { icon: FolderOpen, label: "My Submissions", to: "/my-submissions" },
+  // { icon: UserCircle, label: "Profile", to: "/profile" },
+  // { icon: Mail, label: "Messages", to: "/messages", badge: 3 },
+  // { icon: Bell, label: "Notifications", to: "/notifications", badge: 2 },
 ];
 
 export default function DashboardLayout() {

@@ -18,6 +18,9 @@ import CopyrightForm from "./pages/DashboardPages/CopyrightForm";
 import DashboardLayout from "./pages/DashboardPages/DashboardLayout";
 import SubmitPaper1 from "./pages/DashboardPages/SubmitPaper1";
 import SubmitPaper2 from "./pages/DashboardPages/SubmitPaper2";
+import SubmitPaper3 from "./pages/DashboardPages/SubmitPaper3";
+import SubmitPaper4 from "./pages/DashboardPages/SubmitPaper4";
+import SubmitPaper5 from "./pages/DashboardPages/SubmitPaper5";
 
 export default function App() {
   const location = useLocation();
@@ -100,6 +103,9 @@ export default function App() {
     <Route path="/copyright-form" element={<CopyrightForm />} />
      <Route path="/submit-paper" element={<SubmitPaper1/>} />
       <Route path="/submit-paper2" element={<SubmitPaper2/>} />
+      <Route path="/submit-paper3" element={<SubmitPaper3/>} />
+       <Route path="/submit-paper4" element={<SubmitPaper4/>} />
+        <Route path="/submit-paper5" element={<SubmitPaper5/>} />
     {/* <Route path="/my-submissions" element={<MySubmissions />} />
     <Route path="/profile" element={<Profile />} />
     <Route path="/messages" element={<Messages />} />
