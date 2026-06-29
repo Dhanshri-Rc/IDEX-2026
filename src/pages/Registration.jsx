@@ -49,19 +49,19 @@ const virtualCards = [
   {
     icon: GraduationCap,
     title: "Student Registration",
-    price: "₹ 2,000",
+    price: "50 USD",
     color: "#0B63FF",
   },
   {
     icon: UserRound,
     title: "Faculty / Academician",
-    price: "₹ 3,000",
+    price: "150 USD",
     color: "#0E8F54",
   },
   {
     icon: BriefcaseBusiness,
     title: "Industry Professionals",
-    price: "₹ 3,500",
+    price: "200 USD",
     color: "#6938D3",
   },
 ];
@@ -70,19 +70,19 @@ const offlineCards = [
   {
     icon: GraduationCap,
     title: "Student Registration",
-    price: "₹ 3,500",
+    price: "150 USD",
     color: "#FF7A00",
   },
   {
     icon: UserRound,
     title: "Faculty / Academician",
-    price: "₹ 4,000",
+    price: "300 USD",
     color: "#FF7A00",
   },
   {
     icon: BriefcaseBusiness,
     title: "Industry Professionals",
-    price: "₹ 5,000",
+    price: "400 USD",
     color: "#F04B12",
   },
 ];
@@ -110,7 +110,7 @@ const included = [
   [FileBadge, "Certificate", "E-certificate of participation for all registered delegates."],
   [ClipboardCheck, "Peer Review", "All accepted papers will go through a rigorous peer review."],
   [BookOpenCheck, "Publication", "Accepted & presented papers will be published in Springer / Scopus Indexed Proceedings."],
-  [Network, "Full Access", "Access to all keynote sessions, technical sessions & workshops."],
+ 
   [Users, "Networking", "Connect with global experts and fellow participants."],
 ];
 

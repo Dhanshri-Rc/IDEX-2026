@@ -18,10 +18,10 @@ const fadeUp = {
 };
 
 const STATS = [
-  { icon: Users, value: "500+", label: "Participants", color: "text-[#2563EB]" },
+  { icon: Users, value: "200+", label: "Participants", color: "text-[#2563EB]" },
   { icon: FileText, value: "150+", label: "Research Papers", color: "text-[#7C3AED]" },
   { icon: Globe2, value: "30+", label: "Countries", color: "text-[#12B8B3]" },
-  { icon: Mic2, value: "50+", label: "Keynote Speakers", color: "text-[#FB923C]" },
+  { icon: Mic2, value: "5+", label: "Keynote Speakers", color: "text-[#FB923C]" },
 ];
 
 const TRACKS = [
@@ -74,10 +74,10 @@ const SPEAKERS = [
 ];
 
 const DATES = [
-  ["Paper Submission Deadline", "15 July, 2026"],
-  ["Notification of Acceptance", "15 August, 2026"],
-  ["Camera Ready Submission", "15 September, 2026"],
-  ["Early Bird Registration", "30 September, 2026"],
+  ["Paper Submission Deadline", "25 August, 2026"],
+  ["Notification of Acceptance", "10 September, 2026"],
+  ["Camera Ready Submission", "5 October, 2026"],
+  ["Early Bird Registration", "18 October, 2026"],
   ["Conference Dates", "10 – 12 December, 2026"],
 ];
 
@@ -509,8 +509,8 @@ const prevSpeaker = () => {
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 md:grid-cols-2 xl:grid-cols-4">
         {[
-          [FileCheck2, "Indexed in Scopus"],
-          [BadgeCheck, "IEEE Xplore"],
+          [FileCheck2, "Scopus Indexed Proceedings"],
+          [BadgeCheck, "Scopus Indexed Journals"],
           [ShieldCheck, "DOI Assignment"],
           [FileText, "Open Access Proceedings"],
         ].map(([Icon, label], index) => (

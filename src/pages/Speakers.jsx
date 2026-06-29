@@ -10,7 +10,7 @@ import cta from "../assets/hero/ideax-2026-speakers-call-to-action-banner.webp"
 const STATS = [
   {
     icon: Mic2,
-    value: "50+",
+    value: "5+",
     label: "Keynote Speakers",
     color: "text-[#005BFF]",
     bg: "bg-[#EEF4FF]",

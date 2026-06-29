@@ -17,8 +17,8 @@ const META = [
 
 const CONTACT_CARDS = [
   { icon: MapPin, color: "bg-[#2563EB] text-white", title: "Conference Secretariat", lines: ["IDEAX 2026 Conference Office", "123 Innovation Drive, #05-01", "Singapore 138602"] },
-  { icon: Mail, color: "bg-[#f7872b] text-white", title: "Email Us", lines: ["General Inquiries", "info@ideax-conference.org", "Registration Support", "registration@ideax-conference.org"] },
-  { icon: Phone, color: "bg-[#089b34] text-white", title: "Call Us", lines: ["+65 9123 4567", "(Mon – Fri, 9:00 AM – 6:00 PM SGT)"] },
+  { icon: Mail, color: "bg-[#f7872b] text-white", title: "Email Us", lines: ["General Inquiries", "submit@innovationconference.com"] },
+  { icon: Phone, color: "bg-[#089b34] text-white", title: "Call Us", lines: ["+91-9890917528", "(Mon – Fri, 9:00 AM – 6:00 PM SGT)"] },
   { icon: Globe2, color: "bg-[#7812d2] text-white", title: "Website", lines: ["www.ideax-conference.org"] },
 ];
 
@@ -125,7 +125,7 @@ export default function Contact() {
         Our team is ready to assist you with any inquiries related to IDEAX 2026.
       </p>
 
-      <div className="mt-3 space-y-1.5">
+      <div className="mt-3 space-y-2.5">
         {CONTACT_CARDS.map(({ icon: Icon, color, title, lines }, i) => (
           <motion.div
             key={title}

@@ -102,11 +102,11 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-3">
               <Mail size={15} className="text-white/80" />
-              info@ideax-conference.org
+              submit@innovationconference.com
             </li>
             <li className="flex items-center gap-3">
               <Phone size={15} className="text-white/80" />
-              +65 9123 4567
+              +91-9890917528
             </li>
           </ul>
         </div>
