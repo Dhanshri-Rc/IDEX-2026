@@ -17,7 +17,8 @@ import NotFound from "./pages/NotFound";
 import CopyrightForm from "./pages/DashboardPages/CopyrightForm";
 import DashboardLayout from "./pages/DashboardPages/DashboardLayout";
 import SubmitPaper1 from "./pages/DashboardPages/SubmitPaper1";
-import EditProfile from "./pages/DashboardPages/EditProfile"
+import EditProfile from "./pages/DashboardPages/EditProfile";
+import AdminDashboardLayout from "./pages/DashboardPages/AdminDashboardLayout"
 
 export default function App() {
   const location = useLocation();
@@ -93,7 +94,9 @@ export default function App() {
           />
           {/* Standalone pages without the marketing Navbar/Footer chrome */}
           <Route path="/login" element={<ParticipantLogin />} />
+           <Route path="/admin/dashboard" element={<AdminDashboardLayout />} />
           <Route element={<DashboardLayout />}>
+         
     <Route path="/dashboard" element={<Dashboard />} />
     {/* <Route path="/submit-paper" element={<SubmitPaper />}
     <Route path="/check-status" element={<CheckStatus />} /> */}

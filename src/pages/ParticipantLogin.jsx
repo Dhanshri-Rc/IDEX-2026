@@ -12,8 +12,18 @@ import { motion } from "framer-motion";
 import loginBg from "../assets/hero/ideax-2026-login-background.webp";
 import logo from "../assets/hero/ideax-2026-official-logo.webp";
 
-const STATIC_EMAIL = "admin@ideax.com";
-const STATIC_PASSWORD = "admin123";
+const USERS = [
+  {
+    role: "admin",
+    email: "admin@ideax.com",
+    password: "admin123",
+  },
+  {
+    role: "user",
+    email: "user@ideax.com",
+    password: "user123",
+  },
+];
 
 export default function Login() {
   const navigate = useNavigate();
@@ -26,26 +36,38 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setError("");
+const handleSubmit = (e) => {
+  e.preventDefault();
+  setError("");
 
-    if (!form.email || !form.password) {
-      setError("Please enter email and password.");
-      return;
-    }
+  if (!form.email || !form.password) {
+    setError("Please enter email and password.");
+    return;
+  }
 
-    if (
-      form.email.trim() === STATIC_EMAIL &&
-      form.password.trim() === STATIC_PASSWORD
-    ) {
-      localStorage.setItem("ideaxLoggedIn", "true");
-      navigate("/dashboard");
-      return;
-    }
+  const user = USERS.find(
+    (u) =>
+      u.email.toLowerCase() === form.email.trim().toLowerCase() &&
+      u.password === form.password.trim()
+  );
 
+  if (!user) {
     setError("Invalid email or password.");
-  };
+    return;
+  }
+
+  // Save login status
+  localStorage.setItem("ideaxLoggedIn", "true");
+  localStorage.setItem("userRole", user.role);
+  localStorage.setItem("userEmail", user.email);
+
+  // Redirect based on role
+  if (user.role === "admin") {
+    navigate("/admin/dashboard");
+  } else {
+    navigate("/dashboard");
+  }
+};
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#F5F8FF] px-3 py-4 sm:px-5">
