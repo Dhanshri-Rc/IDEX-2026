@@ -148,14 +148,14 @@ export default function SchedulePage() {
   "
         style={{ backgroundImage: `url(${scheduleHero})` }}
       >
-        <div className="relative z-10 max-w-[1420px] mx-auto px-4 sm:px-8 lg:px-16 pt-8 sm:pt-12 lg:pt-14">
+        <div className="relative z-10 max-w-[1420px] mx-auto px-4 sm:px-8 lg:px-16 pt-8 sm:pt-12 lg:pt-16">
           <motion.div
             initial="hidden"
             animate="show"
             variants={fadeUp}
             className="max-w-[480px]"
           >
-            <div className="flex items-center gap-3 text-[#07113F]/80 text-[13px]">
+            <div className=" flex items-center gap-2 text-[13px] font-semibold text-black/80">
               <Link to="/" className="hover:text-[#0B63FF]">
                 Home
               </Link>

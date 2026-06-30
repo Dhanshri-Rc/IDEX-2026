@@ -11,14 +11,14 @@ import Schedule from "./pages/Schedule";
 import Committee from "./pages/Committee";
 import Registration from "./pages/Registration";
 import ParticipantLogin from "./pages/ParticipantLogin";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/User/Dashboard";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import CopyrightForm from "./pages/DashboardPages/CopyrightForm";
-import DashboardLayout from "./pages/DashboardPages/DashboardLayout";
-import SubmitPaper1 from "./pages/DashboardPages/SubmitPaper1";
-import EditProfile from "./pages/DashboardPages/EditProfile";
-import AdminDashboardLayout from "./pages/DashboardPages/AdminDashboardLayout"
+import CopyrightForm from "./pages/User/CopyrightForm";
+import DashboardLayout from "./pages/User/DashboardLayout";
+import SubmitPaper1 from "./pages/User/SubmitPaper1";
+import EditProfile from "./pages/User/EditProfile";
+import AdminDashboardLayout from "./pages/Admin/AdminDashboardLayout"
 
 export default function App() {
   const location = useLocation();

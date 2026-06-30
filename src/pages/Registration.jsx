@@ -186,7 +186,7 @@ export default function RegistrationPage() {
       >
         <div className="relative z-10 mx-auto max-w-[1420px] px-4 pt-7 sm:px-8 sm:pt-10 lg:px-16 lg:pt-12">
           <motion.div initial="hidden" animate="show" variants={fadeUp} className="max-w-[520px]">
-            <div className="flex items-center gap-3 text-[13px] text-[#07113F]/80">
+            <div className="flex items-center gap-3 text-[13px] font-semibold text-[#07113F]/80">
               <Link to="/" className="hover:text-[#0B63FF]">
                 Home
               </Link>
