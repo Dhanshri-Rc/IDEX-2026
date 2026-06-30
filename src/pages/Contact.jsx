@@ -39,7 +39,7 @@ export default function Contact() {
       
 
       <section
-        className="relative min-h-[430px] overflow-hidden bg-[#020B25] bg-cover bg-center bg-no-repeat sm:min-h-[460px] lg:min-h-[500px]"
+        className="relative min-h-[480px] bg-cover bg-center bg-no-repeat sm:min-h-[430px] lg:min-h-[500px] lg:bg-[length:100%_100%]"
         style={{
           backgroundImage: `url(${contactHero})`,
         }}

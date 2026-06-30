@@ -107,7 +107,7 @@ export default function AboutIdeax2026() {
     <div className="min-h-screen bg-white text-[#07113F] font-sans overflow-hidden">
       {/* Hero */}
       <section
-        className="relative min-h-[500px] sm:min-h-[570px] lg:min-h-[570px] bg-[#020b22] bg-cover bg-center bg-no-repeat"
+        className="relative min-h-[450px] bg-cover bg-center bg-no-repeat sm:min-h-[450px] lg:min-h-[570px] lg:bg-[length:100%_100%]"
         style={{ backgroundImage: `url(${heroBg})` }}
       >
         <div className="absolute inset-0 bg-white/45 sm:bg-white/25 lg:bg-transparent" />
@@ -143,7 +143,7 @@ export default function AboutIdeax2026() {
 
       <main className="max-w-[1420px] mx-auto px-4 sm:px-6 lg:px-16">
         {/* Mission Vision Focus */}
-        <section className="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[250px_250px_1fr] gap-4 -mt-4">
+        <section className="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[250px_250px_1fr] gap-4 -mt-12">
           {[
             {
               title: "OUR MISSION",
