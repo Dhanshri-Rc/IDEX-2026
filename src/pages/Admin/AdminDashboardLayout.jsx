@@ -399,7 +399,7 @@ export default function AdminSubmissions() {
         row.status,
         row.copy,
       ]
-        .map((value) => `"${String(value).replaceAll('"', '""')}"`)
+        .map((value) => `"${String(value).replace(/"/g, '""')}"`)
         .join(","),
     );
 
