@@ -39,7 +39,7 @@ const [organizingIndex, setOrganizingIndex] = useState(0);
       {/* HERO */}
       
 <section
-  className="relative min-h-[430px] overflow-hidden bg-[#020B25] bg-cover bg-center bg-no-repeat sm:min-h-[460px] lg:min-h-[540px]"
+  className="relative min-h-[360px] bg-cover bg-center bg-no-repeat sm:min-h-[430px] lg:min-h-[500px] lg:bg-[length:100%_100%]"
   style={{
     backgroundImage: `url(${committeeHero})`,
   }}

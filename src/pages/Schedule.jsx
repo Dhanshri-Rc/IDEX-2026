@@ -144,14 +144,7 @@ export default function SchedulePage() {
       {/* Hero */}
       <section
         className="
-    relative
-    min-h-[360px] sm:min-h-[470px] lg:min-h-[500px]
-    bg-white
-    bg-no-repeat
-    bg-cover
-    bg-center
-    lg:bg-[length:100%_100%]
-    lg:bg-top
+   relative min-h-[360px] bg-cover bg-center bg-no-repeat sm:min-h-[430px] lg:min-h-[500px] lg:bg-[length:100%_100%]
   "
         style={{ backgroundImage: `url(${scheduleHero})` }}
       >
