@@ -18,6 +18,7 @@ import CopyrightForm from "./pages/User/CopyrightForm";
 import DashboardLayout from "./pages/User/DashboardLayout";
 import SubmitPaper1 from "./pages/User/SubmitPaper1";
 import EditProfile from "./pages/User/EditProfile";
+import AdminLayout from "./pages/Admin/AdminLayout";
 import AdminDashboardLayout from "./pages/Admin/AdminDashboardLayout";
 
 export default function App() {
@@ -93,21 +94,21 @@ export default function App() {
             }
           />
           {/* Standalone pages without the marketing Navbar/Footer chrome */}
+          {/* Standalone pages without the marketing Navbar/Footer chrome */}
           <Route path="/login" element={<ParticipantLogin />} />
-           <Route path="/admin/dashboard" element={<AdminDashboardLayout />} />
+
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboardLayout />} />
+          </Route>
+
           <Route element={<DashboardLayout />}>
-         
-    <Route path="/dashboard" element={<Dashboard />} />
-    {/* <Route path="/submit-paper" element={<SubmitPaper />}
-    <Route path="/check-status" element={<CheckStatus />} /> */}
-    <Route path="/copyright-form" element={<CopyrightForm />} />
-     <Route path="/submit-paper" element={<SubmitPaper1/>} />
-     <Route path="/edit-profile" element={<EditProfile />} />
-    {/* <Route path="/my-submissions" element={<MySubmissions />} />
-    <Route path="/profile" element={<Profile />} />
-    <Route path="/messages" element={<Messages />} />
-    <Route path="/notifications" element={<Notifications />} /> */}
-</Route>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/copyright-form" element={<CopyrightForm />} />
+            <Route path="/submit-paper" element={<SubmitPaper1 />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
+          </Route>
+
+          <Route path="*" element={<NotFound />} />
 
           {/* SPA-safe catch-all (fixes refresh 404 in production hosting) */}
           <Route path="*" element={<NotFound />} />
