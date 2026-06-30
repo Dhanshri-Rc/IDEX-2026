@@ -123,14 +123,14 @@ export default function TracksPage() {
     relative min-h-[360px] bg-cover bg-center bg-no-repeat sm:min-h-[430px] lg:min-h-[500px] lg:bg-[length:100%_100%]"
         style={{ backgroundImage: `url(${tracksBG})` }}
       >
-        <div className="relative z-10 max-w-[1420px] mx-auto px-4 sm:px-8 lg:px-16 pt-6 sm:pt-8 lg:pt-10">
+        <div className="relative z-10 max-w-[1420px] mx-auto px-4 sm:px-8 lg:px-16 pt-6 sm:pt-8 lg:pt-16">
           <motion.div
             initial="hidden"
             animate="show"
             variants={fadeUp}
             className="max-w-[520px]"
           >
-            <div className="flex items-center gap-3 text-white/80 text-[13px]">
+            <div className="flex items-center gap-3 text-white/80 text-[13px] font-semibold">
               <Link to="/" className="hover:text-[#12A8FF]">
                 Home
               </Link>
