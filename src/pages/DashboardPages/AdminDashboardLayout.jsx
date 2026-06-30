@@ -455,10 +455,6 @@ export default function AdminSubmissions() {
               </div>
             </div>
 
-            <button className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#DDE6F5] bg-white text-[#005BFF] transition hover:bg-[#EEF4FF]">
-              <Bell size={18} />
-              <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#FF1E37]" />
-            </button>
 
             <div className="hidden h-12 w-px bg-[#E3EAF5] md:block" />
 
