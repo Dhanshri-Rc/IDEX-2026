@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 
 import Logo from "../../assets/hero/ideax-2026-white-logo.webp";
-import EditProfileModal from "./EditProfile";
+import EditProfileModal from "../DashboardPages/EditProfile";
 
 const menuItems = [
   { name: "Dashboard", icon: LayoutDashboard },
@@ -265,6 +265,7 @@ export default function AdminSubmissions() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [profileOpen, setProfileOpen] = useState(false);
   const [editProfileOpen, setEditProfileOpen] = useState(false);
+  const [selectedSubmission, setSelectedSubmission] = useState(null);
   const navigate = useNavigate();
 
   const tracks = useMemo(
@@ -353,6 +354,20 @@ export default function AdminSubmissions() {
     setRows((prev) =>
       prev.map((row) => (row.id === id ? { ...row, [key]: value } : row)),
     );
+  };
+
+  const updateSubmissionStatus = (id, status) => {
+    setRows((prev) =>
+      prev.map((row) => (row.id === id ? { ...row, status } : row)),
+    );
+
+    setSelectedSubmission((prev) =>
+      prev && prev.id === id ? { ...prev, status } : prev,
+    );
+  };
+
+  const viewSubmission = (submission) => {
+    setSelectedSubmission(submission);
   };
 
   const resetFilters = () => {
@@ -470,7 +485,7 @@ export default function AdminSubmissions() {
 
                 <div className="hidden sm:block text-left">
                   <p className="text-[14px] font-semibold">Rahul Arora</p>
-                  <p className="text-[12px] text-[#4B5579]">Participant</p>
+                  <p className="text-[12px] text-[#4B5579]">Admin</p>
                 </div>
 
                 <ChevronDown
@@ -654,7 +669,7 @@ export default function AdminSubmissions() {
                           <StatusBadge
                             status={row.status}
                             onChange={(value) =>
-                              updateRow(row.id, "status", value)
+                              updateSubmissionStatus(row.id, value)
                             }
                           />
                         </td>
@@ -669,29 +684,25 @@ export default function AdminSubmissions() {
                         <td className="px-2 py-4">
                           <div className="flex gap-2">
                             <button
-                              onClick={exportCSV}
+                              onClick={() => viewSubmission(row)}
                               className="flex h-8 w-8 items-center text-[11px] justify-center rounded border border-[#B8CBFF] text-[#005BFF] transition hover:bg-[#005BFF] hover:text-white"
-                              title="Download"
-                            >
-                              <Download size={15} />
-                            </button>
-                            <button
-                              onClick={() =>
-                                alert(`${row.id}\n${row.title}\n${row.author}`)
-                              }
-                              className="flex h-8 w-8 items-center text-[11px] justify-center rounded border border-[#B8CBFF] text-[#005BFF] transition hover:bg-[#005BFF] hover:text-white"
-                              title="View"
+                              title="View Submission"
                             >
                               <Eye size={15} />
                             </button>
                             <button
-                              onClick={() =>
-                                updateRow(row.id, "status", "Decision Pending")
-                              }
-                              className="flex h-8 w-8 items-center text-[11px] justify-center rounded border border-[#B8CBFF] text-[#005BFF] transition hover:bg-[#005BFF] hover:text-white"
-                              title="Edit"
+                              onClick={() => updateSubmissionStatus(row.id, "Accepted")}
+                              className="flex h-8 w-8 items-center text-[11px] justify-center rounded border border-green-200 text-green-700 transition hover:bg-green-600 hover:text-white"
+                              title="Approve"
                             >
-                              <Pencil size={15} />
+                              <CheckCircle2 size={15} />
+                            </button>
+                            <button
+                              onClick={() => updateSubmissionStatus(row.id, "Rejected")}
+                              className="flex h-8 w-8 items-center text-[11px] justify-center rounded border border-red-200 text-red-600 transition hover:bg-red-600 hover:text-white"
+                              title="Reject"
+                            >
+                              <XCircle size={15} />
                             </button>
                           </div>
                         </td>
@@ -730,12 +741,25 @@ export default function AdminSubmissions() {
                           <Download size={15} />
                         </button>
                         <button
-                          onClick={() =>
-                            alert(`${row.id}\n${row.title}\n${row.author}`)
-                          }
+                          onClick={() => viewSubmission(row)}
                           className="flex h-8 w-8 items-center justify-center rounded border border-[#B8CBFF] text-[#005BFF] transition hover:bg-[#005BFF] hover:text-white"
+                          title="View Submission"
                         >
                           <Eye size={15} />
+                        </button>
+                        <button
+                          onClick={() => updateSubmissionStatus(row.id, "Accepted")}
+                          className="flex h-8 w-8 items-center justify-center rounded border border-green-200 text-green-700 transition hover:bg-green-600 hover:text-white"
+                          title="Approve"
+                        >
+                          <CheckCircle2 size={15} />
+                        </button>
+                        <button
+                          onClick={() => updateSubmissionStatus(row.id, "Rejected")}
+                          className="flex h-8 w-8 items-center justify-center rounded border border-red-200 text-red-600 transition hover:bg-red-600 hover:text-white"
+                          title="Reject"
+                        >
+                          <XCircle size={15} />
                         </button>
                       </div>
                     </div>
@@ -753,7 +777,7 @@ export default function AdminSubmissions() {
                     <div className="mt-4 flex flex-wrap gap-2">
                       <StatusBadge
                         status={row.status}
-                        onChange={(value) => updateRow(row.id, "status", value)}
+                        onChange={(value) => updateSubmissionStatus(row.id, value)}
                       />
                       <CopyrightBadge
                         value={row.copy}
@@ -903,6 +927,85 @@ export default function AdminSubmissions() {
           </div>
         </section>
       </main>
+
+      {selectedSubmission && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 px-4">
+          <div className="w-full max-w-2xl rounded-2xl bg-white shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b px-5 py-4">
+              <div>
+                <h2 className="text-[18px] font-bold text-[#07113F]">Submission Details</h2>
+                <p className="mt-1 text-[12px] text-[#4B5579]">{selectedSubmission.id}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedSubmission(null)}
+                className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="grid gap-4 px-5 py-5 text-[13px] text-[#31406E] sm:grid-cols-2">
+              <div className="sm:col-span-2">
+                <p className="text-[11px] font-semibold uppercase text-[#005BFF]">Paper Title</p>
+                <p className="mt-1 font-semibold leading-6 text-[#07113F]">{selectedSubmission.title}</p>
+              </div>
+              <div>
+                <p className="text-[11px] font-semibold uppercase text-[#005BFF]">Corresponding Author</p>
+                <p className="mt-1">{selectedSubmission.author}</p>
+              </div>
+              <div>
+                <p className="text-[11px] font-semibold uppercase text-[#005BFF]">Track</p>
+                <p className="mt-1">{selectedSubmission.track}</p>
+              </div>
+              <div>
+                <p className="text-[11px] font-semibold uppercase text-[#005BFF]">Submitted On</p>
+                <p className="mt-1 whitespace-pre-line">{selectedSubmission.date}</p>
+              </div>
+              <div>
+                <p className="text-[11px] font-semibold uppercase text-[#005BFF]">Copyright Status</p>
+                <div className="mt-2">
+                  <CopyrightBadge
+                    value={selectedSubmission.copy}
+                    onChange={(value) => updateRow(selectedSubmission.id, "copy", value)}
+                  />
+                </div>
+              </div>
+              <div className="sm:col-span-2">
+                <p className="mb-2 text-[11px] font-semibold uppercase text-[#005BFF]">Review Status</p>
+                <StatusBadge
+                  status={selectedSubmission.status}
+                  onChange={(value) => updateSubmissionStatus(selectedSubmission.id, value)}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3 border-t px-5 py-4 sm:flex-row sm:justify-end">
+              <button
+                type="button"
+                onClick={() => updateSubmissionStatus(selectedSubmission.id, "Accepted")}
+                className="rounded-lg bg-green-600 px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-green-700"
+              >
+                Approve Paper
+              </button>
+              <button
+                type="button"
+                onClick={() => updateSubmissionStatus(selectedSubmission.id, "Rejected")}
+                className="rounded-lg bg-red-600 px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-red-700"
+              >
+                Reject Paper
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedSubmission(null)}
+                className="rounded-lg border border-[#DDE6F5] px-5 py-2.5 text-[13px] font-semibold hover:bg-[#F4F8FF]"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <EditProfileModal
         open={editProfileOpen}
         onClose={() => setEditProfileOpen(false)}

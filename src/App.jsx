@@ -18,7 +18,7 @@ import CopyrightForm from "./pages/DashboardPages/CopyrightForm";
 import DashboardLayout from "./pages/DashboardPages/DashboardLayout";
 import SubmitPaper1 from "./pages/DashboardPages/SubmitPaper1";
 import EditProfile from "./pages/DashboardPages/EditProfile";
-import AdminDashboardLayout from "./pages/DashboardPages/AdminDashboardLayout"
+import AdminDashboardLayout from "./pages/Admin/AdminDashboardLayout"
 
 export default function App() {
   const location = useLocation();
