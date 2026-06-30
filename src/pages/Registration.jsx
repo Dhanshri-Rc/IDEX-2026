@@ -198,7 +198,7 @@ export default function RegistrationPage() {
               <span className="block text-[#07113F] text-[36px] sm:text-[38px] lg:text-[42px]">
                 Register for
               </span>
-              <span className="block text-[36px] sm:text-[48px] lg:text-[52px] font-bold bg-gradient-to-r from-[#0B63FF] via-[#13B5FF] to-[#00D4FF] bg-clip-text text-transparent">
+              <span className="block text-[36px] sm:text-[48px] lg:text-[52px] font-semibold bg-gradient-to-r from-[#0B63FF] via-[#13B5FF] to-[#00D4FF] bg-clip-text text-transparent">
   IDEAX 2026
 </span>
             </h1>
