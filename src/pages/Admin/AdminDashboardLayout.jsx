@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 
 import Logo from "../../assets/hero/ideax-2026-white-logo.webp";
-import EditProfileModal from "../DashboardPages/EditProfile";
+import EditProfileModal from "../User/EditProfile";
 
 const menuItems = [
   { name: "Dashboard", icon: LayoutDashboard },
