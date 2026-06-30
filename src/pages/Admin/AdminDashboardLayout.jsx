@@ -1,16 +1,7 @@
 import React, { useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import {
-  LayoutDashboard,
   FileText,
   FileCheck2,
-  Users,
-  BarChart3,
-  Mail,
-  Settings,
-  LogOut,
-  CalendarDays,
-  Bell,
   ChevronDown,
   Search,
   RotateCcw,
@@ -23,28 +14,9 @@ import {
   Copyright,
   ChevronLeft,
   ChevronRight,
-  Menu,
   X,
-  UserCircle,
 } from "lucide-react";
 
-import Logo from "../../assets/hero/ideax-2026-white-logo.webp";
-import EditProfileModal from "../User/EditProfile";
-
-const menuItems = [
-  { name: "Dashboard", icon: LayoutDashboard },
-  { name: "Submissions", icon: FileText, active: true },
-  { name: "Copyright Forms", icon: FileCheck2 },
-  { name: "Authors", icon: Users },
-  { name: "Reports", icon: BarChart3 },
-];
-
-const settingItems = [
-  { name: "Users", icon: Users },
-  { name: "Email Templates", icon: Mail },
-  { name: "Settings", icon: Settings },
-  { name: "Logout", icon: LogOut },
-];
 
 const initialSubmissions = [
   {
@@ -178,84 +150,83 @@ function CopyrightBadge({ value, onChange }) {
   );
 }
 
-function Sidebar({ mobileOpen, setMobileOpen }) {
-  return (
-    <>
-      {mobileOpen && (
-        <button
-          type="button"
-          aria-label="Close sidebar overlay"
-          onClick={() => setMobileOpen(false)}
-          className="fixed inset-0 z-30 bg-black/40 lg:hidden"
-        />
-      )}
+// function Sidebar({ mobileOpen, setMobileOpen }) {
+//   return (
+//     <>
+//       {mobileOpen && (
+//         <button
+//           type="button"
+//           aria-label="Close sidebar overlay"
+//           onClick={() => setMobileOpen(false)}
+//           className="fixed inset-0 z-30 bg-black/40 lg:hidden"
+//         />
+//       )}
 
-      <aside
-        className={`fixed left-0 top-0 z-40 h-screen w-[260px] bg-[#020B26] text-white transition-transform duration-300 lg:translate-x-0 ${
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <div className="flex h-[75px] items-center justify-between border-b border-white/10 bg-white px-6">
-          {/* Logo */}
-          <div className="px-2 pt-4 pb-4">
-            <Link to="/" className="flex items-center">
-              <img
-                src={Logo}
-                alt="IDEAX 2026"
-                className="h-10 w-auto object-contain"
-              />
-            </Link>
-          </div>
-          <button
-            type="button"
-            aria-label="Close sidebar"
-            onClick={() => setMobileOpen(false)}
-            className="rounded-md p-2 text-[#020B26] lg:hidden"
-          >
-            <X size={22} />
-          </button>
-        </div>
+//       <aside
+//         className={`fixed left-0 top-0 z-40 h-screen w-[260px] bg-[#020B26] text-white transition-transform duration-300 lg:translate-x-0 ${
+//           mobileOpen ? "translate-x-0" : "-translate-x-full"
+//         }`}
+//       >
+//         <div className="flex h-[75px] items-center justify-between border-b border-white/10 bg-white px-6">
+//           {/* Logo */}
+//           <div className="px-2 pt-4 pb-4">
+//             <Link to="/" className="flex items-center">
+//               <img
+//                 src={Logo}
+//                 alt="IDEAX 2026"
+//                 className="h-10 w-auto object-contain"
+//               />
+//             </Link>
+//           </div>
+//           <button
+//             type="button"
+//             aria-label="Close sidebar"
+//             onClick={() => setMobileOpen(false)}
+//             className="rounded-md p-2 text-[#020B26] lg:hidden"
+//           >
+//             <X size={22} />
+//           </button>
+//         </div>
 
-        <nav className="px-4 py-8">
-          <p className="px-4 pt-1 pb-3 text-[12px] uppercase text-white/55">
-            MAIN MENU
-          </p>
-          <div className="space-y-2">
-            {menuItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => setMobileOpen(false)}
-                className="flex w-full items-center gap-4 rounded-lg px-3 py-2 text-left text-[14px] transition hover:bg-[#0F5BFF]"
-              >
-                <item.icon size={20} />
-                {item.name}
-              </button>
-            ))}
-          </div>
+//         <nav className="px-4 py-8">
+//           <p className="px-4 pt-1 pb-3 text-[12px] uppercase text-white/55">
+//             MAIN MENU
+//           </p>
+//           <div className="space-y-2">
+//             {menuItems.map((item) => (
+//               <button
+//                 key={item.name}
+//                 onClick={() => setMobileOpen(false)}
+//                 className="flex w-full items-center gap-4 rounded-lg px-3 py-2 text-left text-[14px] transition hover:bg-[#0F5BFF]"
+//               >
+//                 <item.icon size={20} />
+//                 {item.name}
+//               </button>
+//             ))}
+//           </div>
 
-          <div className="my-6 h-px bg-white/10" />
+//           <div className="my-6 h-px bg-white/10" />
 
-          <p className="mb-4 px-2 text-[13px] text-white/70">SETTINGS</p>
-          <div className="space-y-2">
-            {settingItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => setMobileOpen(false)}
-                className="flex w-full items-center gap-4 rounded-lg px-3 py-2 text-left text-[14px] transition hover:bg-[#0F5BFF]"
-              >
-                <item.icon size={20} />
-                {item.name}
-              </button>
-            ))}
-          </div>
-        </nav>
-      </aside>
-    </>
-  );
-}
+//           <p className="mb-4 px-2 text-[13px] text-white/70">SETTINGS</p>
+//           <div className="space-y-2">
+//             {settingItems.map((item) => (
+//               <button
+//                 key={item.name}
+//                 onClick={() => setMobileOpen(false)}
+//                 className="flex w-full items-center gap-4 rounded-lg px-3 py-2 text-left text-[14px] transition hover:bg-[#0F5BFF]"
+//               >
+//                 <item.icon size={20} />
+//                 {item.name}
+//               </button>
+//             ))}
+//           </div>
+//         </nav>
+//       </aside>
+//     </>
+//   );
+// }
 
 export default function AdminSubmissions() {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [rows, setRows] = useState(initialSubmissions);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All Status");
@@ -263,10 +234,8 @@ export default function AdminSubmissions() {
   const [copyFilter, setCopyFilter] = useState("All Copyright Status");
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [profileOpen, setProfileOpen] = useState(false);
-  const [editProfileOpen, setEditProfileOpen] = useState(false);
   const [selectedSubmission, setSelectedSubmission] = useState(null);
-  const navigate = useNavigate();
+
 
   const tracks = useMemo(
     () => ["All Tracks", ...new Set(rows.map((row) => row.track))],
@@ -399,7 +368,7 @@ export default function AdminSubmissions() {
         row.status,
         row.copy,
       ]
-        .map((value) => `"${String(value).replace(/"/g, '""')}"`)
+        .map((value) => `"${String(value).replaceAll('"', '""')}"`)
         .join(","),
     );
 
@@ -432,97 +401,15 @@ export default function AdminSubmissions() {
   const showingFrom = filteredRows.length === 0 ? 0 : startIndex + 1;
   const showingTo = Math.min(startIndex + rowsPerPage, filteredRows.length);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("user");
+  //   navigate("/login");
+  // };
 
-  return (
-    <div className="min-h-screen bg-[#F8FAFF] font-sans text-[#000B45]">
-      <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-
-      <main className="lg:ml-[260px]">
-        <header className="sticky top-0 z-30 flex min-h-[75px] flex-col gap-4 border-b border-[#DDE6F5] bg-white/95 pl-3 pr-5 py-4 shadow-sm backdrop-blur xl:flex-row xl:items-center xl:justify-between xl:pl-6 xl:pr-8">
-          <div className="flex w-full items-center gap-3 xl:w-auto">
-            <button
-              type="button"
-              aria-label="Open sidebar"
-              onClick={() => setMobileOpen(true)}
-              className="flex h-10 w-10 items-center justify-center rounded-md border border-[#DDE6F5] bg-white text-[#005BFF] lg:hidden"
-            >
-              <Menu size={22} />
-            </button>
-
-            <div className="block max-w-[300px] text-[12px] font-semibold leading-6 text-[#07113F] sm:text-[13px] lg:text-[14px]">
-              International Conference on Innovation, Decision Engineering and
-              Artificial Intelligence
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-            <div className="hidden h-12 w-px bg-[#E3EAF5] md:block" />
-            <div className="flex items-center gap-3">
-              <CalendarDays className="text-[#005BFF]" size={25} />
-              <div>
-                <p className="text-[12px] font-semibold">10 – 12 Dec, 2026</p>
-                <p className="text-[12px] text-[#4B5579]">Singapore</p>
-              </div>
-            </div>
-
-
-            <div className="hidden h-12 w-px bg-[#E3EAF5] md:block" />
-
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setProfileOpen(!profileOpen)}
-                className="flex items-center gap-3"
-              >
-                <span className="w-10 h-10 rounded-full bg-[#5AA9FF] text-white flex items-center justify-center font-semibold">
-                  RA
-                </span>
-
-                <div className="hidden sm:block text-left">
-                  <p className="text-[14px] font-semibold">Rahul Arora</p>
-                  <p className="text-[12px] text-[#4B5579]">Admin</p>
-                </div>
-
-                <ChevronDown
-                  size={16}
-                  className={`transition ${profileOpen ? "rotate-180" : ""}`}
-                />
-              </button>
-
-              {profileOpen && (
-                <div className="absolute right-0 top-[55px] w-[190px] bg-white border border-[#E5ECF7] rounded-[8px] shadow-[0_10px_30px_rgba(0,0,0,0.12)] py-2 z-50">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setProfileOpen(false);
-                      setEditProfileOpen(true);
-                    }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-[#07113F] hover:bg-[#F4F8FF]"
-                  >
-                    <UserCircle size={17} />
-                    Edit Profile
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={handleLogout}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-red-600 hover:bg-red-50"
-                  >
-                    <LogOut size={17} />
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </header>
-
-        <section className="px-4 py-7 sm:px-6 xl:px-8">
+return (
+  <>
+    <div>
           <div className="mb-7">
             <h1 className="text-[20px] font-[600]">Submissions</h1>
             <p className="mt-2 text-[14px] text-[#4B5579]">
@@ -925,8 +812,7 @@ export default function AdminSubmissions() {
               </button>
             </div>
           </div>
-        </section>
-      </main>
+            </div>
 
       {selectedSubmission && (
         <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 px-4">
@@ -1004,12 +890,9 @@ export default function AdminSubmissions() {
               </button>
             </div>
           </div>
-        </div>
+       
+       </div>
       )}
-      <EditProfileModal
-        open={editProfileOpen}
-        onClose={() => setEditProfileOpen(false)}
-      />
-    </div>
+    </>
   );
 }
