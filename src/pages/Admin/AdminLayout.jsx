@@ -22,9 +22,9 @@ import Logo from "../../assets/hero/ideax-2026-white-logo.webp";
 import EditProfileModal from "../User/EditProfile";
 
 const menuItems = [
-  { name: "Dashboard", icon: LayoutDashboard, path: "/admin" },
+  { name: "Dashboard", icon: LayoutDashboard, path: "/admin/dashboard" },
   { name: "Submissions", icon: FileText, path: "/admin/submissions" },
-  { name: "Copyright Forms", icon: FileCheck2, path: "/admin/copyright" },
+  { name: "Copyright Forms", icon: FileCheck2, path: "/admin/copyright-forms" },
   { name: "Authors", icon: Users, path: "/admin/authors" },
   { name: "Reports", icon: BarChart3, path: "/admin/reports" },
 ];

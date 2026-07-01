@@ -20,6 +20,9 @@ import SubmitPaper1 from "./pages/User/SubmitPaper1";
 import EditProfile from "./pages/User/EditProfile";
 import AdminLayout from "./pages/Admin/AdminLayout";
 import AdminDashboardLayout from "./pages/Admin/AdminDashboardLayout";
+import AdminSubmission from "./pages/Admin/AdminSubmissions";
+import AdminCopyrightForm from "./pages/Admin/AdminCopyrightForms";
+import AdminAuthors from "./pages/Admin/AdminAuthors";
 
 export default function App() {
   const location = useLocation();
@@ -99,6 +102,9 @@ export default function App() {
 
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<AdminDashboardLayout />} />
+            <Route path="submissions" element={<AdminSubmission />} />
+            <Route path="copyright-forms" element={<AdminCopyrightForm />} />
+            <Route path="authors" element={<AdminAuthors />} />
           </Route>
 
           <Route element={<DashboardLayout />}>
